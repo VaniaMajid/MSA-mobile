@@ -1,3 +1,36 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react-native",
+    "baseUrl": "./",
+    "paths": {
+      "~Assets/*": ["src/Assets/*"],
+      "~Components/*": ["src/Components/*"],
+      "~Configs/*": ["src/Configs/*"],
+      "~Constants/*": ["src/Constants/*"],
+      "~Contexts/*": ["src/Contexts/*"],
+      "~Hooks/*": ["src/Hooks/*"],
+      "~Navigators/*": ["src/Navigators/*"],
+      "~Screens/*": ["src/Screens/*"],
+      "~Services/*": ["src/Services/*"],
+      "~Style/*": ["src/Style/*"],
+      "~Utils/*": ["src/Utils/*"],
+      "~Store/*": ["src/Store/*"],
+      "~Translation/*": ["src/Translation/*"],
+      "~Features/*": ["src/Features/*"]
+    },
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
 }
