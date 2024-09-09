@@ -1,18 +1,17 @@
 import axios from 'axios';
-import { BASE_URL } from '~Constants/index';
+import {BASE_URL} from '~Constants/index';
 import * as StorageAccess from '~Utils/index';
-
 
 // const baseURL = 'http://localhost:3000/api';
 const authAxios = axios.create({
-  baseURL:BASE_URL,
+  baseURL: BASE_URL,
   headers: {
     MobileApp: true,
   },
 });
 
 const publicAxios = axios.create({
-  baseURL:BASE_URL,
+  baseURL: BASE_URL,
   headers: {
     MobileApp: true,
   },

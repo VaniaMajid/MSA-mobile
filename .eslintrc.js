@@ -47,10 +47,7 @@ module.exports = {
         ],
       },
     ],
-    'sort-imports': [
-      'error',
-      { ignoreCase: true, ignoreDeclarationSort: true },
-    ],
+    'sort-imports': ['error', {ignoreCase: true, ignoreDeclarationSort: true}],
     'import/order': [
       'error',
       {
@@ -81,7 +78,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-curly-brace-presence': [
       'warn',
-      { props: 'never', children: 'never' },
+      {props: 'never', children: 'never'},
     ],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': [
@@ -123,7 +120,7 @@ module.exports = {
     'no-async-promise-executor': 'off', // good suggestion for a code smell
     'no-empty-pattern': 'off', // unexpected empty object
     'no-prototype-builtins': 'off', // this can be dangerous
-    'no-constant-condition': ['error', { checkLoops: false }], // this is fine
+    'no-constant-condition': ['error', {checkLoops: false}], // this is fine
     'no-bitwise': 'error',
     'no-caller': 'error',
     'no-console': [
@@ -178,7 +175,7 @@ module.exports = {
     'eol-last': ['error', 'always'],
     'no-else-return': 'error',
     'array-callback-return': 'error',
-    'no-implicit-coercion': ['error', { allow: ['!!'] }],
+    'no-implicit-coercion': ['error', {allow: ['!!']}],
     'no-throw-literal': 'error',
     yoda: 'error',
     'no-undef-init': 'error',

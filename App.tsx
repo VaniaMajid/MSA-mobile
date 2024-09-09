@@ -5,9 +5,9 @@
  * @format
  */
 
-import React, { useCallback, useEffect } from 'react';
+import React, {useCallback, useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
-import BootSplash from "react-native-bootsplash";
+import BootSplash from 'react-native-bootsplash';
 import {
   SafeAreaView,
   ScrollView,
@@ -25,8 +25,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { SplashScreen } from '~Screens/SplashScreen';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {SplashScreen} from '~Screens/SplashScreen';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -65,16 +65,16 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
- const hideSplash= useCallback(async()=>{
- await BootSplash.hide({ fade: true });
-},[])
+  const hideSplash = useCallback(async () => {
+    await BootSplash.hide({fade: true});
+  }, []);
 
-    useEffect(() => {
-     hideSplash()
-  }, [])
+  useEffect(() => {
+    hideSplash();
+  }, []);
   return (
     <SafeAreaProvider>
-    <SplashScreen/>
+      <SplashScreen />
     </SafeAreaProvider>
   );
 }

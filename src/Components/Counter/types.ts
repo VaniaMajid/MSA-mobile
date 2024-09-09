@@ -1,4 +1,4 @@
-import Colors from "~Style/Colors";
+import Colors from '~Style/Colors';
 
 export type CounterProps = {
   /*
@@ -20,4 +20,4 @@ export type CounterProps = {
    *
    */
   color?: keyof typeof Colors;
-}
+};

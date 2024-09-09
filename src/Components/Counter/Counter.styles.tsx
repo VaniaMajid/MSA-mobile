@@ -1,38 +1,38 @@
-import { useEffect, useRef } from 'react';
-import { Animated, Easing, StyleProp, ViewStyle } from 'react-native';
-import { useTheme } from '~Contexts/ThemeContext';
+import {useEffect, useRef} from 'react';
+import {Animated, Easing, StyleProp, ViewStyle} from 'react-native';
+import {useTheme} from '~Contexts/ThemeContext';
 
 type UseStylesProps = {
   current: number;
 };
 
-export const useStyles = ({ current }: UseStylesProps) => {
+export const useStyles = ({current}: UseStylesProps) => {
   const theme = useTheme();
   const animatedIndicatorPosition = useRef(new Animated.Value(0));
 
   useEffect(() => {
     Animated.timing(animatedIndicatorPosition.current, {
-      toValue: (1) * 16 * (current - 1),
+      toValue: 1 * 16 * (current - 1),
       duration: 300,
       easing: Easing.bezier(0.0, 0.0, 0.1, 1),
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   }, [current]);
 
   return {
     container: {
       flexDirection: 'row',
-      position: 'relative'
+      position: 'relative',
     } as StyleProp<ViewStyle>,
     point: {
       width: 8,
       height: 8,
       borderRadius: 4,
       backgroundColor: theme.colors.lightGray,
-      marginStart: 8
+      marginStart: 8,
     } as StyleProp<ViewStyle>,
     firstPoint: {
-      marginStart: 0
+      marginStart: 0,
     },
     currentIndicator: {
       height: 8,
@@ -44,9 +44,9 @@ export const useStyles = ({ current }: UseStylesProps) => {
       top: 0,
       transform: [
         {
-          translateX: animatedIndicatorPosition.current
-        }
-      ]
-    } as Animated.AnimatedProps<StyleProp<ViewStyle>>
+          translateX: animatedIndicatorPosition.current,
+        },
+      ],
+    } as Animated.AnimatedProps<StyleProp<ViewStyle>>,
   };
 };

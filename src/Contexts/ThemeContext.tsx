@@ -6,7 +6,7 @@ import Spacing from '~Style/Spacing';
 const ThemeContext = React.createContext({
   fonts: Typography,
   colors: Colors,
-  spacing:Spacing
+  spacing: Spacing,
 });
 
 interface IThemeProvider {
@@ -14,7 +14,7 @@ interface IThemeProvider {
 }
 export const ThemeProvider = ({children}: IThemeProvider) => {
   const themeData = React.useMemo(() => {
-    const theme = {fonts: Typography, colors: Colors,spacing:Spacing};
+    const theme = {fonts: Typography, colors: Colors, spacing: Spacing};
     return theme;
   }, []);
 
