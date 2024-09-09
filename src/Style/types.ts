@@ -1,4 +1,3 @@
-
 import Colors from './Colors';
 
 type PickByValue<T, ValueType> = Pick<
