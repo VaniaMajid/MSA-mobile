@@ -6,27 +6,26 @@ export const useStyles = () => {
 
   return StyleSheet.create({
     container: {
-      flex: 1,
       justifyContent: 'center',
     },
     label: {
-      marginBottom: theme.spacing.V5,
-      fontSize: 16,
-      color: theme.colors.accentColor,
+      marginBottom: theme.spacing.V1,
+      fontSize: 18,
+      fontWeight:'semibold',
+      color: theme.colors.darkGray,
     },
     inputContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       borderWidth: 1,
       borderColor: theme.colors.accentColor,
-      borderRadius: 5,
+      borderRadius: 6,
       padding: 10,
     },
     input: {
       flex: 1,
-      marginLeft: 10,
-      fontSize: 16,
-      color: theme.colors.black,
+      fontSize: 14,
+      color: theme.colors.darkGray,
     },
   });
 };

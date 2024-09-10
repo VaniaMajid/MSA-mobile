@@ -74,8 +74,9 @@ function App(): React.JSX.Element {
     hideSplash();
   }, []);
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider>              
       <LoginScreen />
+      {/* <SplashScreen /> */}
     </SafeAreaProvider>
   );
 }
