@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { Text, TextStyle } from 'react-native';
 import { useStyles } from './Heading.styles';
 import { useTheme } from '~Contexts/ThemeContext';
@@ -10,7 +10,7 @@ type HeadingProps = {
   title: string; 
 };
 
-export const Heading: React.FC<HeadingProps> = ({
+export const Heading: FC<HeadingProps> = ({
   fontSize = 20, 
   color,
   style,

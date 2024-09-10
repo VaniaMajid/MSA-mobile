@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
 import { useStyles } from './Button.styles';
 
@@ -10,7 +10,7 @@ type ButtonProps = {
   variant?: 'outline' | 'filled';
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   title,
   onPress,
   style,
