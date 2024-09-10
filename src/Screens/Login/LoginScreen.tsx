@@ -1,23 +1,24 @@
-import React, {FC} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  Platform,
-  KeyboardAvoidingView,
-} from 'react-native';
+import React, {FC, useState} from 'react';
+import {View, Text, Image, ImageBackground} from 'react-native';
 import {Button} from '~Components/Button';
 import {Heading} from '~Components/Heading';
 import {IconEye, IconLock} from '~Components/Icons';
 import {InputField} from '~Components/TextInput';
 import {useStyles} from './LoginScreen.styles';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {useTheme} from '~Contexts/ThemeContext';
+import {Checkbox} from '~Components/Checkbox';
+import { PressableText } from '~Components/PressableText';
 
 export const LoginScreen: FC = () => {
   const styles = useStyles();
-  const theme = useTheme();
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxPress = (checked: boolean) => {
+    setIsChecked(checked);
+  };
+
+  const handleForgotPasswordPress = () => {
+    // logic to be added
+  };
 
   return (
     <ImageBackground
@@ -38,18 +39,18 @@ export const LoginScreen: FC = () => {
           rightIcon={<IconEye />}
         />
         <View style={styles.row}>
-          <BouncyCheckbox
-            size={22}
-            fillColor={theme.colors.primaryColor}
-            unFillColor={theme.colors.white}
+          <Checkbox
             text="Remember Password"
-            iconStyle={styles.checkboxIcon}
-            innerIconStyle={styles.checkboxInnerIcon}
-            textStyle={styles.checkboxText}
-            onPress={(isChecked: boolean) => {}}
+            isChecked={isChecked}
+            onPress={handleCheckboxPress}
             style={{width: 200}}
+            textStyle={styles.checkboxText}
           />
-          <Text style={styles.forgotPass}>Forgot Password?</Text>
+          <PressableText
+            text="Forgot Password?"
+            onPress={handleForgotPasswordPress}
+            style={styles.forgotPass}
+          />
         </View>
 
         <Button title="Login" onPress={() => {}} style={{borderRadius: 6}} />
