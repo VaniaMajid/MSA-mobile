@@ -27,6 +27,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {SplashScreen} from '~Screens/SplashScreen';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {LoginScreen} from '~Screens/Login/LoginScreen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -74,7 +75,7 @@ function App(): React.JSX.Element {
   }, []);
   return (
     <SafeAreaProvider>
-      <SplashScreen />
+      <LoginScreen />
     </SafeAreaProvider>
   );
 }
