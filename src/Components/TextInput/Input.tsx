@@ -29,7 +29,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         {isPassword && rightIcon && (
           <TouchableOpacity
             onPress={() => setSecureTextEntry(!secureTextEntry)}>
-            rightIcon
+            {rightIcon}
           </TouchableOpacity>
         )}
       </View>
