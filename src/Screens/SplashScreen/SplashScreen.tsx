@@ -1,26 +1,27 @@
 import * as React from 'react';
+import {
+  ImageBackground,
+  Platform,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import type {ICarouselInstance} from 'react-native-reanimated-carousel';
 import Carousel from 'react-native-reanimated-carousel';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {
-  Text,
-  ScrollView,
-  Image,
-  ImageBackground,
-  View,
-  TouchableHighlight,
-  Platform,
-} from 'react-native';
 
-import {Dimensions, useWindowDimensions} from 'react-native';
+import {Dimensions} from 'react-native';
 import {useSharedValue} from 'react-native-reanimated';
 import {Button} from '~Components/Button/Button';
 import {CounterSlider} from '~Components/Counter';
 import {useTheme} from '~Contexts/ThemeContext';
+import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
+import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 
-export const SplashScreen = () => {
+type SplashScreenProps = StackScreenProps<PreAuthParamList>;
+
+export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
   const theme = useTheme();
   const [counter, setCounter] = React.useState(0);
   const scrollOffsetValue = useSharedValue<number>(0);
@@ -95,7 +96,9 @@ export const SplashScreen = () => {
         />
         <Button
           title="Next"
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('Login');
+          }}
           style={{marginTop: -theme.spacing.V2}}
         />
       </View>

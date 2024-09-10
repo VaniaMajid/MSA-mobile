@@ -6,9 +6,13 @@ import {IconEye, IconLock} from '~Components/Icons';
 import {InputField} from '~Components/TextInput';
 import {useStyles} from './LoginScreen.styles';
 import {Checkbox} from '~Components/Checkbox';
-import { PressableText } from '~Components/PressableText';
+import {PressableText} from '~Components/PressableText';
+import {StackScreenProps} from '@react-navigation/stack';
+import {PreAuthParamList} from '~Navigators/PreAuthParamList';
+import {ImageBackgroundWrapper} from 'src/HOC';
 
-export const LoginScreen: FC = () => {
+type LoginScreenProps = StackScreenProps<PreAuthParamList>;
+export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
   const styles = useStyles();
   const [isChecked, setIsChecked] = useState(false);
 
@@ -21,9 +25,7 @@ export const LoginScreen: FC = () => {
   };
 
   return (
-    <ImageBackground
-      style={styles.content}
-      source={require('../../Assets/images/authBackground.png')}>
+    <ImageBackgroundWrapper>
       <Image
         source={require('../../Assets/images/nameLogo.png')}
         style={styles.logo}
@@ -59,11 +61,13 @@ export const LoginScreen: FC = () => {
         <Text style={styles.text}>Don't have an account?</Text>
         <Button
           title="Register"
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate('SelectRole');
+          }}
           style={{borderRadius: 6, width: '100%'}}
           variant="outline"
         />
       </View>
-    </ImageBackground>
+    </ImageBackgroundWrapper>
   );
 };

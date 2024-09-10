@@ -28,6 +28,7 @@ import {
 import {SplashScreen} from '~Screens/SplashScreen';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {LoginScreen} from '~Screens/Login/LoginScreen';
+import {PreAuthNavigator} from '~Navigators/PreAuthNavigator';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -74,9 +75,8 @@ function App(): React.JSX.Element {
     hideSplash();
   }, []);
   return (
-    <SafeAreaProvider>              
-      <LoginScreen />
-      {/* <SplashScreen /> */}
+    <SafeAreaProvider>
+      <PreAuthNavigator />
     </SafeAreaProvider>
   );
 }
