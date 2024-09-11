@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { useTheme } from '~Contexts/ThemeContext';
+import {StyleSheet} from 'react-native';
+import {useTheme} from '~Contexts/ThemeContext';
 
 export const useStyles = (variant: 'outline' | 'filled') => {
   const theme = useTheme();
@@ -42,10 +42,12 @@ export const useStyles = (variant: 'outline' | 'filled') => {
 
   switch (variant) {
     case 'outline':
-      return StyleSheet.create(styles.outline as Record<'button' | 'text' , any>);
+      return StyleSheet.create(
+        styles.outline as Record<'button' | 'text', any>,
+      );
     case 'filled':
-      return StyleSheet.create(styles.filled as Record<'button' | 'text' , any>);
+      return StyleSheet.create(styles.filled as Record<'button' | 'text', any>);
     default:
-      return StyleSheet.create(styles.filled as Record<'button' | 'text' , any>);
+      return StyleSheet.create(styles.filled as Record<'button' | 'text', any>);
   }
 };

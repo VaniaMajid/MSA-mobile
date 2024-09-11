@@ -1,1 +1,1 @@
-export * from './SetPasswordScreen';
+export * from './PasswordScreen';

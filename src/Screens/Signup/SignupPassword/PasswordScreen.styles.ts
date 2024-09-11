@@ -7,7 +7,7 @@ export const useStyles = () => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      marginTop: -theme.spacing.V6,
+      marginTop: theme.spacing.V5,
       justifyContent: 'center',
       alignSelf: 'flex-start',
     },

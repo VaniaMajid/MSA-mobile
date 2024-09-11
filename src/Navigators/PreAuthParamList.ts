@@ -5,6 +5,7 @@ export type PreAuthParamList = {
   SignupEmail: undefined;
   SignupOtp: undefined;
   RegistrationForm: undefined;
+  PasswordScreen: undefined;
 };
 
 // if you want to define a screen that accepts params

@@ -1,12 +1,18 @@
 import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {ImageBackgroundWrapper} from 'src/HOC';
 import {useStyles} from './SelectRole.styles';
 import {useTheme} from '~Contexts/ThemeContext';
 import RoleCard from './components/RoleCard';
 import {IconPatient, IconSpecialist} from '~Components/Icons';
+import {Checkbox} from '~Components/Checkbox';
+import {Button} from '~Components/Button';
+import {StackScreenProps} from '@react-navigation/stack';
+import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 
-export const SelectRoleScreen = () => {
+type SelectRoleScreenProps = StackScreenProps<PreAuthParamList>;
+
+export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
   const theme = useTheme();
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const styles = useStyles();
@@ -23,7 +29,7 @@ export const SelectRoleScreen = () => {
           Select your role to proceed: choose 'Patient' for medical advice or
           'Specialist' to offer consultations.
         </Text>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginLeft: -theme.spacing.H3}}>
           <RoleCard
             onPress={() => handleSelectRole('Patient')}
             role="Patient"
@@ -55,7 +61,29 @@ export const SelectRoleScreen = () => {
             selectedIcon={selectedRole === 'Specialist'}
           />
         </View>
+        <Checkbox
+          text={
+            <Text style={{marginLeft: theme.spacing.H2}}>
+              I agree to the{' '}
+              <Text style={{color: theme.colors.primaryColor}}>
+                Terms of Service
+              </Text>{' '}
+              and{' '}
+              <Text style={{color: theme.colors.primaryColor}}>
+                Privacy Policy
+              </Text>
+            </Text>
+          }
+          onPress={() => {}}
+        />
       </View>
+      <Button
+        title="Lets Get Started"
+        style={{width: '100%'}}
+        onPress={() => {
+          navigation.navigate('SignupEmail');
+        }}
+      />
     </ImageBackgroundWrapper>
   );
 };

@@ -5,6 +5,7 @@ import {LoginScreen} from '~Screens/Login';
 import {SplashScreen} from '~Screens/SplashScreen';
 import {
   OtpScreen,
+  PasswordScreen,
   RegistrationFormScreen,
   SelectRoleScreen,
   SignupEmailScreen,
@@ -25,12 +26,34 @@ export const PreAuthNavigator = () => {
           name="SelectRole"
           component={SelectRoleScreen}
           options={{
+            title: 'Register As',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
+        <PreAuthStack.Screen
+          name="SignupEmail"
+          component={SignupEmailScreen}
+          options={{
             title: 'Create Patient Account',
             headerLeft: ({}) => <Header />,
           }}
         />
-        <PreAuthStack.Screen name="SignupEmail" component={SignupEmailScreen} />
-        <PreAuthStack.Screen name="SignupOtp" component={OtpScreen} />
+        <PreAuthStack.Screen
+          name="SignupOtp"
+          component={OtpScreen}
+          options={{
+            title: 'Authentication',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
+        <PreAuthStack.Screen
+          name="PasswordScreen"
+          component={PasswordScreen}
+          options={{
+            title: 'Set Password',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
         <PreAuthStack.Screen
           name="RegistrationForm"
           component={RegistrationFormScreen}
