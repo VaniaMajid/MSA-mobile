@@ -9,7 +9,8 @@ export const useStyles = () => {
       flex: 1,
       justifyContent: 'center',
       alignSelf: 'flex-start',
-      gap: theme.spacing.HGap1
+      gap: theme.spacing.HGap1,
+      marginBottom: theme.spacing.V5
     },
     text: {
       color: theme.colors.lightGray1, 

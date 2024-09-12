@@ -7,7 +7,7 @@ export const useStyles = (selectedIcon: boolean) => {
   return StyleSheet.create({
     container: {
       backgroundColor: !selectedIcon ? undefined : theme.colors.primaryColor,
-      marginVertical: theme.spacing.V3,
+      marginVertical: theme.spacing.V2,
       marginHorizontal: theme.spacing.H2,
       paddingHorizontal: theme.spacing.H2,
       borderRadius: 6,

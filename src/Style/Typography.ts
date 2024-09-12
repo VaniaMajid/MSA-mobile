@@ -38,7 +38,7 @@ export const FontSize = {
   filterText: hp('1.7'), // 12px
   subtextSmall: hp('1.6'), // 11px
   medicalColumnText: hp('1.7'), // 12px
-  allCapsSubtext: hp('1.6'), // 11px
+  allCapsSubtext: hp('1.4'), // 11px
   navigationSubtext: hp('1.5'), // 10px
 };
 

@@ -8,6 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {ToggleProps} from './types';
+import { useStyles } from './Toggle.styles';
 
 export const Toggle: FC<ToggleProps> = ({
   value,
@@ -18,6 +19,8 @@ export const Toggle: FC<ToggleProps> = ({
 }) => {
   const height = useSharedValue(0);
   const width = useSharedValue(0);
+
+  const styles = useStyles();
 
   const trackAnimatedStyle = useAnimatedStyle(() => {
     const color = interpolateColor(
@@ -54,26 +57,11 @@ export const Toggle: FC<ToggleProps> = ({
           height.value = e.nativeEvent.layout.height;
           width.value = e.nativeEvent.layout.width;
         }}
-        style={[switchStyles.track, style, trackAnimatedStyle]}>
+        style={[styles.track, style, trackAnimatedStyle]}>
         <Animated.View
-          style={[switchStyles.thumb, thumbAnimatedStyle]}></Animated.View>
+          style={[styles.thumb, thumbAnimatedStyle]}></Animated.View>
       </Animated.View>
     </Pressable>
   );
 };
 
-const switchStyles = StyleSheet.create({
-  track: {
-    alignItems: 'flex-start',
-    width: 100,
-    height: 40,
-    padding: 5,
-  },
-  thumb: {
-    marginTop: '-30%',
-    marginLeft: '-20%',
-    width: 16,
-    height: 16,
-    backgroundColor: 'white',
-  },
-});

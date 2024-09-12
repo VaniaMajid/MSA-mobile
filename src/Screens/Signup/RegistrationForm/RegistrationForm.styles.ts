@@ -22,5 +22,12 @@ export const useStyles = () => {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    allergyToggle: {
+      flexDirection: 'row', 
+      alignItems:'center'
+    },
+    toggleText: {
+      marginRight: theme.spacing.H2, 
+    }
   });
 };

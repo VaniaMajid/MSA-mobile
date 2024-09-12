@@ -3,6 +3,7 @@ import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {useStyles} from './input.styles';
 import {InputFieldProps} from './types';
 import { useTheme } from '~Contexts/ThemeContext';
+import { IconEyeHide } from '~Components/Icons';
 
 export const InputField: React.FC<InputFieldProps> = ({
   title,
@@ -24,14 +25,14 @@ export const InputField: React.FC<InputFieldProps> = ({
         <TextInput
           style={[theme.fonts.subtextSmall,styles.input]}
           placeholder={placeholder}
-          placeholderTextColor="#888"
+          placeholderTextColor={theme.colors.accentColor}
           secureTextEntry={secureTextEntry}
           {...rest}
         />
         {isPassword && rightIcon && (
           <TouchableOpacity
             onPress={() => setSecureTextEntry(!secureTextEntry)}>
-            {rightIcon}
+              {secureTextEntry ? <IconEyeHide/> : rightIcon}
           </TouchableOpacity>
         )}
       </View>
