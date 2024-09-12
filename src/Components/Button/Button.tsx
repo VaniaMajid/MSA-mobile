@@ -1,12 +1,13 @@
 import React, {FC} from 'react';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 import { useStyles } from './Button.styles';
+import { useTheme } from '~Contexts/ThemeContext';
 
 type ButtonProps = {
   title: string;
   onPress: () => void;
   style?: ViewStyle;
-  textStyle?: ViewStyle;
+  textStyle?: ViewStyle | TextStyle[];
   variant?: 'outline' | 'filled';
 };
 
@@ -21,7 +22,7 @@ export const Button: FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Text style={[styles.text, textStyle]}>{title}</Text>
+      <Text style={[textStyle, styles.text]}>{title}</Text>
     </TouchableOpacity>
   );
 };

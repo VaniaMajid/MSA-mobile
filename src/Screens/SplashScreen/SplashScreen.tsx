@@ -18,6 +18,7 @@ import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import SplashHeading from './components/SplashHeading/SplashHeading';
 import {PressableText} from '~Components/PressableText';
+import fontConfig from '~Style/Typography';
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 
@@ -136,10 +137,12 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
           }}>
           <PressableText
             text="Back"
-            style={{
-              color: theme.colors.primaryColor,
-              fontSize: 16,
-            }}
+            style={[
+              theme.fonts.buttonSemiBold, 
+              {
+                color: theme.colors.primaryColor,
+              }
+            ]}
             onPress={handleBackPress}
             disabled={counter === 1}
           />
@@ -151,6 +154,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
           <Button
             title="Next"
             onPress={handleNextPress}
+            textStyle={theme.fonts.buttonSemiBold}
             style={{borderRadius: 30}}
           />
         </View>

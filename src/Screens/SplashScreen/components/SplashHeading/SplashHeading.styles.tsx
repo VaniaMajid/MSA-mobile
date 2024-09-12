@@ -10,13 +10,9 @@ export const useStyles = () => {
       marginTop: 100,
     },
     superSubHeading: {
-      fontSize: 18,
-      fontWeight: 'bold',
       color: theme.colors.darkGray, 
     },
     heading: {
-      fontSize: 28,
-      fontWeight: 'bold',
       color: theme.colors.primaryColor, 
     },
   });

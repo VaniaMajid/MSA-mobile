@@ -18,8 +18,6 @@ export const useStyles = (variant: 'outline' | 'filled') => {
       },
       text: {
         color: theme.colors.primaryColor,
-        fontSize: 16,
-        fontWeight: '500',
       },
     },
     filled: {
@@ -34,8 +32,6 @@ export const useStyles = (variant: 'outline' | 'filled') => {
       },
       text: {
         color: theme.colors.white,
-        fontSize: 16,
-        fontWeight: '500',
       },
     },
   };

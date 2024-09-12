@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, TextStyle, ViewStyle } from 'react-native';
 interface PressableTextProps {
   text: string;
   onPress: () => void;
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[];
   containerStyle?: ViewStyle;
   disabled?: boolean; 
 }

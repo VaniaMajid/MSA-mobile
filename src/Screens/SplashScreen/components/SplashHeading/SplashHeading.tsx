@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Text, View } from 'react-native';
 import { useStyles } from './SplashHeading.styles';
+import { useTheme } from '~Contexts/ThemeContext';
 
 interface SplashHeadingProps {
   superHeading?: string;
@@ -10,12 +11,13 @@ interface SplashHeadingProps {
 
 const SplashHeading: FC<SplashHeadingProps> = ({ superHeading, heading, subHeading }) => {
   const styles = useStyles(); 
+  const theme = useTheme();
 
   return (
     <View style={styles.container}>
-      {superHeading && <Text style={styles.superSubHeading}>{superHeading}</Text>}
-      {heading && <Text style={styles.heading}>{heading}</Text>}
-      {subHeading && <Text style={styles.superSubHeading}>{subHeading}</Text>}
+      {superHeading && <Text style={[theme.fonts.subtextBlack, styles.superSubHeading]}>{superHeading}</Text>}
+      {heading && <Text style={[theme.fonts.largeHeaderBlack, styles.heading]}>{heading}</Text>}
+      {subHeading && <Text style={[theme.fonts.subtextBlack, styles.superSubHeading]}>{subHeading}</Text>}
     </View>
   );
 };

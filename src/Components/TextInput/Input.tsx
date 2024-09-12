@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {useStyles} from './input.styles';
 import {InputFieldProps} from './types';
+import { useTheme } from '~Contexts/ThemeContext';
 
 export const InputField: React.FC<InputFieldProps> = ({
   title,
@@ -12,15 +13,16 @@ export const InputField: React.FC<InputFieldProps> = ({
   ...rest
 }) => {
   const styles = useStyles();
+  const theme = useTheme();
   const [secureTextEntry, setSecureTextEntry] = useState(isPassword);
 
   return (
     <View style={styles.container}>
-      {title && <Text style={styles.label}>{title}</Text>}
+      {title && <Text style={[theme.fonts.inputFieldLabelText, styles.label]}>{title}</Text>}
       <View style={styles.inputContainer}>
         {leftIcon && leftIcon}
         <TextInput
-          style={styles.input}
+          style={[theme.fonts.subtextSmall,styles.input]}
           placeholder={placeholder}
           placeholderTextColor="#888"
           secureTextEntry={secureTextEntry}
