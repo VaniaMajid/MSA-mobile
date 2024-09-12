@@ -26,10 +26,10 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
   const [counter, setCounter] = React.useState(0);
   const scrollOffsetValue = useSharedValue<number>(0);
   const [data, setData] = React.useState([
-    require('../../Assets/images/onboarding1.png'),
-    require('../../Assets/images/onboarding2.png'),
-    require('../../Assets/images/onboarding3.png'),
-    require('../../Assets/images/onboarding4.png'),
+    { image: require('../../Assets/images/onboarding1.png'), heading: 'A TRUSTED APPINION', subHeading: 'IN YOUR POCKET'},
+    { image: require('../../Assets/images/onboarding2.png'), superHeading: 'CHOOSE FROM A RANGE OF', heading: 'MEDICAL SPECIALTIES'},
+    { image: require('../../Assets/images/onboarding3.png'), superHeading: 'CONNECT DIRECTLY TO ONE OF OUR', heading: 'UK BASED CONSULTANTS'},
+    { image: require('../../Assets/images/onboarding4.png'), superHeading: 'INTERACT WITH OUR', heading: 'SPECIALISTS ON', subHeading: 'OUR MEDIA MESSAGING PLATFORM'},
   ]);
   const isPagingEnabled = React.useRef(true);
   const ref = React.useRef<ICarouselInstance>(null);
@@ -46,7 +46,12 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
 
   return (
     <>
-      <Carousel
+    <ImageBackground
+      source={require('../../Assets/images/onboardingBackground.png')} 
+      style={{flex: 1}} 
+      resizeMode="cover"
+    >
+       <Carousel
         {...baseOptions}
         loop
         enabled // Default is true, just for demo
@@ -58,22 +63,18 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
         autoPlayInterval={2000}
         data={data}
         onScrollStart={() => {}}
-        onScrollEnd={() => {
-          if (counter > data.length - 1) {
-            setCounter(0);
-            return;
-          }
-          setCounter(counter + 1);
-        }}
         pagingEnabled={isPagingEnabled}
-        onSnapToItem={index => console.log('current index:', index)}
+        onSnapToItem={index => {
+          console.log('current index:', index);
+          setCounter(index + 1);
+        }}
         renderItem={({item}) => {
           return (
             <>
               <ImageBackground
                 source={item}
-                style={{width: '100%', height: '100%'}}
-                resizeMode="cover"
+                style={{width: '100%', height:'100%'}}
+                resizeMode="contain"
               />
             </>
           );
@@ -83,10 +84,12 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginHorizontal: theme.spacing.H7,
-          marginBottom: theme.spacing.V2,
+          alignItems: 'center',
+          paddingHorizontal: theme.spacing.H7,
+          padding: theme.spacing.H6,
+          backgroundColor: theme.colors.white
         }}>
-        <TouchableHighlight style={{marginTop: -theme.spacing.H1}}>
+        <TouchableHighlight >
           <Text style={{color: theme.colors.primaryColor}}>Back</Text>
         </TouchableHighlight>
         <CounterSlider
@@ -99,9 +102,12 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
           onPress={() => {
             navigation.navigate('Login');
           }}
-          style={{marginTop: -theme.spacing.V2}}
+          style={{borderRadius: 30}}
         />
       </View>
+
+    </ImageBackground>
+     
     </>
   );
 };

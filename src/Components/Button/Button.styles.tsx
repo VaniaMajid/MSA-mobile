@@ -11,7 +11,7 @@ export const useStyles = (variant: 'outline' | 'filled') => {
         borderWidth: 1,
         borderColor: theme.colors.primaryColor,
         paddingVertical: 15,
-        paddingHorizontal: 20,
+        paddingHorizontal: 25,
         borderRadius: 6,
         alignItems: 'center',
         justifyContent: 'center',
@@ -26,7 +26,7 @@ export const useStyles = (variant: 'outline' | 'filled') => {
       button: {
         backgroundColor: theme.colors.primaryColor,
         paddingVertical: 15,
-        paddingHorizontal: 20,
+        paddingHorizontal: 25,
         borderRadius: 6,
         alignItems: 'center',
         justifyContent: 'center',

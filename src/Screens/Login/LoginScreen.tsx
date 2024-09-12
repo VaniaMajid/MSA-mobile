@@ -55,7 +55,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
           />
         </View>
 
-        <Button title="Login" onPress={() => {}} style={{borderRadius: 6}} />
+        <Button title="Login" onPress={() => {}} />
       </View>
       <View style={styles.register}>
         <Text style={styles.text}>Don't have an account?</Text>
@@ -64,7 +64,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
           onPress={() => {
             navigation.navigate('SelectRole');
           }}
-          style={{borderRadius: 6, width: '100%'}}
+          style={{width: '100%'}}
           variant="outline"
         />
       </View>
