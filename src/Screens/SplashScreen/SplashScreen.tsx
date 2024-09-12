@@ -14,11 +14,10 @@ import {useSharedValue} from 'react-native-reanimated';
 import {Button} from '~Components/Button/Button';
 import {CounterSlider} from '~Components/Counter';
 import {useTheme} from '~Contexts/ThemeContext';
-import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
+import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import SplashHeading from './components/SplashHeading/SplashHeading';
 import {PressableText} from '~Components/PressableText';
-import fontConfig from '~Style/Typography';
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 
@@ -100,7 +99,6 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
           onScrollStart={() => {}}
           pagingEnabled={isPagingEnabled}
           onSnapToItem={index => {
-            console.log('current index:', index);
             setCounter(index + 1);
           }}
           renderItem={({item}) => {

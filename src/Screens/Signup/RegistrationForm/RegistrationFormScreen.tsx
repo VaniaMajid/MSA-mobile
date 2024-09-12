@@ -29,34 +29,18 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
     <ImageBackgroundWrapper>
       <StepIndicator currentStep={2} />
       <ScrollView
-        style={{flex: 1, paddingBottom: '-20%'}}
+        style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <View>
-            <InputField title="First Name" placeholder="Slim Shady" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <InputField title="Last Name" placeholder="DeadPool" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <DateOfBirthInput />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <InputField title="Post Code" placeholder="Nw16xe" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <InputField title="Mobile Number" placeholder="+44XXXXXX" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <DropdownPicker />
-          </View>
+          <InputField title="First Name" placeholder="Slim Shady" />
+          <InputField title="Last Name" placeholder="DeadPool" />
+          <DateOfBirthInput />
+          <InputField title="Post Code" placeholder="Nw16xe" />
+          <InputField title="Mobile Number" placeholder="+44XXXXXX" />
+          <DropdownPicker />
           <View
-            style={{
-              marginTop: theme.spacing.V2,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{marginTop: '0.5%'}}>Allergy</Text>
+            style={styles.toggle}>
+            <Text style = {theme.fonts.inputFieldSmall}>Allergy</Text>
             <View style={{flexDirection: 'row'}}>
               <Text style={{marginRight: theme.spacing.H2, marginTop: '1%'}}>
                 No known allergies

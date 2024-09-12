@@ -11,5 +11,19 @@ export const useStyles = () => {
       justifyContent: 'center',
       alignSelf: 'flex-start',
     },
+    text: {
+      color: theme.colors.lightGray1, 
+      marginTop: theme.spacing.V1
+    },
+    roleCardContainer: {
+      flexDirection: 'row', 
+      marginLeft: -theme.spacing.H3
+    },
+    checkboxText: {
+      marginLeft: theme.spacing.H2
+    },
+    checkboxTextPrimary: {
+      color: theme.colors.primaryColor
+    }
   });
 };

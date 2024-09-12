@@ -3,7 +3,7 @@ import React, {FC, useState} from 'react';
 import {ImageBackgroundWrapper} from 'src/HOC';
 import {useStyles} from './SelectRole.styles';
 import {useTheme} from '~Contexts/ThemeContext';
-import RoleCard from './components/RoleCard';
+import RoleCard from './components/RoleCard/RoleCard';
 import {IconPatient, IconSpecialist} from '~Components/Icons';
 import {Checkbox} from '~Components/Checkbox';
 import {Button} from '~Components/Button';
@@ -23,13 +23,13 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
-        <Text style={{fontSize: 20}}>Select your Role</Text>
+        <Text style={theme.fonts.headerMediumBold}>Select your Role</Text>
         <Text
-          style={{color: theme.colors.lightGray1, marginTop: theme.spacing.V1}}>
+          style={[theme.fonts.paragraphRegularSmall, styles.text]}>
           Select your role to proceed: choose 'Patient' for medical advice or
           'Specialist' to offer consultations.
         </Text>
-        <View style={{flexDirection: 'row', marginLeft: -theme.spacing.H3}}>
+        <View style={styles.roleCardContainer}>
           <RoleCard
             onPress={() => handleSelectRole('Patient')}
             role="Patient"
@@ -63,13 +63,13 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
         </View>
         <Checkbox
           text={
-            <Text style={{marginLeft: theme.spacing.H2}}>
+            <Text style={[theme.fonts.subtextSmall, styles.checkboxText]}>
               I agree to the{' '}
-              <Text style={{color: theme.colors.primaryColor}}>
+              <Text style={styles.checkboxTextPrimary}>
                 Terms of Service
               </Text>{' '}
               and{' '}
-              <Text style={{color: theme.colors.primaryColor}}>
+              <Text style={styles.checkboxTextPrimary}>
                 Privacy Policy
               </Text>
             </Text>

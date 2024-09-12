@@ -18,7 +18,7 @@ export const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <View style={styles.container}>
-      {title && <Text style={[theme.fonts.inputFieldLabelText, styles.label]}>{title}</Text>}
+      {title && <Text style={[theme.fonts.inputFieldSmall, styles.label]}>{title}</Text>}
       <View style={styles.inputContainer}>
         {leftIcon && leftIcon}
         <TextInput
