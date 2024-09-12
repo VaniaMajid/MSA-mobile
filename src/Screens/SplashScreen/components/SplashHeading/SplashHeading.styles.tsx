@@ -7,18 +7,17 @@ export const useStyles = () => {
   return StyleSheet.create({
     container: {
       alignItems: 'center',
-      marginVertical: 16,
+      marginTop: 100,
     },
     superSubHeading: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: 'bold',
       color: theme.colors.darkGray, 
     },
     heading: {
-      fontSize: 24,
+      fontSize: 28,
       fontWeight: 'bold',
       color: theme.colors.primaryColor, 
-      marginVertical: 8,
     },
   });
 };

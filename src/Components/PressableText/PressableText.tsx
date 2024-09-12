@@ -6,11 +6,22 @@ interface PressableTextProps {
   onPress: () => void;
   style?: TextStyle;
   containerStyle?: ViewStyle;
+  disabled?: boolean; 
 }
 
-export const PressableText: FC<PressableTextProps> = ({ text, onPress, style, containerStyle }) => {
+export const PressableText: FC<PressableTextProps> = ({
+  text,
+  onPress,
+  style,
+  containerStyle,
+  disabled = false, 
+}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={containerStyle}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[containerStyle, disabled ? { opacity: 0.5 } : {}]} 
+      disabled={disabled} 
+    >
       <Text style={style}>{text}</Text>
     </TouchableOpacity>
   );
