@@ -42,7 +42,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
         />
         <View style={styles.row}>
           <Checkbox
-            text={<Text>Remember me</Text>}
+            text={<Text style={{marginLeft: 10}}>Remember me</Text>}
             isChecked={isChecked}
             onPress={handleCheckboxPress}
             style={{width: 200}}

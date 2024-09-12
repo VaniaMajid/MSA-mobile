@@ -57,6 +57,10 @@ export const PreAuthNavigator = () => {
         <PreAuthStack.Screen
           name="RegistrationForm"
           component={RegistrationFormScreen}
+          options={{
+            title: 'Register',
+            headerLeft: ({}) => <Header />,
+          }}
         />
       </PreAuthStack.Navigator>
     </NavigationContainer>
