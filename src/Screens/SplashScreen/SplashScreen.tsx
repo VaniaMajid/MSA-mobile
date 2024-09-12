@@ -100,7 +100,6 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
           onScrollStart={() => {}}
           pagingEnabled={isPagingEnabled}
           onSnapToItem={index => {
-            console.log('current index:', index);
             setCounter(index + 1);
           }}
           renderItem={({item}) => {

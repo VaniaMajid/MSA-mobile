@@ -10,6 +10,7 @@ import IconLockSvg from '~Assets/Icons/lock.svg';
 import IconPatientSvg from '~Assets/Icons/patient.svg';
 import IconSpecialistSvg from '~Assets/Icons/specialist.svg';
 import IconTickCircleSvg from '~Assets/Icons/tickCircle.svg';
+import IconVerifySvg from '~Assets/Icons/verify.svg';
 
 export * from './props';
 
@@ -148,6 +149,27 @@ export const IconTickCircle: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconTickCircleSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconVerify: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-verify',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconVerifySvg
       color={color}
       height={iconSize}
       width={iconSize}
