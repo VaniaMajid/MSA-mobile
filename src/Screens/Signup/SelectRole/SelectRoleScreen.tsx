@@ -9,6 +9,7 @@ import {Checkbox} from '~Components/Checkbox';
 import {Button} from '~Components/Button';
 import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
+import { Heading } from '~Components/Heading';
 
 type SelectRoleScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -23,7 +24,7 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
-        <Text style={theme.fonts.headerMediumBold}>Select your Role</Text>
+        <Heading title="Select your Role" style={theme.fonts.headerMediumBold}/>
         <Text
           style={[theme.fonts.paragraphRegularSmall, styles.text]}>
           Select your role to proceed: choose 'Patient' for medical advice or
