@@ -9,7 +9,7 @@ export const useStyles = () => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between', 
-        paddingVertical: 20,
+        paddingBottom: 10,
         paddingHorizontal: 50, 
       },
       stepContainer: {
