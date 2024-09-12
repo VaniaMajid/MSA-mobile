@@ -10,6 +10,7 @@ import {ReactComponent as IconPatientSvg} from '~Assets/Icons/patient.svg';
 import {ReactComponent as IconSpecialistSvg} from '~Assets/Icons/specialist.svg';
 import {ReactComponent as IconTickCircleSvg} from '~Assets/Icons/tickCircle.svg';
 import {ReactComponent as IconUserSvg} from '~Assets/Icons/user.svg';
+import {ReactComponent as IconVerifySvg} from '~Assets/Icons/verify.svg';
 
 export * from './props';
 
@@ -23,3 +24,4 @@ export const IconPatient = makeIconWeb(IconPatientSvg);
 export const IconSpecialist = makeIconWeb(IconSpecialistSvg);
 export const IconTickCircle = makeIconWeb(IconTickCircleSvg);
 export const IconUser = makeIconWeb(IconUserSvg);
+export const IconVerify = makeIconWeb(IconVerifySvg);
