@@ -27,7 +27,7 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
 
   return (
     <ImageBackgroundWrapper>
-      <StepIndicator currentStep={1} />
+      <StepIndicator currentStep={2} />
       <ScrollView
         style={{flex: 1, paddingBottom: '-20%'}}
         showsVerticalScrollIndicator={false}>
