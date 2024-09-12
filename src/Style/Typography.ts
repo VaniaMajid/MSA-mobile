@@ -7,313 +7,239 @@ export const getDimensions = {
 };
 
 export const FontSize = {
-  font: hp('2.5'), //16
-  h1: hp('2.6'), //22
-  h2: hp('5.7'), //48
-  h3: hp('2.3'), //18
-  h5: hp('4.6'), //36
-  sh1: hp('2.35'), //20
-  sh2: hp('2.3'), //18
-  sh3: hp('2.4'),
-  st1: hp('1.65'), //14
-  st2: hp('1.9'), //16
-  st3: hp('1.65'), //14
-  numberPoints: hp('5'),
-  body1: hp('1.65'), //14
-  body2: hp('1.65'), //14
-  body3: hp('1.43'), //12
-  body4: hp('1.9'), //16
-  btn1: hp('1.9'), //16
-  btn2: hp('1.65'), //14
-  btn3: hp('1.65'), //14
-  textLink1: hp('1.6'), //14
-  textLink2: hp('2.6'), //22
-  nav: hp('1.9'), //14
-  num1: hp('3.0'),
-  num2: hp('2.0'),
-  num3: hp('1.0'),
-  text1: hp('1.43'), //12
-  text2: hp('2.15'), //18
-  text3: hp('4.15'), //18
-
-  fieldError: hp('1.6'),
+  headerBlack: hp('4'), // 30px
+  headerBold: hp('4'), // 30px
+  largeHeaderText: hp('3.7'), // 28px
+  largeHeaderBlack: hp('3.3'), // 28px
+  headerMediumBold: hp('3.2'), // 24px
+  largeSubHeaderSemiBold: hp('2.7'), // 20px
+  middleTextNormal: hp('2.7'), // 20px
+  subtextBlack: hp('2.2'), // 18px
+  inputFieldLabelText: hp('2.4'), // 18px
+  uiLabelSemiBold: hp('2.3'), // 17px
+  popupCTAText: hp('2.3'), // 17px
+  paragraphRegular: hp('2.2'), // 16px
+  paragraphBold: hp('2.2'), // 16px
+  paragraphSemiBold: hp('2.2'), // 16px
+  headerSmallBold: hp('2.2'), // 16px
+  ctaBoldTransparent: hp('2.2'), // 16px
+  buttonSemiBold: hp('2.2'), // 16px
+  labelMedium: hp('2.2'), // 16px
+  paragraph: hp('2.1'), // 15px
+  chatText: hp('2.1'), // 15px
+  notificationHeader: hp('2.1'), // 15px
+  linkBold: hp('1.9'), // 14px
+  paragraphSmallSemiBold: hp('1.9'), // 14px
+  paragraphRegularSmall: hp('1.9'), // 14px
+  linkSemiBold: hp('1.9'), // 14px
+  inputFieldSmall: hp('1.9'), // 14px
+  notificationSubtext: hp('1.9'), // 14px
+  previewSubtext: hp('1.8'), // 13px
+  subtextSmall: hp('1.7'), // 12px
+  filterText: hp('1.7'), // 12px
+  medicalColumnText: hp('1.7'), // 12px
+  allCapsSubtext: hp('1.6'), // 11px
+  navigationSubtext: hp('1.5'), // 10px
 };
 
 const fontConfig: IThemeFonts = {
-  h1: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.h1,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
+  headerBlack: {
+    fontFamily: 'Lato-Black',
+    fontSize: FontSize.headerBlack,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  h2: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.h2,
-    fontWeight: '400',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  headerBold: {
+    fontFamily: 'Lato-Bold',
+    fontSize: FontSize.headerBlack,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  h3: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.h3,
-    fontWeight: '300',
-    color: Colors.black,
-    letterSpacing: 0.3,
+  largeHeaderText: {
+    fontFamily: 'Lato-ExtraBold',
+    fontSize: FontSize.largeHeaderText,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-
-  h4: {
-    fontFamily: 'ClarendonLtStd-Bold',
-    fontSize: FontSize.h1,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
+  largeHeaderBlack: {
+    fontFamily: 'Lato-Black',
+    fontSize: FontSize.largeHeaderBlack,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  h5: {
-    fontFamily: 'ClarendonLtStd',
-    fontSize: FontSize.h5,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
+  headerMediumBold: {
+    fontFamily: 'Lato-Bold',
+    fontSize: FontSize.headerMediumBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-
-  sh1: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.sh1,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  largeSubHeaderSemiBold: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.largeSubHeaderSemiBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  sh2: {
-    fontFamily: 'ClarendonLtStd-Bold',
-    fontSize: FontSize.sh2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  middleTextNormal: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.middleTextNormal,
+    color: Colors.darkGray,
+    letterSpacing: 0.35,
   },
-  sh3: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.sh1,
-    color: Colors.primaryDarkGray,
-    fontWeight: '400',
-    letterSpacing: 0.2,
+  subtextBlack: {
+    fontFamily: 'Lato-Black',
+    fontSize: FontSize.subtextBlack,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  sh4: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.sh2,
-    color: Colors.primaryDarkGray,
-    fontWeight: '400',
-    letterSpacing: 0.2,
+  inputFieldLabelText: {
+    fontFamily: 'Lato-Medium',
+    fontSize: FontSize.inputFieldLabelText,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  sh5: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.sh3,
-    color: Colors.primaryDarkGray,
-    fontWeight: '400',
-    letterSpacing: 0.2,
+  uiLabelSemiBold: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.uiLabelSemiBold,
+    color: Colors.darkGray,
+    letterSpacing: -0.41,
   },
-  sh2light: {
-    fontFamily: 'ClarendonLTStd',
-    fontSize: FontSize.sh2,
-    fontWeight: '300',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  popupCTAText: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.popupCTAText,
+    color: Colors.darkGray,
+    letterSpacing: -0.41,
   },
-  sh4light: {
-    fontFamily: 'ClarendonLtStd-Light',
-    fontSize: FontSize.sh2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  paragraphRegular: {
+    fontFamily: 'Lato-Medium',
+    fontSize: FontSize.paragraphRegular,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  st1: {
-    fontFamily: 'VisbyCf-Bold',
-    fontSize: FontSize.st1,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
+  paragraphBold: {
+    fontFamily: 'Lato-Bold',
+    fontSize: FontSize.paragraphBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  st2: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.st2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
+  paragraphSemiBold: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.paragraphSemiBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  st3: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.st3,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
+  headerSmallBold: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.headerSmallBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  st4: {
-    fontFamily: 'VisbyCf-DemiBold',
-    fontSize: FontSize.btn3,
-    fontWeight: '600',
-    color: Colors.primaryMediumBlue,
-    letterSpacing: 0.3,
+  ctaBoldTransparent: {
+    fontFamily: 'Lato-Bold',
+    fontSize: FontSize.ctaBoldTransparent,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  st2Med: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.st2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
+  buttonSemiBold: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.buttonSemiBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  numberPoints: {
-    fontFamily: 'VisbyCf-Bold',
-    fontSize: FontSize.numberPoints,
-    color: Colors.primaryMediumBlue,
-    letterSpacing: 0.2,
+  labelMedium: {
+    fontFamily: 'Lato-Medium',
+    fontSize: FontSize.labelMedium,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  body0: {
-    fontFamily: 'Raleway-Regular',
-    fontSize: FontSize.body1,
-    fontWeight: '500',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  paragraph: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.paragraph,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  body1: {
-    fontFamily: 'Raleway-Regular',
-    fontSize: FontSize.body1,
-    fontWeight: '400',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  chatText: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.chatText,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  body2: {
-    fontFamily: 'VisbyCf-Medium',
-    fontWeight: 'normal',
-    fontSize: FontSize.body2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  notificationHeader: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.notificationHeader,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  body3: {
-    fontFamily: 'VisbyCf-Medium',
-    fontWeight: '600',
-    fontSize: FontSize.body3,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.4,
+  linkBold: {
+    fontFamily: 'Lato-Bold',
+    fontSize: FontSize.linkBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  body4: {
-    fontFamily: 'Raleway-Regular',
-    fontSize: FontSize.body4,
-    fontWeight: '400',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  paragraphSmallSemiBold: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.paragraphSmallSemiBold,
+    color: Colors.darkGray,
+    letterSpacing: 3.0,
   },
-  body5: {
-    fontFamily: 'VisbyCf-Medium',
-    fontWeight: '600',
-    fontSize: FontSize.body2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  paragraphRegularSmall: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.paragraphRegularSmall,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  body6: {
-    fontFamily: 'VisbyCf-Medium',
-    fontWeight: '600',
-    fontSize: FontSize.body2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.4,
+  linkSemiBold: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.linkSemiBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  body7: {
-    fontFamily: 'VisbyCf-Medium',
-    fontWeight: '400',
-    fontSize: FontSize.body2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.4,
+  inputFieldSmall: {
+    fontFamily: 'Lato-Medium',
+    fontSize: FontSize.inputFieldSmall,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  num1: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.num1,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.4,
+  notificationSubtext: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.notificationSubtext,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  num2: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.num2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  previewSubtext: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.previewSubtext,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  num3: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.num3,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
+  subtextSmall: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.subtextSmall,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  btn1: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.btn1,
-    color: Colors.primaryMediumBlue,
-    letterSpacing: 0.3,
+  filterText: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.filterText,
+    color: Colors.darkGray,
+    letterSpacing: -0.24,
   },
-  btn2: {
-    fontFamily: 'VisbyCf-Bold',
-    fontSize: FontSize.btn2,
-    fontWeight: '400',
-    color: Colors.primaryMediumBlue,
-    letterSpacing: 0.3,
+  medicalColumnText: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.medicalColumnText,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  btn3: {
-    fontFamily: 'VisbyCf-DemiBold',
-    fontSize: FontSize.btn3,
-    fontWeight: '400',
-    color: Colors.primaryMediumBlue,
-    letterSpacing: 0.3,
+  allCapsSubtext: {
+    fontFamily: 'Lato-Semibold',
+    fontSize: FontSize.allCapsSubtext,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
   },
-  btn4: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.btn2,
-    color: Colors.primaryMediumBlue,
-    letterSpacing: 0.3,
-  },
-  nav: {
-    fontFamily: 'Raleway-Regular',
-    fontSize: FontSize.nav,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
-  },
-  textLink: {
-    fontFamily: 'VisbyCf-Bold',
-    fontSize: FontSize.nav,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
-  },
-  textLink1: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.textLink1,
-    fontWeight: 'bold',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
-  },
-  textLink2: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.textLink2,
-    fontWeight: '900',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.3,
-  },
-  text1: {
-    fontFamily: 'VisbyCf-Bold',
-    fontSize: FontSize.text1,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
-  },
-  text2: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.text1,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
-  },
-  text3: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.text2,
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
-  },
-
-  ralewayMedium: {
-    fontFamily: 'Raleway-Medium',
-    fontSize: FontSize.body1,
-    fontWeight: '500',
-    color: Colors.primaryDarkGray,
-    letterSpacing: 0.2,
-  },
-  fieldError: {
-    fontFamily: 'VisbyCF-ExtraBold',
-    fontSize: FontSize.fieldError,
-    color: Colors.secondaryRed,
-    letterSpacing: 0.2,
+  navigationSubtext: {
+    fontFamily: 'Lato-Regular',
+    fontSize: FontSize.navigationSubtext,
+    color: Colors.darkGray,
+    letterSpacing: -0.24,
   },
 };
 

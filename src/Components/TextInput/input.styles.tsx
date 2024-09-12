@@ -10,9 +10,6 @@ export const useStyles = () => {
     },
     label: {
       marginBottom: theme.spacing.V1,
-      fontSize: 18,
-      fontWeight:'semibold',
-      color: theme.colors.darkGray,
     },
     inputContainer: {
       flexDirection: 'row',
@@ -24,8 +21,6 @@ export const useStyles = () => {
     },
     input: {
       flex: 1,
-      fontSize: 14,
-      color: theme.colors.darkGray,
     },
   });
 };

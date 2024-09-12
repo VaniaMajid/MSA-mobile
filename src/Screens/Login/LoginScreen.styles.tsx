@@ -39,8 +39,6 @@ export const useStyles = () => {
       minHeight: 30, 
     },
     forgotPass: {
-      fontSize: 16,
-      fontWeight: '700',
       color: theme.colors.primaryColor, 
     },
     checkboxIcon: {

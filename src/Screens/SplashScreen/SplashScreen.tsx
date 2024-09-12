@@ -16,6 +16,9 @@ import {CounterSlider} from '~Components/Counter';
 import {useTheme} from '~Contexts/ThemeContext';
 import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
+import SplashHeading from './components/SplashHeading/SplashHeading';
+import {PressableText} from '~Components/PressableText';
+import fontConfig from '~Style/Typography';
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 
@@ -26,10 +29,27 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
   const [counter, setCounter] = React.useState(0);
   const scrollOffsetValue = useSharedValue<number>(0);
   const [data, setData] = React.useState([
-    require('../../Assets/images/onboarding1.png'),
-    require('../../Assets/images/onboarding2.png'),
-    require('../../Assets/images/onboarding3.png'),
-    require('../../Assets/images/onboarding4.png'),
+    {
+      image: require('../../Assets/images/onboarding1.png'),
+      heading: 'A TRUSTED APPINION',
+      subHeading: 'IN YOUR POCKET',
+    },
+    {
+      image: require('../../Assets/images/onboarding2.png'),
+      superHeading: 'CHOOSE FROM A RANGE OF',
+      heading: 'MEDICAL SPECIALTIES',
+    },
+    {
+      image: require('../../Assets/images/onboarding3.png'),
+      superHeading: 'CONNECT DIRECTLY TO ONE OF OUR',
+      heading: 'UK BASED CONSULTANTS',
+    },
+    {
+      image: require('../../Assets/images/onboarding4.png'),
+      superHeading: 'INTERACT WITH OUR',
+      heading: 'SPECIALISTS ON',
+      subHeading: 'OUR MEDIA MESSAGING PLATFORM',
+    },
   ]);
   const isPagingEnabled = React.useRef(true);
   const ref = React.useRef<ICarouselInstance>(null);
@@ -44,63 +64,101 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
     pagingEnabled: true,
   } as const;
 
+  const handleBackPress = () => {
+    if (counter > 1) {
+      ref.current?.prev();
+      setCounter(counter - 1);
+    }
+  };
+
+  const handleNextPress = () => {
+    if (counter < data.length) {
+      ref.current?.next();
+      setCounter(counter + 1);
+    } else {
+      navigation.navigate('Login');
+    }
+  };
+
   return (
     <>
-      <Carousel
-        {...baseOptions}
-        loop
-        enabled // Default is true, just for demo
-        ref={ref}
-        defaultScrollOffsetValue={scrollOffsetValue}
-        testID={'xxx'}
-        style={{width: '100%'}}
-        autoPlay={true}
-        autoPlayInterval={2000}
-        data={data}
-        onScrollStart={() => {}}
-        onScrollEnd={() => {
-          if (counter > data.length - 1) {
-            setCounter(0);
-            return;
-          }
-          setCounter(counter + 1);
-        }}
-        pagingEnabled={isPagingEnabled}
-        renderItem={({item}) => {
-          return (
-            <>
-              <ImageBackground
-                source={item}
-                style={{width: '100%', height: '100%'}}
-                resizeMode="cover"
-              />
-            </>
-          );
-        }}
-      />
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: theme.spacing.H7,
-          marginBottom: theme.spacing.V2,
-        }}>
-        <TouchableHighlight style={{marginTop: -theme.spacing.H1}}>
-          <Text style={{color: theme.colors.primaryColor}}>Back</Text>
-        </TouchableHighlight>
-        <CounterSlider
-          current={counter}
-          total={data.length}
-          color="primaryColor"
-        />
-        <Button
-          title="Next"
-          onPress={() => {
-            navigation.navigate('Login');
+      <ImageBackground
+        source={require('../../Assets/images/onboardingBackground.png')}
+        style={{flex: 1}}
+        resizeMode="cover">
+        <Carousel
+          {...baseOptions}
+          loop
+          enabled // Default is true, just for demo
+          ref={ref}
+          defaultScrollOffsetValue={scrollOffsetValue}
+          testID={'xxx'}
+          style={{width: '100%'}}
+          autoPlay={true}
+          autoPlayInterval={2000}
+          data={data}
+          onScrollStart={() => {}}
+          pagingEnabled={isPagingEnabled}
+          onSnapToItem={index => {
+            console.log('current index:', index);
+            setCounter(index + 1);
           }}
-          style={{marginTop: -theme.spacing.V2}}
+          renderItem={({item}) => {
+            return (
+              <View style={{flex: 1, marginTop: 45}}>
+                <SplashHeading
+                  superHeading={item.superHeading}
+                  heading={item.heading}
+                  subHeading={item.subHeading}
+                />
+
+                <View style={{flex: 1, justifyContent: 'flex-end'}}>
+                  <ImageBackground
+                    source={item.image}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                    }}
+                    resizeMode="contain"
+                  />
+                </View>
+              </View>
+            );
+          }}
         />
-      </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: theme.spacing.H7,
+            padding: theme.spacing.H7,
+            backgroundColor: theme.colors.white,
+          }}>
+          <PressableText
+            text="Back"
+            style={[
+              theme.fonts.buttonSemiBold, 
+              {
+                color: theme.colors.primaryColor,
+              }
+            ]}
+            onPress={handleBackPress}
+            disabled={counter === 1}
+          />
+          <CounterSlider
+            current={counter}
+            total={data.length}
+            color="primaryColor"
+          />
+          <Button
+            title="Next"
+            onPress={handleNextPress}
+            textStyle={theme.fonts.buttonSemiBold}
+            style={{borderRadius: 30}}
+          />
+        </View>
+      </ImageBackground>
     </>
   );
 };

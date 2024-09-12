@@ -13,8 +13,6 @@ export const useStyles = () => {
         borderRadius: 5,
       },
       checkboxText: {
-        fontSize: 16,
-        color: theme.colors.darkGray,
         textDecorationLine: 'none',
       },
   });
