@@ -29,8 +29,6 @@ export const useStyles = () => {
     },
     text: {
       textAlign: 'center',
-      fontSize: 16,
-      color: theme.colors.darkGray,
     },
     row: {
       flexDirection: 'row',
@@ -58,7 +56,6 @@ export const useStyles = () => {
     errorText: {
       marginTop: 4,
       color: theme.colors.error,
-      fontSize: 12,
     },
   });
 };

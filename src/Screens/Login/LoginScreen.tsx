@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { View, Text, Image } from 'react-native';
 import { Button } from '~Components/Button';
 import { Heading } from '~Components/Heading';
@@ -12,6 +12,7 @@ import { PreAuthParamList } from '~Navigators/PreAuthParamList';
 import { ImageBackgroundWrapper } from 'src/HOC';
 import { useTheme } from '~Contexts/ThemeContext';
 import { validateEmail, validatePassword } from '~Utils/validation';
+import { useFocusEffect } from '@react-navigation/native';
 
 type LoginScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -70,9 +71,20 @@ export const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
 
   const handleLoginPress = () => {
     if (validateInputs()) {
-      
+      // navigation.navigate('Home');
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      setEmail('');
+      setPassword('');
+      setEmailError('');
+      setPasswordError('');
+      setLoginError('');
+      setIsChecked(false);
+    }, [])
+  );
 
   return (
     <ImageBackgroundWrapper>
@@ -114,12 +126,12 @@ export const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
           />
         </View>
 
-        {loginError ? <Text style={styles.errorText}>{loginError}</Text> : null}
+        {loginError ? <Text style={[theme.fonts.subtextSmall,styles.errorText]}>{loginError}</Text> : null}
         <Button title="Login" textStyle={theme.fonts.buttonSemiBold} onPress={handleLoginPress} />
       </View>
 
       <View style={styles.register}>
-        <Text style={styles.text}>Don't have an account?</Text>
+        <Text style={[styles.text, theme.fonts.paragraph]}>Don't have an account?</Text>
         <Button
           title="Register"
           onPress={() => {

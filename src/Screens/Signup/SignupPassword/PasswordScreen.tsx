@@ -1,16 +1,68 @@
 import {View, Text} from 'react-native';
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {ImageBackgroundWrapper} from 'src/HOC';
 import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import {useStyles} from './PasswordScreen.styles';
 import {useTheme} from '~Contexts/ThemeContext';
-import {InputField, Button, Heading} from '~Components/index';
+import {
+  InputField,
+  Button,
+  Heading,
+  IconLock,
+  IconEye,
+} from '~Components/index';
+import {validateConfirmPassword, validateNewPassword} from '~Utils/validation';
 
 type PasswordScreenProps = StackScreenProps<PreAuthParamList>;
+
 export const PasswordScreen: FC<PasswordScreenProps> = ({navigation}) => {
   const styles = useStyles();
   const theme = useTheme();
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+    const passwordValidationError = validateNewPassword(text);
+    setPasswordError(passwordValidationError);
+  };
+
+  const handleConfirmPasswordChange = (text: string) => {
+    setConfirmPassword(text);
+    const confirmPasswordValidationError = validateConfirmPassword(
+      text,
+      password,
+    );
+    setConfirmPasswordError(confirmPasswordValidationError);
+  };
+
+  const handleSetPasswordPress = () => {
+    setPasswordError('');
+    setConfirmPasswordError('');
+
+    const passwordValidationError = validateNewPassword(password);
+    const confirmPasswordValidationError = validateConfirmPassword(
+      confirmPassword,
+      password,
+    );
+
+    if (passwordValidationError) {
+      setPasswordError(passwordValidationError);
+    }
+
+    if (confirmPasswordValidationError) {
+      setConfirmPasswordError(confirmPasswordValidationError);
+    }
+
+    if (!passwordValidationError && !confirmPasswordValidationError) {
+      navigation.navigate('RegistrationForm');
+    }
+  };
+
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
@@ -27,7 +79,16 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({navigation}) => {
 
         <View style={styles.inputContainer}>
           <View>
-            <InputField title="Password" placeholder="Enter your password" />
+            <InputField
+              title="Password"
+              placeholder="Enter your password"
+              isPassword={true}
+              leftIcon={<IconLock />}
+              rightIcon={<IconEye />}
+              value={password}
+              onChangeText={handlePasswordChange}
+              errorMessage={passwordError}
+            />
             <Text style={[theme.fonts.subtextSmall, styles.text]}>
               Passwords must be at least 8 characters long and include a special
               character.
@@ -35,20 +96,25 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({navigation}) => {
           </View>
           <View>
             <InputField
-              title="Confirm Password"
-              placeholder="Enter your password"
+              title="Confirm password"
+              placeholder="Confrim your password"
+              isPassword={true}
+              leftIcon={<IconLock />}
+              rightIcon={<IconEye />}
+              value={confirmPassword}
+              onChangeText={handleConfirmPasswordChange}
+              errorMessage={confirmPasswordError}
             />
             <Text style={[theme.fonts.subtextSmall, styles.text]}>
-              Both Password should match
+              Both passwords should match.
             </Text>
           </View>
         </View>
 
         <Button
           title="Set Password"
-          onPress={() => {
-            navigation.navigate('RegistrationForm');
-          }}
+          onPress={handleSetPasswordPress}
+          textStyle={theme.fonts.buttonSemiBold}
         />
       </View>
     </ImageBackgroundWrapper>

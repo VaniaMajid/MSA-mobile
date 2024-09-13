@@ -1,4 +1,4 @@
-import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 import React, {FC, useState} from 'react';
 import {ImageBackgroundWrapper} from 'src/HOC';
 import {useStyles} from './SelectRole.styles';
@@ -9,24 +9,49 @@ import {Checkbox} from '~Components/Checkbox';
 import {Button} from '~Components/Button';
 import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
-import { Heading } from '~Components/Heading';
+import {Heading} from '~Components/Heading';
+import {validateTermsAgreement} from '~Utils/validation';
 
 type SelectRoleScreenProps = StackScreenProps<PreAuthParamList>;
 
 export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
   const theme = useTheme();
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
+  const [error, setError] = useState('');
   const styles = useStyles();
 
   const handleSelectRole = (role: string) => {
     setSelectedRole(role);
   };
+
+  const handleAgreeTermsPress = () => {
+    const newIsTermsChecked = !isTermsChecked;
+    setIsTermsChecked(newIsTermsChecked);
+
+    if (newIsTermsChecked) {
+      setError('');
+    }
+  };
+
+  const handleGetStartedPress = () => {
+    const validationError = validateTermsAgreement(isTermsChecked);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+    setError('');
+    navigation.navigate('SignupEmail');
+  };
+
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
-        <Heading title="Select your Role" style={theme.fonts.headerMediumBold}/>
-        <Text
-          style={[theme.fonts.paragraphRegularSmall, styles.text]}>
+        <Heading
+          title="Select your Role"
+          style={theme.fonts.headerMediumBold}
+        />
+        <Text style={[theme.fonts.paragraphRegularSmall, styles.text]}>
           Select your role to proceed: choose 'Patient' for medical advice or
           'Specialist' to offer consultations.
         </Text>
@@ -66,24 +91,24 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
           text={
             <Text style={[theme.fonts.subtextSmall, styles.checkboxText]}>
               I agree to the{' '}
-              <Text style={styles.checkboxTextPrimary}>
-                Terms of Service
-              </Text>{' '}
-              and{' '}
-              <Text style={styles.checkboxTextPrimary}>
-                Privacy Policy
-              </Text>
+              <Text style={styles.checkboxTextPrimary}>Terms of Service</Text>{' '}
+              and <Text style={styles.checkboxTextPrimary}>Privacy Policy</Text>
             </Text>
           }
-          onPress={() => {}}
+          isChecked={isTermsChecked}
+          onPress={handleAgreeTermsPress}
         />
+
+        {error ? (
+          <Text style={[theme.fonts.subtextSmall, styles.errorText]}>
+            {error}
+          </Text>
+        ) : null}
       </View>
       <Button
-        title="Lets Get Started"
+        title="Let's Get Started"
         style={{width: '100%'}}
-        onPress={() => {
-          navigation.navigate('SignupEmail');
-        }}
+        onPress={handleGetStartedPress}
       />
     </ImageBackgroundWrapper>
   );

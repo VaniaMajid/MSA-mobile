@@ -1,16 +1,42 @@
-import {View, Text} from 'react-native';
-import React, {FC} from 'react';
-import {ImageBackgroundWrapper} from 'src/HOC';
-import {useTheme} from '~Contexts/ThemeContext';
-import {InputField, Button, Heading} from '~Components/index';
-import {StackScreenProps} from '@react-navigation/stack';
-import {PreAuthParamList} from '~Navigators/PreAuthParamList';
-import {useStyles} from './SignupEmailScreen.styles';
+import React, { FC, useState, useCallback } from 'react';
+import { View, Text } from 'react-native';
+import { ImageBackgroundWrapper } from 'src/HOC';
+import { useTheme } from '~Contexts/ThemeContext';
+import { InputField, Button, Heading } from '~Components/index';
+import { StackScreenProps } from '@react-navigation/stack';
+import { PreAuthParamList } from '~Navigators/PreAuthParamList';
+import { useStyles } from './SignupEmailScreen.styles';
+import { validateEmail } from '~Utils/validation';
 
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
-export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({navigation}) => {
+
+export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation }) => {
   const styles = useStyles();
   const theme = useTheme();
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [submissionError, setSubmissionError] = useState('');
+
+  const handleEmailChange = (text: string) => {
+    setEmail(text);
+    const emailValidationError = validateEmail(text);
+    setEmailError(emailValidationError); 
+  };
+
+  const handleVerifyEmailPress = () => {
+    setEmailError('');
+    setSubmissionError('');
+
+    const emailValidationError = validateEmail(email);
+
+    if (emailValidationError) {
+      setEmailError(emailValidationError);
+      return;
+    }
+    navigation.navigate('SignupOtp');
+  };
+
+
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
@@ -25,13 +51,24 @@ export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({navigation}) => {
           </Text>
         </View>
 
-        <InputField title="Email" placeholder="Enter your email" />
+        <InputField
+          title="Email"
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={handleEmailChange} 
+          errorMessage={emailError} 
+        />
+
+        {submissionError ? (
+          <Text style={[theme.fonts.subtextSmall, styles.errorText]}>
+            {submissionError}
+          </Text>
+        ) : null}
 
         <Button
           title="Verify Email"
-          onPress={() => {
-            navigation.navigate('SignupOtp');
-          }}
+          onPress={handleVerifyEmailPress}
+          textStyle={theme.fonts.buttonSemiBold}
         />
       </View>
     </ImageBackgroundWrapper>

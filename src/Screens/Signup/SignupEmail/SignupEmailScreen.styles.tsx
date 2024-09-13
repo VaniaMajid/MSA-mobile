@@ -16,5 +16,8 @@ export const useStyles = () => {
       color: theme.colors.lightGray1, 
       marginTop: theme.spacing.V1
     },
+    errorText: {
+      color: theme.colors.error,
+    },
   });
 };

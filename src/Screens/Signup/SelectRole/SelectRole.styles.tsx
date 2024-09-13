@@ -24,6 +24,10 @@ export const useStyles = () => {
     },
     checkboxTextPrimary: {
       color: theme.colors.primaryColor
-    }
+    },
+    errorText: {
+      marginTop: 4,
+      color: theme.colors.error,
+    },
   });
 };
