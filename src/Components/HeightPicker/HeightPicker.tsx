@@ -61,7 +61,7 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
       <View style={styles.inputContainer}>
         <View style={styles.input}>
           <TextInput
-            style={[theme.fonts.inputFieldSmall]}
+            style={[theme.fonts.inputFieldSmall, { paddingBottom: 9}]}
             placeholder={placeholder}
             placeholderTextColor={theme.colors.accentColor}
             keyboardType="numeric"
@@ -71,8 +71,7 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
           <Text style={theme.fonts.inputFieldSmall}>{selectedUnit}</Text>
         </View>
         <TouchableOpacity
-          onPress={() => setOpen(prev => !prev)}
-          style={styles.dropdownButton}>
+          onPress={() => setOpen(prev => !prev)}>
           <IconArrowDown size='xxxs'/>
         </TouchableOpacity>
       </View>

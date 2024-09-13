@@ -29,6 +29,7 @@ export const InputField: React.FC<InputFieldProps> = ({
             styles.input,
             
           ]}
+          multiline= {false}
           placeholder={placeholder}
           placeholderTextColor={disabled ?theme.colors.disabled :theme.colors.accentColor}
           secureTextEntry={secureTextEntry}

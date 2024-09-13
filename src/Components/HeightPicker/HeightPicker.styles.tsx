@@ -12,17 +12,13 @@ export const useStyles = () => {
       borderWidth: 1,
       borderColor: theme.colors.accentColor,
       borderRadius: 6,
-      paddingHorizontal: 10,
-      height: 60,
+      padding: 10,
     },
     input: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 1,
-        maxWidth: 42,
-    },
-    dropdownButton: {
-      paddingHorizontal: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      maxWidth: 42,
+      maxHeight: 40,
     },
     hiddenPicker: {
       display: 'none',
@@ -30,7 +26,9 @@ export const useStyles = () => {
     dropDownContainer: {
       borderColor: theme.colors.accentColor,
       position: 'absolute',
+      bottom: 55, 
       width: '100%',
+      zIndex: 999, 
     },
   });
 };
