@@ -179,7 +179,7 @@ const fontConfig: IThemeFonts = {
     fontFamily: 'Lato-Semibold',
     fontSize: FontSize.paragraphSmallSemiBold,
     color: Colors.darkGray,
-    letterSpacing: 3.0,
+    letterSpacing: 0.0,
   },
   paragraphRegularSmall: {
     fontFamily: 'Lato-Regular',
