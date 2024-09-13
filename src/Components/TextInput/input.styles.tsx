@@ -19,9 +19,13 @@ export const useStyles = () => {
       borderRadius: 6,
       padding: 10,
       gap: theme.spacing.HGap3,
+      height: 60
     },
     input: {
       flex: 1,
+    },
+    disabledInputContainer: { 
+      borderColor: theme.colors.disabled, 
     },
   });
 };

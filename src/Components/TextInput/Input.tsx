@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import {useStyles} from './input.styles';
-import {InputFieldProps} from './types';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useStyles } from './input.styles';
+import { InputFieldProps } from './types';
 import { useTheme } from '~Contexts/ThemeContext';
 import { IconEyeHide } from '~Components/Icons';
 
@@ -11,6 +11,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   isPassword = false,
   leftIcon,
   rightIcon,
+  disabled = false, 
   ...rest
 }) => {
   const styles = useStyles();
@@ -20,19 +21,26 @@ export const InputField: React.FC<InputFieldProps> = ({
   return (
     <View style={styles.container}>
       {title && <Text style={[theme.fonts.inputFieldSmall, styles.label]}>{title}</Text>}
-      <View style={styles.inputContainer}>
+      <View style={[styles.inputContainer, disabled ? styles.disabledInputContainer : {}]}>
         {leftIcon && leftIcon}
         <TextInput
-          style={[theme.fonts.subtextSmall,styles.input]}
+          style={[
+            theme.fonts.subtextSmall,
+            styles.input,
+            
+          ]}
           placeholder={placeholder}
-          placeholderTextColor={theme.colors.accentColor}
+          placeholderTextColor={disabled ?theme.colors.disabled :theme.colors.accentColor}
           secureTextEntry={secureTextEntry}
+          editable={!disabled} 
           {...rest}
         />
         {isPassword && rightIcon && (
           <TouchableOpacity
-            onPress={() => setSecureTextEntry(!secureTextEntry)}>
-              {secureTextEntry ? <IconEyeHide/> : rightIcon}
+            onPress={() => setSecureTextEntry(!secureTextEntry)}
+            disabled={disabled}
+          >
+            {secureTextEntry ? <IconEyeHide /> : rightIcon}
           </TouchableOpacity>
         )}
       </View>

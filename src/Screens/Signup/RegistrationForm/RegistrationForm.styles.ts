@@ -7,7 +7,6 @@ export const useStyles = () => {
   return StyleSheet.create({
     scrollContainer: {
       flex: 1,
-      paddingBottom: '-20%',
     },
     container: {
       flex: 1,
@@ -17,8 +16,21 @@ export const useStyles = () => {
       alignSelf: 'flex-start',
       gap: 10,
     },
+    bmiContainer: {
+      flex: 1
+    },
+    bmi: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      borderWidth: 1,
+      borderColor: theme.colors.accentColor,
+      borderRadius: 6,
+      padding: 10,
+      gap: theme.spacing.HGap3,
+      height: 60,
+    },
     toggle: {
-      marginTop: theme.spacing.V2,
+      marginTop: theme.spacing.V1,
       flexDirection: 'row',
       justifyContent: 'space-between',
     },

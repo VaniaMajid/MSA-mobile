@@ -1,34 +1,49 @@
 import React, {useState} from 'react';
-
 import {View, Text} from 'react-native';
-
 import DropDownPicker from 'react-native-dropdown-picker';
 import {useTheme} from '~Contexts/ThemeContext';
 
-export const DropdownPicker = () => {
+interface DropdownPickerProps {
+  title: string;
+  placeholder: string;
+  items: Array<{label: string; value: any}>;
+  onValueChange: (value: any) => void;
+  defaultValue?: any;
+  multiple?: boolean;
+}
+
+export const DropdownPicker: React.FC<DropdownPickerProps> = ({
+  title = 'Select Option',
+  placeholder = 'Select',
+  items,
+  onValueChange,
+  defaultValue = null,
+  multiple = false,
+}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Male', value: 'Male'},
-    {label: 'Female', value: 'Female'},
+  const [value, setValue] = useState(defaultValue);
 
-    {label: 'Non Binary', value: 'Non Binary'},
-    {label: 'Other', value: 'Other'},
-  ]);
   const pickDropDownItem = (value: any) => {
-    console.log(value);
-
     setValue(value);
+    onValueChange(value);
     setOpen(false);
   };
 
   return (
     <View>
-      <Text style={[theme.fonts.inputFieldSmall, {marginVertical: theme.spacing.V1}]}>Gender</Text>
+      {title && (
+        <Text
+          style={[
+            theme.fonts.inputFieldSmall,
+            {marginBottom: theme.spacing.V1},
+          ]}>
+          {title}
+        </Text>
+      )}
       <DropDownPicker
-        multiple={false}
-        placeholder="Select Gender"
+        multiple={multiple}
+        placeholder={placeholder}
         dropDownDirection="BOTTOM"
         open={open}
         max={1}
@@ -38,12 +53,17 @@ export const DropdownPicker = () => {
         containerStyle={{borderColor: theme.colors.accentColor}}
         setOpen={setOpen}
         setValue={pickDropDownItem}
-        placeholderStyle={[theme.fonts.inputFieldSmall, {
-          color: theme.colors.accentColor,
-        }]}
-        setItems={setItems}
+        placeholderStyle={[
+          theme.fonts.inputFieldSmall,
+          {color: theme.colors.accentColor},
+        ]}
+        setItems={() => {}}
         theme="LIGHT"
         mode="SIMPLE"
+        dropDownContainerStyle={{
+          borderColor: theme.colors.accentColor,
+          zIndex: 999,
+        }}
       />
     </View>
   );

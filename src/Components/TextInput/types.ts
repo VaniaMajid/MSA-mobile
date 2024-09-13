@@ -6,4 +6,5 @@ export type InputFieldProps = TextInputProps & {
   isPassword?: boolean;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
+  disabled?: boolean;
 };

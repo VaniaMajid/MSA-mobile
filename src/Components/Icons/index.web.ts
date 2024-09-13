@@ -1,6 +1,8 @@
 //  This file is auto-generated and read-only
 import {makeIconWeb} from './utils/makeIconWeb';
+import {ReactComponent as IconArrowDownSvg} from '~Assets/Icons/arrowDown.svg';
 import {ReactComponent as IconChevronleftSvg} from '~Assets/Icons/chevronleft.svg';
+import {ReactComponent as IconConvertSvg} from '~Assets/Icons/convert.svg';
 import {ReactComponent as IconEmailSvg} from '~Assets/Icons/email.svg';
 import {ReactComponent as IconEyeSvg} from '~Assets/Icons/eye.svg';
 import {ReactComponent as IconEyeHideSvg} from '~Assets/Icons/eyeHide.svg';
@@ -14,7 +16,9 @@ import {ReactComponent as IconVerifySvg} from '~Assets/Icons/verify.svg';
 
 export * from './props';
 
+export const IconArrowDown = makeIconWeb(IconArrowDownSvg);
 export const IconChevronleft = makeIconWeb(IconChevronleftSvg);
+export const IconConvert = makeIconWeb(IconConvertSvg);
 export const IconEmail = makeIconWeb(IconEmailSvg);
 export const IconEye = makeIconWeb(IconEyeSvg);
 export const IconEyeHide = makeIconWeb(IconEyeHideSvg);

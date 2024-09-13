@@ -12,7 +12,8 @@ import {DropdownPicker} from '~Components/Dropdown';
 import {Toggle} from '~Components/Toggle';
 import {useSharedValue} from 'react-native-reanimated';
 import {Button} from '~Components/Button';
-import { IconUser } from '~Components/Icons';
+import {IconConvert, IconUser} from '~Components/Icons';
+import { HeightPicker } from '~Components/HeightPicker';
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
 export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
   navigation,
@@ -26,6 +27,17 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
     setIsToggle(!isToggleOn);
   };
 
+  const [heightValue, setHeightValue] = useState<string>('');
+  const [heightUnit, setHeightUnit] = useState<string>('cm');
+
+  const handleUnitChange = (unit: string) => {
+    setHeightUnit(unit);
+  };
+
+  const handleValueChange = (value: any) => {
+    setHeightValue(value);
+  };
+
   return (
     <ImageBackgroundWrapper>
       <StepIndicator currentStep={1} />
@@ -33,17 +45,46 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
         style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <InputField title="First Name" placeholder="First name" leftIcon={<IconUser size='ss'/>}/>
-          <InputField title="Last Name" placeholder="Last name" leftIcon={<IconUser size='ss'/>}/>
+          <InputField
+            title="First Name"
+            placeholder="First name"
+            leftIcon={<IconUser size="ss" />}
+          />
+          <InputField
+            title="Last Name"
+            placeholder="Last name"
+            leftIcon={<IconUser size="ss" />}
+          />
           <DateOfBirthInput />
           <InputField title="Post Code" placeholder="Nw16xe" />
           <InputField title="Mobile Number" placeholder="+44XXXXXX" />
-          <DropdownPicker />
-          <View
-            style={styles.toggle}>
-            <Text style = {theme.fonts.inputFieldSmall}>Allergy</Text>
+          <DropdownPicker
+            title="Gender"
+            placeholder="Select Gender"
+            items={[
+              {label: 'Male', value: 'Male'},
+              {label: 'Female', value: 'Female'},
+              {label: 'Non Binary', value: 'Non Binary'},
+              {label: 'Other', value: 'Other'},
+            ]}
+            onValueChange={value => console.log('Selected value:', value)}
+          />
+
+          <View style={styles.toggle}>
+            <Text
+              style={[
+                theme.fonts.inputFieldSmall,
+                {
+                  color: isToggleOn
+                    ? theme.colors.disabled
+                    : theme.colors.darkGray,
+                },
+              ]}>
+              Allergy
+            </Text>
             <View style={styles.allergyToggle}>
-              <Text style={[theme.fonts.paragraphRegularSmall, styles.toggleText]}>
+              <Text
+                style={[theme.fonts.paragraphRegularSmall, styles.toggleText]}>
                 No known allergies
               </Text>
               <Toggle
@@ -58,12 +99,57 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
               />
             </View>
           </View>
-          {isToggleOn && (
-            <View style={{marginTop: theme.spacing.V2}}>
-              <InputField placeholder="e.g. penicillin" />
+          <InputField
+            placeholder="e.g. penicillin"
+            disabled={isToggleOn ?? true}
+          />
+          <InputField
+            title="Past Medical History"
+            placeholder="e.g. hypertension"
+          />
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
+              gap: 10,
+            }}>
+            <View style={{flex: 1}}>
+              <HeightPicker
+                title="Height"
+                placeholder="5"
+                units={[
+                  {label: 'cm', value: 'cm'},
+                  {label: 'feet', value: 'ft.'},
+                  {label: 'inches', value: 'in.'},
+                ]}
+                onUnitChange={handleUnitChange}
+                onValueChange={handleValueChange}
+                defaultValue={heightValue}
+                defaultUnit={heightUnit}
+              />
             </View>
-          )}
-          <InputField title="Past Medical History" placeholder="e.g. hypertension"/>
+            <View style={{flex: 1}}>
+              <InputField title="Weight" placeholder="70KG" />
+            </View>
+            <View style={{marginTop: 35}}>
+              <IconConvert size="sss" />
+            </View>
+            <View style={styles.bmiContainer}>
+              <Text
+                style={[
+                  theme.fonts.inputFieldSmall,
+                  {marginBottom: theme.spacing.V1},
+                ]}>
+                BMI
+              </Text>
+              <View style={styles.bmi}>
+                <Text>22.86</Text>
+              </View>
+            </View>
+          </View>
         </View>
         <View style={{flexDirection: 'row'}}>
           <Button
