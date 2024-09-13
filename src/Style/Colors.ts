@@ -12,6 +12,8 @@ const colors = {
   accentColor: '#A8B4BD',
   black: '#000000',
   lightGray1: '#96969F',
+  grayBg: '#EFF0F6'
+
 };
 
 export default colors;

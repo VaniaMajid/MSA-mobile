@@ -6,10 +6,13 @@ import {getSize} from './utils/getSize';
 import IconChevronleftSvg from '~Assets/Icons/chevronleft.svg';
 import IconEmailSvg from '~Assets/Icons/email.svg';
 import IconEyeSvg from '~Assets/Icons/eye.svg';
+import IconEyeHideSvg from '~Assets/Icons/eyeHide.svg';
+import IconInfoCircleSvg from '~Assets/Icons/infoCircle.svg';
 import IconLockSvg from '~Assets/Icons/lock.svg';
 import IconPatientSvg from '~Assets/Icons/patient.svg';
 import IconSpecialistSvg from '~Assets/Icons/specialist.svg';
 import IconTickCircleSvg from '~Assets/Icons/tickCircle.svg';
+import IconUserSvg from '~Assets/Icons/user.svg';
 import IconVerifySvg from '~Assets/Icons/verify.svg';
 
 export * from './props';
@@ -65,6 +68,48 @@ export const IconEye: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconEyeSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconEyeHide: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-eyeHide',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconEyeHideSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconInfoCircle: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-infoCircle',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconInfoCircleSvg
       color={color}
       height={iconSize}
       width={iconSize}
@@ -149,6 +194,27 @@ export const IconTickCircle: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconTickCircleSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconUser: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-user',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconUserSvg
       color={color}
       height={iconSize}
       width={iconSize}

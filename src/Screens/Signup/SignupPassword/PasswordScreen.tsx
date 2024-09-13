@@ -5,7 +5,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import {useStyles} from './PasswordScreen.styles';
 import {useTheme} from '~Contexts/ThemeContext';
-import {InputField, Button} from '~Components/index';
+import {InputField, Button, Heading} from '~Components/index';
 
 type PasswordScreenProps = StackScreenProps<PreAuthParamList>;
 export const PasswordScreen: FC<PasswordScreenProps> = ({navigation}) => {
@@ -14,46 +14,42 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({navigation}) => {
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
-        <Text style={{fontSize: 24}}>Set up your password</Text>
-        <Text
-          style={{
-            fontSize: 16,
-            marginTop: theme.spacing.V1,
-            color: theme.colors.lightGray1,
-          }}>
-          Enter your email to create a new patient account. We’ll send you a
-          confirmation email with instructions to set up your password.
-        </Text>
-        <View style={{marginTop: theme.spacing.V3}}>
-          <InputField title="Password" placeholder="Enter your password" />
-          <Text
-            style={{
-              color: theme.colors.lightGray1,
-              marginVertical: theme.spacing.V2,
-            }}>
-            Passwords must be at least 8 characters long and include a special
-            character.
-          </Text>
-          <InputField
-            title="Confirm Password"
-            placeholder="Enter your password"
+        <View>
+          <Heading
+            title="Set up your password"
+            style={theme.fonts.headerMediumBold}
           />
-          <Text
-            style={{
-              color: theme.colors.lightGray1,
-              marginVertical: theme.spacing.V1,
-            }}>
-            Both Password should match
+          <Text style={[theme.fonts.paragraphRegularSmall, styles.text]}>
+            Create a secure password for your account. This will be used to
+            access your patient profile and services.
           </Text>
-
-          <Button
-            title="Set Password"
-            style={{marginTop: theme.spacing.V3}}
-            onPress={() => {
-              navigation.navigate('RegistrationForm');
-            }}
-          />
         </View>
+
+        <View style={styles.inputContainer}>
+          <View>
+            <InputField title="Password" placeholder="Enter your password" />
+            <Text style={[theme.fonts.subtextSmall, styles.text]}>
+              Passwords must be at least 8 characters long and include a special
+              character.
+            </Text>
+          </View>
+          <View>
+            <InputField
+              title="Confirm Password"
+              placeholder="Enter your password"
+            />
+            <Text style={[theme.fonts.subtextSmall, styles.text]}>
+              Both Password should match
+            </Text>
+          </View>
+        </View>
+
+        <Button
+          title="Set Password"
+          onPress={() => {
+            navigation.navigate('RegistrationForm');
+          }}
+        />
       </View>
     </ImageBackgroundWrapper>
   );
