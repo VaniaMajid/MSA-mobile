@@ -41,6 +41,7 @@ export const useStyles = () => {
     forgotPass: {
       color: theme.colors.primaryColor, 
     },
+    
     checkboxIcon: {
       borderColor: theme.colors.primaryColor,
       borderRadius: 5,
@@ -53,6 +54,11 @@ export const useStyles = () => {
       fontSize: 16,
       color: theme.colors.darkGray,
       textDecorationLine: 'none',
+    },
+    errorText: {
+      marginTop: 4,
+      color: theme.colors.error,
+      fontSize: 12,
     },
   });
 };

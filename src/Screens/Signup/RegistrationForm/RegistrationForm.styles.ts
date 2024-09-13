@@ -12,6 +12,7 @@ export const useStyles = () => {
       flex: 1,
       width: '100%',
       marginTop: theme.spacing.V1,
+      marginBottom: theme.spacing.V1,
       justifyContent: 'center',
       alignSelf: 'flex-start',
       gap: 10,

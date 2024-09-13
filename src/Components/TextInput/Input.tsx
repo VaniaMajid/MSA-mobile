@@ -11,7 +11,8 @@ export const InputField: React.FC<InputFieldProps> = ({
   isPassword = false,
   leftIcon,
   rightIcon,
-  disabled = false, 
+  disabled = false,
+  errorMessage = '',
   ...rest
 }) => {
   const styles = useStyles();
@@ -21,19 +22,25 @@ export const InputField: React.FC<InputFieldProps> = ({
   return (
     <View style={styles.container}>
       {title && <Text style={[theme.fonts.inputFieldSmall, styles.label]}>{title}</Text>}
-      <View style={[styles.inputContainer, disabled ? styles.disabledInputContainer : {}]}>
+      
+      <View
+        style={[
+          styles.inputContainer,
+          disabled ? styles.disabledInputContainer : {},
+          errorMessage ? styles.errorInputContainer : {},
+        ]}
+      >
         {leftIcon && leftIcon}
         <TextInput
           style={[
             theme.fonts.subtextSmall,
             styles.input,
-            
           ]}
-          multiline= {false}
+          multiline={false}
           placeholder={placeholder}
-          placeholderTextColor={disabled ?theme.colors.disabled :theme.colors.accentColor}
+          placeholderTextColor={disabled ? theme.colors.disabled : theme.colors.accentColor}
           secureTextEntry={secureTextEntry}
-          editable={!disabled} 
+          editable={!disabled}
           {...rest}
         />
         {isPassword && rightIcon && (
@@ -45,6 +52,10 @@ export const InputField: React.FC<InputFieldProps> = ({
           </TouchableOpacity>
         )}
       </View>
+      
+      {errorMessage ? (
+        <Text style={[theme.fonts.subtextSmall,styles.errorText]}>{errorMessage}</Text>
+      ) : null}
     </View>
   );
 };
