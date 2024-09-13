@@ -9,8 +9,12 @@ import IconConvertSvg from '~Assets/Icons/convert.svg';
 import IconEmailSvg from '~Assets/Icons/email.svg';
 import IconEyeSvg from '~Assets/Icons/eye.svg';
 import IconEyeHideSvg from '~Assets/Icons/eyeHide.svg';
+import IconHomeActiveSvg from '~Assets/Icons/homeActive.svg';
+import IconHomeInActiveSvg from '~Assets/Icons/homeInActive.svg';
 import IconInfoCircleSvg from '~Assets/Icons/infoCircle.svg';
 import IconLockSvg from '~Assets/Icons/lock.svg';
+import IconMedicalInfoActiveSvg from '~Assets/Icons/medicalInfoActive.svg';
+import IconMedicalInfoInActiveSvg from '~Assets/Icons/medicalInfoInActive.svg';
 import IconPatientSvg from '~Assets/Icons/patient.svg';
 import IconSpecialistSvg from '~Assets/Icons/specialist.svg';
 import IconTickCircleSvg from '~Assets/Icons/tickCircle.svg';
@@ -145,6 +149,48 @@ export const IconEyeHide: FC<IconProps> = ({
     />
   );
 };
+export const IconHomeActive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-homeActive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconHomeActiveSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconHomeInActive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-homeInActive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconHomeInActiveSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
 export const IconInfoCircle: FC<IconProps> = ({
   color = '#000000',
   size = 'xxs',
@@ -175,6 +221,48 @@ export const IconLock: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconLockSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconMedicalInfoActive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-medicalInfoActive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconMedicalInfoActiveSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconMedicalInfoInActive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-medicalInfoInActive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconMedicalInfoInActiveSvg
       color={color}
       height={iconSize}
       width={iconSize}
