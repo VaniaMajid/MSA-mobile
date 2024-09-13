@@ -5,29 +5,14 @@
  * @format
  */
 
-import React, {useCallback, useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
+import React, {useCallback, useEffect} from 'react';
+import {StyleSheet, Text, useColorScheme, View} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {SplashScreen} from '~Screens/SplashScreen';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {LoginScreen} from '~Screens/Login/LoginScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {AuthStack} from '~Navigators/AuthNavigator';
 import {PreAuthNavigator} from '~Navigators/PreAuthNavigator';
 
 type SectionProps = PropsWithChildren<{
@@ -76,7 +61,7 @@ function App(): React.JSX.Element {
   }, []);
   return (
     <SafeAreaProvider>
-      <PreAuthNavigator />
+      <AuthStack />
     </SafeAreaProvider>
   );
 }
