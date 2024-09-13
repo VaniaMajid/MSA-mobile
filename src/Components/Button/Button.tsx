@@ -19,10 +19,11 @@ export const Button: FC<ButtonProps> = ({
   variant = 'filled',
 }) => {
   const styles = useStyles(variant);
+  const theme = useTheme();
 
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
-      <Text style={[textStyle, styles.text]}>{title}</Text>
+      <Text style={[theme.fonts.buttonSemiBold, textStyle, styles.text]}>{title}</Text>
     </TouchableOpacity>
   );
 };

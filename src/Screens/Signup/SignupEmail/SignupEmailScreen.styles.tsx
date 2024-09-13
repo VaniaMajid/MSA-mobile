@@ -13,11 +13,8 @@ export const useStyles = () => {
       marginBottom: theme.spacing.V5
     },
     text: {
-      color: theme.colors.lightGray1,
-      marginTop: theme.spacing.V1,
+      color: theme.colors.lightGray1, 
+      marginTop: theme.spacing.V1
     },
-    inputContainer : {
-      gap: theme.spacing.HGap2
-    }
   });
 };

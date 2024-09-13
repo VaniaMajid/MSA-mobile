@@ -12,12 +12,20 @@ import {
 } from '~Screens/Signup';
 import {PreAuthParamList} from './PreAuthParamList';
 import {Header} from '~Components/index';
+import { useTheme } from '~Contexts/ThemeContext';
 
 const PreAuthStack = createStackNavigator<PreAuthParamList>();
 export const PreAuthNavigator = () => {
+  const theme = useTheme();
   return (
     <NavigationContainer>
-      <PreAuthStack.Navigator initialRouteName="Splash">
+      <PreAuthStack.Navigator initialRouteName="Splash"
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerTitleStyle: {
+          ...theme.fonts.uiLabelSemiBold,
+        },
+      }}>
         <PreAuthStack.Group screenOptions={{headerShown: false}}>
           <PreAuthStack.Screen name="Login" component={LoginScreen} />
           <PreAuthStack.Screen name="Splash" component={SplashScreen} />

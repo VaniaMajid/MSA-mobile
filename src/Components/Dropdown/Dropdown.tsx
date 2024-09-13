@@ -25,7 +25,7 @@ export const DropdownPicker = () => {
 
   return (
     <View>
-      <Text style={{marginVertical: theme.spacing.V1}}>Gender</Text>
+      <Text style={[theme.fonts.inputFieldSmall, {marginVertical: theme.spacing.V1}]}>Gender</Text>
       <DropDownPicker
         multiple={false}
         placeholder="Select Gender"
@@ -38,9 +38,9 @@ export const DropdownPicker = () => {
         containerStyle={{borderColor: theme.colors.accentColor}}
         setOpen={setOpen}
         setValue={pickDropDownItem}
-        placeholderStyle={{
+        placeholderStyle={[theme.fonts.inputFieldSmall, {
           color: theme.colors.accentColor,
-        }}
+        }]}
         setItems={setItems}
         theme="LIGHT"
         mode="SIMPLE"

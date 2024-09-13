@@ -18,6 +18,7 @@ export const useStyles = () => {
       borderColor: theme.colors.accentColor,
       borderRadius: 6,
       padding: 10,
+      gap: theme.spacing.HGap3,
     },
     input: {
       flex: 1,

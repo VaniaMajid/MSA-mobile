@@ -7,11 +7,12 @@ import {StepIndicator} from './Components';
 import {InputField} from '~Components/TextInput';
 import {useTheme} from '~Contexts/ThemeContext';
 import {useStyles} from './RegistrationForm.styles';
-import {DateOfBirthInput} from './Components/DateOfBirth';
+import {DateOfBirthInput} from './Components/DateOfBirth/DateOfBirth';
 import {DropdownPicker} from '~Components/Dropdown';
 import {Toggle} from '~Components/Toggle';
 import {useSharedValue} from 'react-native-reanimated';
 import {Button} from '~Components/Button';
+import { IconUser } from '~Components/Icons';
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
 export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
   navigation,
@@ -27,38 +28,22 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
 
   return (
     <ImageBackgroundWrapper>
-      <StepIndicator currentStep={2} />
+      <StepIndicator currentStep={1} />
       <ScrollView
-        style={{flex: 1, paddingBottom: '-20%'}}
+        style={styles.scrollContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <View>
-            <InputField title="First Name" placeholder="Slim Shady" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <InputField title="Last Name" placeholder="DeadPool" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <DateOfBirthInput />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <InputField title="Post Code" placeholder="Nw16xe" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <InputField title="Mobile Number" placeholder="+44XXXXXX" />
-          </View>
-          <View style={{marginTop: theme.spacing.V2}}>
-            <DropdownPicker />
-          </View>
+          <InputField title="First Name" placeholder="First name" leftIcon={<IconUser size='ss'/>}/>
+          <InputField title="Last Name" placeholder="Last name" leftIcon={<IconUser size='ss'/>}/>
+          <DateOfBirthInput />
+          <InputField title="Post Code" placeholder="Nw16xe" />
+          <InputField title="Mobile Number" placeholder="+44XXXXXX" />
+          <DropdownPicker />
           <View
-            style={{
-              marginTop: theme.spacing.V2,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{marginTop: '0.5%'}}>Allergy</Text>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{marginRight: theme.spacing.H2, marginTop: '1%'}}>
+            style={styles.toggle}>
+            <Text style = {theme.fonts.inputFieldSmall}>Allergy</Text>
+            <View style={styles.allergyToggle}>
+              <Text style={[theme.fonts.paragraphRegularSmall, styles.toggleText]}>
                 No known allergies
               </Text>
               <Toggle
@@ -75,9 +60,10 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
           </View>
           {isToggleOn && (
             <View style={{marginTop: theme.spacing.V2}}>
-              <InputField placeholder="e,g HyperTension" />
+              <InputField placeholder="e.g. penicillin" />
             </View>
           )}
+          <InputField title="Past Medical History" placeholder="e.g. hypertension"/>
         </View>
         <View style={{flexDirection: 'row'}}>
           <Button
