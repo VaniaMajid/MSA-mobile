@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import {ImageBackgroundWrapper} from 'src/HOC';
 import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
@@ -13,6 +13,7 @@ import {
   IconEye,
 } from '~Components/index';
 import {validateConfirmPassword, validateNewPassword} from '~Utils/validation';
+import { useFocusEffect } from '@react-navigation/native';
 
 type PasswordScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -62,6 +63,16 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({navigation}) => {
       navigation.navigate('RegistrationForm');
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      setPassword('');
+      setPasswordError('');
+      setConfirmPassword('');
+      setConfirmPasswordError('');
+    }, [])
+  );
+
 
   return (
     <ImageBackgroundWrapper>

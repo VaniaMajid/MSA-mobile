@@ -18,7 +18,7 @@ export const useStyles = () => {
       gap: 10,
     },
     bmiContainer: {
-      flex: 1
+      flex: 1,
     },
     bmi: {
       flexDirection: 'row',
@@ -36,11 +36,17 @@ export const useStyles = () => {
       justifyContent: 'space-between',
     },
     allergyToggle: {
-      flexDirection: 'row', 
-      alignItems:'center'
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    label: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+      gap: theme.spacing.HGap3,
     },
     toggleText: {
-      marginRight: theme.spacing.H2, 
-    }
+      marginRight: theme.spacing.H2,
+    },
   });
 };

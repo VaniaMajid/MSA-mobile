@@ -16,8 +16,8 @@ interface HeightPickerProps {
   placeholder?: string;
   units: Array<{label: string; value: string}>;
   onUnitChange: (unit: string) => void;
-  onValueChange: (value: number | string) => void;
-  defaultValue?: string;
+  onValueChange: (value: number) => void;
+  defaultValue?: number;
   defaultUnit?: string;
 }
 
@@ -27,13 +27,13 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
   units,
   onUnitChange,
   onValueChange,
-  defaultValue = '',
+  defaultValue = 0,
   defaultUnit = 'cm',
 }) => {
   const theme = useTheme();
   const styles = useStyles();
   const [selectedUnit, setSelectedUnit] = useState(defaultUnit);
-  const [inputValue, setInputValue] = useState<string>(defaultValue);
+  const [inputValue, setInputValue] = useState<number>(defaultValue);
   const [open, setOpen] = useState(false);
 
   const handleUnitChange = (value: any) => {
@@ -42,7 +42,7 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
     setOpen(false);
   };
 
-  const handleInputChange = (value: string) => {
+  const handleInputChange = (value: any) => {
     setInputValue(value);
     onValueChange(value);
   };
@@ -65,7 +65,7 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
             placeholder={placeholder}
             placeholderTextColor={theme.colors.accentColor}
             keyboardType="numeric"
-            value={inputValue}
+            value={inputValue.toString()}
             onChangeText={handleInputChange}
           />
           <Text style={theme.fonts.inputFieldSmall}>{selectedUnit}</Text>

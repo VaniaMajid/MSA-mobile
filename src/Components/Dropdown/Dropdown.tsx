@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { ErrorMessage } from '~Components/Error';
 import {useTheme} from '~Contexts/ThemeContext';
 
 interface DropdownPickerProps {
@@ -10,6 +11,7 @@ interface DropdownPickerProps {
   onValueChange: (value: any) => void;
   defaultValue?: any;
   multiple?: boolean;
+  errorMessage?: string;
 }
 
 export const DropdownPicker: React.FC<DropdownPickerProps> = ({
@@ -19,6 +21,7 @@ export const DropdownPicker: React.FC<DropdownPickerProps> = ({
   onValueChange,
   defaultValue = null,
   multiple = false,
+  errorMessage = '',
 }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -47,7 +50,7 @@ export const DropdownPicker: React.FC<DropdownPickerProps> = ({
         dropDownDirection="BOTTOM"
         open={open}
         max={1}
-        style={{borderColor: theme.colors.accentColor, width: '100%'}}
+        style={{borderColor: errorMessage? theme.colors.error:theme.colors.accentColor, width: '100%'}}
         value={value}
         items={items}
         containerStyle={{borderColor: theme.colors.accentColor}}
@@ -65,6 +68,9 @@ export const DropdownPicker: React.FC<DropdownPickerProps> = ({
           zIndex: 999,
         }}
       />
+      {errorMessage ? (
+        <ErrorMessage message={errorMessage}/>    
+      ) : null}
     </View>
   );
 };
