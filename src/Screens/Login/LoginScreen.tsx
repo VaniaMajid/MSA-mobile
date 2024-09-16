@@ -13,6 +13,7 @@ import { ImageBackgroundWrapper } from 'src/HOC';
 import { useTheme } from '~Contexts/ThemeContext';
 import { validateEmail, validatePassword } from '~Utils/validation';
 import { useFocusEffect } from '@react-navigation/native';
+import { ErrorMessage } from '~Components/Error';
 
 type LoginScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -71,7 +72,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
 
   const handleLoginPress = () => {
     if (validateInputs()) {
-      // navigation.navigate('Home');
+
     }
   };
 
@@ -126,7 +127,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
           />
         </View>
 
-        {loginError ? <Text style={[theme.fonts.subtextSmall,styles.errorText]}>{loginError}</Text> : null}
+        {loginError ?  <ErrorMessage message={loginError}/>  : null}
         <Button title="Login" textStyle={theme.fonts.buttonSemiBold} onPress={handleLoginPress} />
       </View>
 

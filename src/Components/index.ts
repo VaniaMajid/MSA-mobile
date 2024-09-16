@@ -8,3 +8,4 @@ export * from './PressableText';
 export * from './Header';
 export * from './HeightPicker'
 export * from './OtpInput';
+export * from './Error'

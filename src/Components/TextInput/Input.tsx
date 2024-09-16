@@ -4,6 +4,7 @@ import { useStyles } from './input.styles';
 import { InputFieldProps } from './types';
 import { useTheme } from '~Contexts/ThemeContext';
 import { IconEyeHide } from '~Components/Icons';
+import { ErrorMessage } from '~Components/Error';
 
 export const InputField: React.FC<InputFieldProps> = ({
   title,
@@ -54,7 +55,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       </View>
       
       {errorMessage ? (
-        <Text style={[theme.fonts.subtextSmall,styles.errorText]}>{errorMessage}</Text>
+        <ErrorMessage message={errorMessage}/>    
       ) : null}
     </View>
   );

@@ -31,9 +31,5 @@ export const useStyles = () => {
     errorInputContainer: {
       borderColor: theme.colors.error, 
     },
-    errorText: {
-      marginTop: 4,
-      color: theme.colors.error,
-    },
   });
 };

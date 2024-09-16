@@ -11,6 +11,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import {Heading} from '~Components/Heading';
 import {validateTermsAgreement} from '~Utils/validation';
+import { ErrorMessage } from '~Components/Error';
 
 type SelectRoleScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -18,11 +19,13 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
   const theme = useTheme();
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-  const [error, setError] = useState('');
+  const [roleError, setRoleError] = useState('');
+  const [termsError, setTermsError] = useState('');
   const styles = useStyles();
 
   const handleSelectRole = (role: string) => {
     setSelectedRole(role);
+    if (roleError) setRoleError(''); 
   };
 
   const handleAgreeTermsPress = () => {
@@ -30,17 +33,30 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
     setIsTermsChecked(newIsTermsChecked);
 
     if (newIsTermsChecked) {
-      setError('');
+      setTermsError(''); 
     }
   };
 
   const handleGetStartedPress = () => {
-    const validationError = validateTermsAgreement(isTermsChecked);
-    if (validationError) {
-      setError(validationError);
+    let hasError = false;
+ 
+    if (!selectedRole) {
+      setRoleError('Please select a role to proceed.');
+      hasError = true;
+    }
+
+    const termsAgreementError = validateTermsAgreement(isTermsChecked);
+    if (termsAgreementError) {
+      setTermsError(termsAgreementError);
+      hasError = true;
+    }
+
+    if (hasError) {
       return;
     }
-    setError('');
+
+    setRoleError('');
+    setTermsError('');
     navigation.navigate('SignupEmail');
   };
 
@@ -87,6 +103,7 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
             selectedIcon={selectedRole === 'Specialist'}
           />
         </View>
+
         <Checkbox
           text={
             <Text style={[theme.fonts.subtextSmall, styles.checkboxText]}>
@@ -98,11 +115,12 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
           isChecked={isTermsChecked}
           onPress={handleAgreeTermsPress}
         />
+        {roleError ? (
+           <ErrorMessage message={roleError}/> 
+        ) : null}
 
-        {error ? (
-          <Text style={[theme.fonts.subtextSmall, styles.errorText]}>
-            {error}
-          </Text>
+        {termsError ? (
+           <ErrorMessage message={termsError}/> 
         ) : null}
       </View>
       <Button

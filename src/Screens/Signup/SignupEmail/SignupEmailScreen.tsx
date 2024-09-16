@@ -2,7 +2,7 @@ import React, { FC, useState, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import { ImageBackgroundWrapper } from 'src/HOC';
 import { useTheme } from '~Contexts/ThemeContext';
-import { InputField, Button, Heading } from '~Components/index';
+import { InputField, Button, Heading, ErrorMessage } from '~Components/index';
 import { StackScreenProps } from '@react-navigation/stack';
 import { PreAuthParamList } from '~Navigators/PreAuthParamList';
 import { useStyles } from './SignupEmailScreen.styles';
@@ -60,9 +60,7 @@ export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation }) =>
         />
 
         {submissionError ? (
-          <Text style={[theme.fonts.subtextSmall, styles.errorText]}>
-            {submissionError}
-          </Text>
+           <ErrorMessage message={submissionError}/> 
         ) : null}
 
         <Button

@@ -53,9 +53,5 @@ export const useStyles = () => {
       color: theme.colors.darkGray,
       textDecorationLine: 'none',
     },
-    errorText: {
-      marginTop: 4,
-      color: theme.colors.error,
-    },
   });
 };
