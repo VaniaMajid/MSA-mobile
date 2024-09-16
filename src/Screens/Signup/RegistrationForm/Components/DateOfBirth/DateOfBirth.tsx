@@ -1,20 +1,25 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { useStyles } from './DateOfBirth.styles';
-import { IconInfoCircle } from '~Components/Icons';
-import { useTheme } from '~Contexts/ThemeContext';
-import { ErrorMessage } from '~Components/Error';
+import React, {useState, useRef, useEffect, FC} from 'react';
+import {View, Text, TextInput} from 'react-native';
+import {useStyles} from './DateOfBirth.styles';
+import {IconInfoCircle} from '~Components/Icons';
+import {useTheme} from '~Contexts/ThemeContext';
+import {ErrorMessage} from '~Components/Error';
 
-interface DateOfBirthInputProps {
+type DateOfBirthInputProps = {
   onChange: (day: string, month: string, year: string) => void;
-  errors: { [key: string]: string };
-}
+  errorMessage?: string;
+};
 
-export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({ onChange, errors }) => {
+export const DateOfBirthInput: FC<DateOfBirthInputProps> = ({
+  onChange,
+  errorMessage = '',
+}) => {
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
-  const [activeField, setActiveField] = useState<'day' | 'month' | 'year' | null>(null);
+  const [activeField, setActiveField] = useState<
+    'day' | 'month' | 'year' | null
+  >(null);
 
   const dayRef = useRef<TextInput>(null);
   const monthRef = useRef<TextInput>(null);
@@ -24,7 +29,9 @@ export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({ onChange, er
   const theme = useTheme();
 
   useEffect(() => {
-    onChange(day, month, year);
+    if (day && month && year) {
+      onChange(day, month, year);
+    }
   }, [day, month, year]);
 
   const handleDayChange = (text: string) => {
@@ -45,6 +52,15 @@ export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({ onChange, er
     setYear(text);
   };
 
+  const getInputStyle = (field: 'day' | 'month' | 'year') => {
+    return [
+      theme.fonts.inputFieldSmall,
+      styles.input,
+      errorMessage && styles.errorInputContainer,
+      activeField === field && styles.activeInput,
+    ];
+  };
+
   return (
     <View>
       <View style={styles.label}>
@@ -54,11 +70,7 @@ export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({ onChange, er
       <View style={styles.inputRow}>
         <TextInput
           ref={dayRef}
-          style={[
-            theme.fonts.inputFieldSmall,
-            styles.input,
-            activeField === 'day' && styles.activeInput,
-          ]}
+          style={getInputStyle('day')}
           maxLength={2}
           keyboardType="numeric"
           value={day}
@@ -72,11 +84,7 @@ export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({ onChange, er
         />
         <TextInput
           ref={monthRef}
-          style={[
-            theme.fonts.inputFieldSmall,
-            styles.input,
-            activeField === 'month' && styles.activeInput,
-          ]}
+          style={getInputStyle('month')}
           maxLength={2}
           keyboardType="numeric"
           value={month}
@@ -90,11 +98,7 @@ export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({ onChange, er
         />
         <TextInput
           ref={yearRef}
-          style={[
-            theme.fonts.inputFieldSmall,
-            styles.input,
-            activeField === 'year' && styles.activeInput,
-          ]}
+          style={getInputStyle('year')}
           maxLength={4}
           keyboardType="numeric"
           value={year}
@@ -106,7 +110,7 @@ export const DateOfBirthInput: React.FC<DateOfBirthInputProps> = ({ onChange, er
           onBlur={() => setActiveField(null)}
         />
       </View>
-      {errors.dateOfBirth && <ErrorMessage message={errors.dateOfBirth} />}
+      {errorMessage ? <ErrorMessage message={errorMessage} /> : null}
     </View>
   );
 };

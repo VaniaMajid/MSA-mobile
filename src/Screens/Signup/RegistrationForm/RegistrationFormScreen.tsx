@@ -14,8 +14,18 @@ import {Button} from '~Components/Button';
 import {IconConvert, IconInfoCircle, IconUser} from '~Components/Icons';
 import {HeightPicker} from '~Components/HeightPicker';
 import {calculateBMI} from '~Utils/bmiUtils';
-import {validateDateOfBirth, validateRegistrationForm} from '~Utils/validation';
 import {ErrorMessage} from '~Components/Error';
+import {
+  validateAllergy,
+  validateBMI,
+  validateDateOfBirth,
+  validateFirstName,
+  validateGender,
+  validateLastName,
+  validateMedicalHistory,
+  validateMobileNumber,
+  validatePostCode,
+} from '~Utils/validation';
 
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -44,7 +54,6 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
   const [month, setMonth] = useState<string>('');
   const [year, setYear] = useState<string>('');
 
-  
   const setToggleValue = () => {
     setIsToggle(prev => !prev);
   };
@@ -52,38 +61,115 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
   useEffect(() => {
     const newBmi = calculateBMI(heightValue, weightValue, heightUnit);
     setBmi(newBmi);
+
+    if (newBmi && newBmi > 0) {
+      setErrors(prevErrors => ({...prevErrors, bmi: ''}));
+    }
   }, [heightValue, weightValue, heightUnit]);
 
   const handleSubmit = () => {
-    const validationErrors = validateRegistrationForm(
-      firstName,
-      lastName,
-      postCode,
-      mobileNumber,
-      gender,
-      allergy,
-      medicalHistory,
-      isToggleOn,
-      bmi,
+    const validationErrors: {[key: string]: string} = {};
+
+    validationErrors.firstName = validateFirstName(firstName);
+    validationErrors.lastName = validateLastName(lastName);
+    validationErrors.postCode = validatePostCode(postCode);
+    validationErrors.mobileNumber = validateMobileNumber(mobileNumber);
+    validationErrors.gender = validateGender(gender);
+    validationErrors.allergy = validateAllergy(allergy, isToggleOn);
+    validationErrors.medicalHistory = validateMedicalHistory(medicalHistory);
+    validationErrors.bmi = validateBMI(bmi);
+    const dobErrors = validateDateOfBirth(day, month, year);
+    if (dobErrors.dateOfBirth)
+      validationErrors.dateOfBirth = dobErrors.dateOfBirth;
+
+    setErrors(validationErrors);
+
+    const hasErrors = Object.values(validationErrors).some(
+      error => error !== '',
     );
 
-    const dobErrors = validateDateOfBirth(day, month, year);
-    const allErrors = { ...validationErrors, ...dobErrors };
-
-    setErrors(allErrors);
-
-    if (Object.keys(allErrors).length === 0) {
+    if (!hasErrors) {
       console.log('Form is valid.');
     } else {
-      console.log('Form has errors.');
+      console.log('Form has errors:', validationErrors);
     }
   };
 
-
-  const handleDateOfBirthChange = (day: string, month: string, year: string) => {
+  const handleDateOfBirthChange = (
+    day: string,
+    month: string,
+    year: string,
+  ) => {
     setDay(day);
     setMonth(month);
     setYear(year);
+    const dobErrors = validateDateOfBirth(day, month, year);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      dateOfBirth: dobErrors.dateOfBirth ?? '',
+    }));
+  };
+
+  const handleFirstNameChange = (text: string) => {
+    setFirstName(text);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      firstName: validateFirstName(text),
+    }));
+  };
+
+  const handleLastNameChange = (text: string) => {
+    setLastName(text);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      lastName: validateLastName(text),
+    }));
+  };
+
+  const handlePostCodeChange = (text: string) => {
+    setPostCode(text);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      postCode: validatePostCode(text),
+    }));
+  };
+
+  const handleMobileNumberChange = (text: string) => {
+    setMobileNumber(text);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      mobileNumber: validateMobileNumber(text),
+    }));
+  };
+
+  const handleGenderChange = (value: string) => {
+    setGender(value);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      gender: validateGender(value),
+    }));
+  };
+
+  const handleAllergyChange = (text: string) => {
+    setAllergy(text);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      allergy: validateAllergy(text, isToggleOn),
+    }));
+  };
+
+  const handleMedicalHistoryChange = (text: string) => {
+    setMedicalHistory(text);
+    setErrors(prevErrors => ({
+      ...prevErrors,
+      medicalHistory: validateMedicalHistory(text),
+    }));
+  };
+
+  const handleWeightChange = (text: string) => {
+    const weight = parseFloat(text);
+    setWeightValue(isNaN(weight) ? 0 : weight);
+    setErrors(prevErrors => ({...prevErrors, weight: ''}));
   };
 
   return (
@@ -104,7 +190,7 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
             title="First Name"
             placeholder="First name"
             value={firstName}
-            onChangeText={setFirstName}
+            onChangeText={handleFirstNameChange}
             leftIcon={<IconUser size="ss" />}
             errorMessage={errors.firstName}
           />
@@ -112,26 +198,26 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
             title="Last Name"
             placeholder="Last name"
             value={lastName}
-            onChangeText={setLastName}
+            onChangeText={handleLastNameChange}
             leftIcon={<IconUser size="ss" />}
             errorMessage={errors.lastName}
           />
           <DateOfBirthInput
             onChange={handleDateOfBirthChange}
-            errors={errors}
+            errorMessage={errors.dateOfBirth}
           />
           <InputField
             title="Post Code"
             placeholder="Nw16xe"
             value={postCode}
-            onChangeText={setPostCode}
+            onChangeText={handlePostCodeChange}
             errorMessage={errors.postCode}
           />
           <InputField
             title="Mobile Number"
             placeholder="+44XXXXXX"
             value={mobileNumber}
-            onChangeText={setMobileNumber}
+            onChangeText={handleMobileNumberChange}
             errorMessage={errors.mobileNumber}
           />
           <DropdownPicker
@@ -143,7 +229,7 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
               {label: 'Non Binary', value: 'Non Binary'},
               {label: 'Other', value: 'Other'},
             ]}
-            onValueChange={value => setGender(value)}
+            onValueChange={handleGenderChange}
             errorMessage={errors.gender}
           />
           <View style={styles.toggle}>
@@ -180,16 +266,16 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
           </View>
           <InputField
             placeholder="e.g. penicillin"
-            value={allergy}
-            onChangeText={setAllergy}
+            value={!isToggleOn ? allergy : ''}
+            onChangeText={handleAllergyChange}
             disabled={isToggleOn}
-            errorMessage={errors.allergy}
+            errorMessage={!isToggleOn ? errors.allergy : ''}
           />
           <InputField
             title="Past Medical History"
             placeholder="e.g. hypertension"
             value={medicalHistory}
-            onChangeText={setMedicalHistory}
+            onChangeText={handleMedicalHistoryChange}
             errorMessage={errors.medicalHistory}
           />
           <View
@@ -219,13 +305,12 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
             <View style={{flex: 1}}>
               <InputField
                 title="Weight"
-                placeholder="70KG"
+                placeholder="e.g. 70"
+                value={weightValue.toString()}
+                onChangeText={handleWeightChange}
                 keyboardType="numeric"
-                onChangeText={text => setWeightValue(parseFloat(text) || 0)}
+                errorMessage={errors.weight}
               />
-            </View>
-            <View style={{marginTop: 35}}>
-              <IconConvert size="sss" />
             </View>
             <View style={styles.bmiContainer}>
               <Text
@@ -235,19 +320,17 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
                 ]}>
                 BMI
               </Text>
-              <View style={styles.bmi}>
-                <Text>{bmi ? bmi.toFixed(2) : '0'}</Text>
+              <View style={[styles.bmi, errors.bmi ? styles.errorBmi : {}]}>
+                <Text style={[theme.fonts.paragraphRegularSmall]}>
+                  {bmi ? bmi.toFixed(2) : '0.00'}
+                </Text>
               </View>
             </View>
           </View>
-          {errors.bmi && <ErrorMessage message={errors.bmi} />}
-        </View>
-        <View style={{flexDirection: 'row'}}>
           <Button
-            variant="filled"
-            title="Next"
+            title="Submit"
             onPress={handleSubmit}
-            style={{marginTop: theme.spacing.V2, width: '100%'}}
+            style={styles.submitButton}
           />
         </View>
       </ScrollView>

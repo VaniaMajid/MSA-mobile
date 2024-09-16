@@ -16,6 +16,8 @@ export const validatePassword = (password: string): string => {
   return '';
 };
 
+// password validations
+
 export const validateNewPassword = (password: string): string => {
   if (!password) {
     return 'Password is required';
@@ -52,54 +54,39 @@ export const validateTermsAgreement = (isTermsChecked: boolean): string => {
   return '';
 };
 
-interface ValidationErrors {
-  [key: string]: string;
-}
+// registration form validations
 
-export const validateRegistrationForm = (
-  firstName: string,
-  lastName: string,
-  postCode: string,
-  mobileNumber: string,
-  gender: string,
-  allergy: string,
-  medicalHistory: string,
-  isToggleOn: boolean,
-  bmi: number | null,
-): ValidationErrors => {
-  const errors: ValidationErrors = {};
-  
-  if (!firstName.trim()) errors.firstName = 'First name is required';
-  
-  if (!lastName.trim()) errors.lastName = 'Last name is required';
+export const validateFirstName = (value: string): string => 
+  value.trim() === '' ? 'First name is required' : '';
 
-  if (!postCode.trim()) errors.postCode = 'Post code is required';
-  
-  if (!mobileNumber.trim()) {
-    errors.mobileNumber = 'Mobile number is required';
-  } else if (!/^\d{10}$/.test(mobileNumber)) {
-    errors.mobileNumber = 'Invalid mobile number';
-  }
-  
-  if (!gender.trim()) errors.gender = 'Gender is required';
+export const validateLastName = (value: string): string => 
+  value.trim() === '' ? 'Last name is required' : '';
 
-  if (!isToggleOn && !allergy.trim()) {
-    errors.allergy = 'Please specify allergy';
-  }
+export const validatePostCode = (value: string): string => 
+  value.trim() === '' ? 'Post code is required' : '';
 
-  if (!medicalHistory.trim()) errors.medicalHistory = 'Medical history is required';
-
-  if (!bmi || bmi <= 0) {
-    errors.bmi = 'Invalid BMI. Please enter valid height and weight values';
-  }
-
-
-  return errors;
+export const validateMobileNumber = (value: string): string => {
+  const trimmedValue = value.trim();
+  if (trimmedValue === '') return 'Mobile number is required';
+  else if (!/^\d{11}$/.test(value)) return 'Invalid mobile number';
+  return '';
 };
 
+export const validateGender = (value: string): string => 
+  value === '' ? 'Gender is required' : '';
 
-export const validateDateOfBirth = (day: string, month: string, year: string) => {
-  const errors: { [key: string]: string } = {};
+export const validateAllergy = (value: string, isToggleOn: boolean): string => 
+  !isToggleOn && value.trim() === '' ? 'Please specify allergy' : '';
+
+export const validateMedicalHistory = (value: string): string => 
+  value.trim() === '' ? 'Medical history is required' : '';
+
+export const validateBMI = (bmi: number | null): string => 
+  bmi === null || bmi <= 0 ? 'Invalid BMI. Please enter valid height and weight values' : '';
+
+
+export const validateDateOfBirth = (day: string, month: string, year: string): { dateOfBirth?: string } => {
+  const errors: { dateOfBirth?: string } = {};
 
   if (!day || !month || !year) {
     errors.dateOfBirth = 'Date of Birth is required.';
@@ -128,12 +115,7 @@ export const validateDateOfBirth = (day: string, month: string, year: string) =>
 
   const currentYear = new Date().getFullYear();
   if (yearNumber < 1900 || yearNumber > currentYear) {
-    errors.dateOfBirth = `Invalid birth year`;
-    return errors;
-  }
-
-  if (year.length !== 4) {
-    errors.dateOfBirth = 'Year must be a four-digit number';
+    errors.dateOfBirth = 'Invalid birth year';
     return errors;
   }
 
@@ -147,4 +129,3 @@ export const validateDateOfBirth = (day: string, month: string, year: string) =>
 
   return errors;
 };
-

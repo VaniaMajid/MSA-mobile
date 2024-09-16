@@ -61,7 +61,6 @@ function App(): React.JSX.Element {
   }, []);
   return (
     <SafeAreaProvider>
-      {/* <AuthStack /> */}
       <PreAuthNavigator />
     </SafeAreaProvider>
   );

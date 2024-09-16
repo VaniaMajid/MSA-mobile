@@ -7,6 +7,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { PreAuthParamList } from '~Navigators/PreAuthParamList';
 import { useStyles } from './SignupEmailScreen.styles';
 import { validateEmail } from '~Utils/validation';
+import { useFocusEffect } from '@react-navigation/native';
 
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -35,6 +36,14 @@ export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation }) =>
     }
     navigation.navigate('SignupOtp');
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      setEmail('');
+      setEmailError('');
+    }, [])
+  );
+
 
 
   return (

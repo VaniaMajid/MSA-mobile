@@ -32,5 +32,8 @@ export const useStyles = () => {
     yearInput: {
       width: 100,
     },
+    errorInputContainer: {
+      borderColor: theme.colors.error, 
+    },
   });
 };

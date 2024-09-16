@@ -30,6 +30,9 @@ export const useStyles = () => {
       gap: theme.spacing.HGap3,
       height: 60,
     },
+    errorBmi: {
+      borderColor: theme.colors.error,
+    },
     toggle: {
       marginTop: theme.spacing.V1,
       flexDirection: 'row',
@@ -47,6 +50,10 @@ export const useStyles = () => {
     },
     toggleText: {
       marginRight: theme.spacing.H2,
+    },
+    submitButton: {
+      marginTop: theme.spacing.V2,
+      width: '100%',
     },
   });
 };
