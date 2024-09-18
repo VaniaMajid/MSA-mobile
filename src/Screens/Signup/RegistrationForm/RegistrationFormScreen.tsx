@@ -121,35 +121,34 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
             )}
           />
 
-<Controller
-  name="dateOfBirth"
-  control={control}
-  render={({field: {onChange, value}}) => (
-    <DateOfBirthInput
-      onChange={(day, month, year) => {
-        const dayNumber = parseInt(day, 10);
-        const monthNumber = parseInt(month, 10) - 1; 
-        const yearNumber = parseInt(year, 10);
-       
-        const date = new Date(yearNumber, monthNumber, dayNumber);
-        console.log(date)
-        if (
-          date.getFullYear() === yearNumber &&
-          date.getMonth() === monthNumber &&
-          date.getDate() === dayNumber
-        ) {
-          onChange(date);
-          trigger('dateOfBirth');
-        } else {
-          // Handle invalid date input
-          onChange(null);
-          trigger('dateOfBirth');
-        }
-      }}
-      errorMessage={errors.dateOfBirth?.message}
-    />
-  )}
-/>
+          <Controller
+            name="dateOfBirth"
+            control={control}
+            render={({field: {onChange, value}}) => (
+              <DateOfBirthInput
+                onChange={(day, month, year) => {
+                  const dayNumber = parseInt(day, 10);
+                  const monthNumber = parseInt(month, 10) - 1;
+                  const yearNumber = parseInt(year, 10);
+                  const date = new Date(
+                    Date.UTC(yearNumber, monthNumber, dayNumber),
+                  );
+                  if (
+                    date.getFullYear() === yearNumber &&
+                    date.getMonth() === monthNumber &&
+                    date.getDate() === dayNumber
+                  ) {
+                    onChange(date);
+                    trigger('dateOfBirth');
+                  } else {
+                    onChange(null);
+                    trigger('dateOfBirth');
+                  }
+                }}
+                errorMessage={errors.dateOfBirth?.message}
+              />
+            )}
+          />
 
           <Controller
             name="postCode"

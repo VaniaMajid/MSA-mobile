@@ -49,15 +49,15 @@ export const patientRegistrationSchema = Yup.object().shape({
     .matches(/^\d{11,14}$/, 'Mobile number must be valid'),
   gender: Yup.string().required('Gender is required'),
   dateOfBirth: Yup.date()
-    .required('Date of Birth is required')
+    .required('Date of Birth must be valid')
     .test('is-valid-date', 'Invalid Date of Birth', value => {
       if (!value) return false;
 
       const date = new Date(value);
       const year = date.getFullYear();
-      const month = date.getMonth();
+      const month = date.getMonth() + 1;
       const day = date.getDate();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInMonth = new Date(year, month, 0).getDate();
 
       if (year < 1900 || year > new Date().getFullYear()) return false;
 
