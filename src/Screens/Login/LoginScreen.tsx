@@ -1,124 +1,124 @@
-import React, { FC, useCallback, useState } from 'react';
-import { View, Text, Image } from 'react-native';
-import { Button } from '~Components/Button';
-import { Heading } from '~Components/Heading';
-import { IconEye, IconLock } from '~Components/Icons';
-import { InputField } from '~Components/TextInput';
-import { useStyles } from './LoginScreen.styles';
-import { Checkbox } from '~Components/Checkbox';
-import { PressableText } from '~Components/PressableText';
-import { StackScreenProps } from '@react-navigation/stack';
-import { PreAuthParamList } from '~Navigators/PreAuthParamList';
-import { ImageBackgroundWrapper } from 'src/HOC';
-import { useTheme } from '~Contexts/ThemeContext';
-import { validateEmail, validatePassword } from '~Utils/validation';
-import { useFocusEffect } from '@react-navigation/native';
-import { ErrorMessage } from '~Components/Error';
+import React, {FC, useCallback, useState} from 'react';
+import {View, Text, Image} from 'react-native';
+import {Button} from '~Components/Button';
+import {Heading} from '~Components/Heading';
+import {IconEye, IconLock} from '~Components/Icons';
+import {InputField} from '~Components/TextInput';
+import {useStyles} from './LoginScreen.styles';
+import {Checkbox} from '~Components/Checkbox';
+import {PressableText} from '~Components/PressableText';
+import {StackScreenProps} from '@react-navigation/stack';
+import {PreAuthParamList} from '~Navigators/PreAuthParamList';
+import {ImageBackgroundWrapper} from 'src/HOC';
+import {useTheme} from '~Contexts/ThemeContext';
+import {useForm, Controller} from 'react-hook-form';
+import {useFocusEffect} from '@react-navigation/native';
+import {ErrorMessage} from '~Components/Error';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {loginSchema} from '~Utils/validation';
+import { LoginFormType } from './types';
 
 type LoginScreenProps = StackScreenProps<PreAuthParamList>;
 
-export const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
+export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
   const styles = useStyles();
   const theme = useTheme();
- 
-  const [isChecked, setIsChecked] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [loginError, setLoginError] = useState('');
 
-  const handleCheckboxPress = (checked: boolean) => {
-    setIsChecked(checked);
-  };
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {errors},
+  } = useForm<LoginFormType>({
+    resolver: yupResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: false,
+    },
+  });
+
+  const [loginError, setLoginError] = useState('');
 
   const handleForgotPasswordPress = () => {
     // Logic to be handled
   };
 
-  const handleEmailChange = (text: string) => {
-    setEmail(text);
-    const emailValidationError = validateEmail(text);
-    setEmailError(emailValidationError); 
-  };
+  const onSubmit = (data: LoginFormType) => {
+    const {email, password} = data;
 
-  const handlePasswordChange = (text: string) => {
-    setPassword(text);
-    const passwordValidationError = validatePassword(text);
-    setPasswordError(passwordValidationError); 
-  };
+    console.log('Login Data:', data);
 
-  const validateInputs = () => {
-    let isValid = true;
-    setEmailError('');
-    setPasswordError('');
-    setLoginError('');
-
-    const emailValidationError = validateEmail(email);
-    const passwordValidationError = validatePassword(password);
-
-    if (emailValidationError) {
-      setEmailError(emailValidationError);
-      isValid = false;
-    }
-
-    if (passwordValidationError) {
-      setPasswordError(passwordValidationError);
-      isValid = false;
-    }
-
-    return isValid;
-  };
-
-  const handleLoginPress = () => {
-    if (validateInputs()) {
-
+    if (loginError) {
+      setLoginError('Invalid email or password');
+      return;
     }
   };
 
   useFocusEffect(
     useCallback(() => {
-      setEmail('');
-      setPassword('');
-      setEmailError('');
-      setPasswordError('');
+      reset();
       setLoginError('');
-      setIsChecked(false);
-    }, [])
+    }, [reset]),
   );
 
   return (
     <ImageBackgroundWrapper>
-      <Image source={require('../../Assets/images/nameLogo.png')} style={styles.logo} />
+      <Image
+        source={require('../../Assets/images/nameLogo.png')}
+        style={styles.logo}
+      />
       <View style={styles.form}>
         <Heading style={theme.fonts.headerBold} title="Login" />
 
-        <InputField
-          title="Email"
-          placeholder="yourname@example.com"
-          value={email}
-          onChangeText={handleEmailChange} 
-          errorMessage={emailError}
+        <Controller
+          control={control}
+          name="email"
+          render={({field: {onChange, value}}) => (
+            <InputField
+              title="Email"
+              placeholder="yourname@example.com"
+              value={value}
+              onChangeText={onChange}
+              errorMessage={errors.email?.message}
+            />
+          )}
         />
 
-        <InputField
-          title="Password"
-          placeholder=""
-          isPassword={true}
-          leftIcon={<IconLock />}
-          rightIcon={<IconEye />}
-          value={password}
-          onChangeText={handlePasswordChange}
-          errorMessage={passwordError}
+        <Controller
+          control={control}
+          name="password"
+          render={({field: {onChange, value}}) => (
+            <InputField
+              title="Password"
+              placeholder=""
+              isPassword={true}
+              leftIcon={<IconLock />}
+              rightIcon={<IconEye />}
+              value={value}
+              onChangeText={onChange}
+              errorMessage={errors.password?.message}
+            />
+          )}
         />
 
         <View style={styles.row}>
-          <Checkbox
-            text={<Text style={[theme.fonts.labelMedium, { marginLeft: 10 }]}>Remember me</Text>}
-            isChecked={isChecked}
-            onPress={handleCheckboxPress}
-            style={{ width: 200 }}
-            textStyle={styles.checkboxText}
+          <Controller
+            control={control}
+            name="rememberMe"
+            render={({field: {onChange, value}}) => (
+              <Checkbox
+                text={
+                  <Text style={[theme.fonts.labelMedium, {marginLeft: 10}]}>
+                    Remember me
+                  </Text>
+                }
+                isChecked={value}
+                onPress={checked => onChange(checked)}
+                style={{width: 200}}
+                textStyle={styles.checkboxText}
+              />
+            )}
           />
           <PressableText
             text="Forgot Password?"
@@ -127,19 +127,26 @@ export const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
           />
         </View>
 
-        {loginError ?  <ErrorMessage message={loginError}/>  : null}
-        <Button title="Login" textStyle={theme.fonts.buttonSemiBold} onPress={handleLoginPress} />
+        {loginError ? <ErrorMessage message={loginError} /> : null}
+
+        <Button
+          title="Login"
+          textStyle={theme.fonts.buttonSemiBold}
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
 
       <View style={styles.register}>
-        <Text style={[styles.text, theme.fonts.paragraph]}>Don't have an account?</Text>
+        <Text style={[styles.text, theme.fonts.paragraph]}>
+          Don't have an account?
+        </Text>
         <Button
           title="Register"
           onPress={() => {
             navigation.navigate('SelectRole');
           }}
           textStyle={theme.fonts.buttonSemiBold}
-          style={{ width: '100%' }}
+          style={{width: '100%'}}
           variant="outline"
         />
       </View>

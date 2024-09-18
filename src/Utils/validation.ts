@@ -1,131 +1,85 @@
-export const validateEmail = (email: string): string => {
-  if (!email) {
-    return 'Email is required';
-  } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
-    return 'Invalid email format';
-  }
-  return '';
-};
+import * as Yup from 'yup';
 
-export const validatePassword = (password: string): string => {
-  if (!password) {
-    return 'Password is required';
-  } else if (password.length < 8) {
-    return 'Password must be at least 8 characters';
-  }
-  return '';
-};
+export const loginSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .required('Password is required'),
+  rememberMe: Yup.boolean(),
+});
 
-// password validations
+export const selectRoleSchema = Yup.object().shape({
+  role: Yup.string().required('Please select a role to proceed.'),
+  terms: Yup.boolean()
+    .oneOf([true], 'You must agree to the terms and privacy policy.')
+    .required(),
+});
 
-export const validateNewPassword = (password: string): string => {
-  if (!password) {
-    return 'Password is required';
-  } else if (password.length < 8) {
-    return 'Password must be at least 8 characters';
-  } else if (!/[a-z]/.test(password)) {
-    return 'Password must contain at least one lowercase letter';
-  } else if (!/[A-Z]/.test(password)) {
-    return 'Password must contain at least one uppercase letter';
-  } else if (!/[0-9]/.test(password)) {
-    return 'Password must contain at least one number';
-  } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    return 'Password must contain at least one special character';
-  }
-  return '';
-};
+export const signupEmailSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+});
 
-export const validateConfirmPassword = (
-  confirmPassword: string,
-  password: string,
-): string => {
-  if (!confirmPassword) {
-    return 'Confirm Password is required';
-  } else if (confirmPassword !== password) {
-    return 'Passwords do not match';
-  }
-  return '';
-};
+export const otpSchema = Yup.object().shape({
+  otp: Yup.string()
+    .required('OTP is required')
+    .length(6, 'Please enter a valid 6-digit OTP'),
+});
 
-export const validateTermsAgreement = (isTermsChecked: boolean): string => {
-  if (!isTermsChecked) {
-    return 'You must agree to the terms and conditions.';
-  }
-  return '';
-};
+export const passwordSchema = Yup.object().shape({
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
+    .matches(
+      /[!@#$%^&*(),.?":{}|<>]/,
+      'Password must include a special character',
+    ),
+  confirmPassword: Yup.string()
+    .required('Confirm Password is required')
+    .oneOf([Yup.ref('password')], 'Passwords must match'),
+});
 
-// registration form validations
+export const patientRegistrationSchema = Yup.object().shape({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  postCode: Yup.string().required('Post code is required'),
+  mobileNumber: Yup.string()
+    .required('Mobile number is required')
+    .matches(/^\d{11,14}$/, 'Mobile number must be valid'),
+  gender: Yup.string().required('Gender is required'),
+  dateOfBirth: Yup.date()
+    .required('Date of Birth is required')
+    .test('is-valid-date', 'Invalid Date of Birth', value => {
+      if (!value) return false;
 
-export const validateFirstName = (value: string): string => 
-  value.trim() === '' ? 'First name is required' : '';
+      const date = new Date(value);
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const day = date.getDate();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-export const validateLastName = (value: string): string => 
-  value.trim() === '' ? 'Last name is required' : '';
+      if (year < 1900 || year > new Date().getFullYear()) return false;
 
-export const validatePostCode = (value: string): string => 
-  value.trim() === '' ? 'Post code is required' : '';
+      if (month < 0 || month > 11 || day < 1 || day > daysInMonth) return false;
 
-export const validateMobileNumber = (value: string): string => {
-  const trimmedValue = value.trim();
-  if (trimmedValue === '') return 'Mobile number is required';
-  else if (!/^\d{11}$/.test(value)) return 'Invalid mobile number';
-  return '';
-};
+      if (date > new Date()) return false;
 
-export const validateGender = (value: string): string => 
-  value === '' ? 'Gender is required' : '';
+      return true;
+    }),
+  allergy: Yup.string().test(
+    'is-required',
+    'Please specify allergy',
+    function (value) {
+      const {isToggleOn} = this.parent;
+      return isToggleOn || (value && value.trim().length > 0);
+    },
+  ),
+  bmi: Yup.number()
+    .required('BMI is required')
+    .positive('BMI must be greater than zero'),
 
-export const validateAllergy = (value: string, isToggleOn: boolean): string => 
-  !isToggleOn && value.trim() === '' ? 'Please specify allergy' : '';
+  medicalHistory: Yup.string().required('Medical history is required'),
+  isToggleOn: Yup.boolean().required(),
+});
 
-export const validateMedicalHistory = (value: string): string => 
-  value.trim() === '' ? 'Medical history is required' : '';
-
-export const validateBMI = (bmi: number | null): string => 
-  bmi === null || bmi <= 0 ? 'Invalid BMI. Please enter valid height and weight values' : '';
-
-
-export const validateDateOfBirth = (day: string, month: string, year: string): { dateOfBirth?: string } => {
-  const errors: { dateOfBirth?: string } = {};
-
-  if (!day || !month || !year) {
-    errors.dateOfBirth = 'Date of Birth is required.';
-    return errors;
-  }
-
-  const dayNumber = parseInt(day, 10);
-  const monthNumber = parseInt(month, 10);
-  const yearNumber = parseInt(year, 10);
-
-  if (isNaN(dayNumber) || isNaN(monthNumber) || isNaN(yearNumber)) {
-    errors.dateOfBirth = 'Invalid date format.';
-    return errors;
-  }
-
-  if (monthNumber < 1 || monthNumber > 12) {
-    errors.dateOfBirth = 'Month must be between 01 and 12.';
-    return errors;
-  }
-
-  const daysInMonth = new Date(yearNumber, monthNumber, 0).getDate();
-  if (dayNumber < 1 || dayNumber > daysInMonth) {
-    errors.dateOfBirth = `Day must be between 01 and ${daysInMonth}`;
-    return errors;
-  }
-
-  const currentYear = new Date().getFullYear();
-  if (yearNumber < 1900 || yearNumber > currentYear) {
-    errors.dateOfBirth = 'Invalid birth year';
-    return errors;
-  }
-
-  const dob = new Date(yearNumber, monthNumber - 1, dayNumber);
-  const today = new Date();
-
-  if (dob > today) {
-    errors.dateOfBirth = 'Invalid Date of Birth';
-    return errors;
-  }
-
-  return errors;
-};

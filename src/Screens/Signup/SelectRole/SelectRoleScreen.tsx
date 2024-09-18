@@ -1,5 +1,5 @@
+import React, {FC} from 'react';
 import {View, Text} from 'react-native';
-import React, {FC, useState} from 'react';
 import {ImageBackgroundWrapper} from 'src/HOC';
 import {useStyles} from './SelectRole.styles';
 import {useTheme} from '~Contexts/ThemeContext';
@@ -10,63 +10,50 @@ import {Button} from '~Components/Button';
 import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import {Heading} from '~Components/Heading';
-import {validateTermsAgreement} from '~Utils/validation';
-import { ErrorMessage } from '~Components/Error';
+import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {useForm, Controller} from 'react-hook-form';
+import {ErrorMessage} from '~Components/Error';
+import { selectRoleSchema } from '~Utils/validation';
+import { SelectRoleFormType } from './types';
 
 type SelectRoleScreenProps = StackScreenProps<PreAuthParamList>;
 
 export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
   const theme = useTheme();
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
-  const [isTermsChecked, setIsTermsChecked] = useState(false);
-  const [roleError, setRoleError] = useState('');
-  const [termsError, setTermsError] = useState('');
   const styles = useStyles();
 
+  const {
+    control,
+    handleSubmit,
+    watch,
+    setValue,
+    trigger, 
+    formState: {errors},
+  } = useForm<SelectRoleFormType>({
+    resolver: yupResolver(selectRoleSchema),
+    defaultValues: {
+      role: '',
+      terms: false,
+    },
+  });
+
+  const selectedRole = watch('role');
+
   const handleSelectRole = (role: string) => {
-    setSelectedRole(role);
-    if (roleError) setRoleError(''); 
+    setValue('role', role); 
+    trigger('role'); 
   };
 
-  const handleAgreeTermsPress = () => {
-    const newIsTermsChecked = !isTermsChecked;
-    setIsTermsChecked(newIsTermsChecked);
-
-    if (newIsTermsChecked) {
-      setTermsError(''); 
-    }
-  };
-
-  const handleGetStartedPress = () => {
-    let hasError = false;
- 
-    if (!selectedRole) {
-      setRoleError('Please select a role to proceed.');
-      hasError = true;
-    }
-
-    const termsAgreementError = validateTermsAgreement(isTermsChecked);
-    if (termsAgreementError) {
-      setTermsError(termsAgreementError);
-      hasError = true;
-    }
-
-    if (hasError) {
-      return;
-    }
-
-    setRoleError('');
-    setTermsError('');
+  const onSubmit = (data: SelectRoleFormType) => {
+    console.log('Form Data:', data);
     navigation.navigate('SignupEmail');
   };
 
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
-        <Heading
-          title="Select your Role"
-          style={theme.fonts.headerMediumBold}
-        />
+        <Heading title="Select your Role" style={theme.fonts.headerMediumBold} />
         <Text style={[theme.fonts.paragraphRegularSmall, styles.text]}>
           Select your role to proceed: choose 'Patient' for medical advice or
           'Specialist' to offer consultations.
@@ -104,29 +91,30 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
           />
         </View>
 
-        <Checkbox
-          text={
-            <Text style={[theme.fonts.subtextSmall, styles.checkboxText]}>
-              I agree to the{' '}
-              <Text style={styles.checkboxTextPrimary}>Terms of Service</Text>{' '}
-              and <Text style={styles.checkboxTextPrimary}>Privacy Policy</Text>
-            </Text>
-          }
-          isChecked={isTermsChecked}
-          onPress={handleAgreeTermsPress}
+        <Controller
+          control={control}
+          name="terms"
+          render={({field: {onChange, value}}) => (
+            <Checkbox
+              text={
+                <Text style={[theme.fonts.subtextSmall, styles.checkboxText]}>
+                  I agree to the{' '}
+                  <Text style={styles.checkboxTextPrimary}>Terms of Service</Text>{' '}
+                  and <Text style={styles.checkboxTextPrimary}>Privacy Policy</Text>
+                </Text>
+              }
+              isChecked={value}
+              onPress={() => onChange(!value)}
+            />
+          )}
         />
-        {roleError ? (
-           <ErrorMessage message={roleError}/> 
-        ) : null}
-
-        {termsError ? (
-           <ErrorMessage message={termsError}/> 
-        ) : null}
+        {errors.role ? <ErrorMessage message={errors.role?.message || ''} /> : null}
+        {errors.terms ? <ErrorMessage message={errors.terms?.message || ''} /> : null}
       </View>
       <Button
         title="Let's Get Started"
         style={{width: '100%'}}
-        onPress={handleGetStartedPress}
+        onPress={handleSubmit(onSubmit)}
       />
     </ImageBackgroundWrapper>
   );
