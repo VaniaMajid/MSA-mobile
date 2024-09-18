@@ -6,6 +6,7 @@ import {SplashScreen} from '~Screens/SplashScreen';
 import {
   OtpScreen,
   PasswordScreen,
+  PreviewFormScreen,
   RegistrationFormScreen,
   SelectRoleScreen,
   SignupEmailScreen,
@@ -65,6 +66,14 @@ export const PreAuthNavigator = () => {
         <PreAuthStack.Screen
           name="RegistrationForm"
           component={RegistrationFormScreen}
+          options={{
+            title: 'Register',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
+        <PreAuthStack.Screen
+          name="PreviewForm"
+          component={PreviewFormScreen}
           options={{
             title: 'Register',
             headerLeft: ({}) => <Header />,

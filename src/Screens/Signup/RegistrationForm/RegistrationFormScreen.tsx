@@ -69,7 +69,7 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
           <Button
             variant="filled"
             title="Next"
-            onPress={() => {}}
+            onPress={() => {navigation.navigate('PreviewForm')}}
             style={{marginTop: theme.spacing.V2, width: '100%'}}
           />
         </View>

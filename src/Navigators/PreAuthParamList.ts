@@ -5,6 +5,7 @@ export type PreAuthParamList = {
   SignupEmail: undefined;
   SignupOtp: undefined;
   RegistrationForm: undefined;
+  PreviewForm: undefined;
   PasswordScreen: undefined;
 };
 
