@@ -70,6 +70,7 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
 
   const onSubmit = (data: PatientRegistrationFormType) => {
     console.log('Form Data: ', data);
+    navigation.navigate('PreviewForm');
   };
 
   const handleWeightChange = (text: string) => {
@@ -335,7 +336,7 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
           <Button
             variant="filled"
             title="Next"
-            onPress={() => {navigation.navigate('PreviewForm')}}
+            onPress={handleSubmit(onSubmit)}
             style={{marginTop: theme.spacing.V2, width: '100%'}}
           />
         </View>
