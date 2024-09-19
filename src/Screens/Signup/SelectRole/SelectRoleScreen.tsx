@@ -47,7 +47,7 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
 
   const onSubmit = (data: SelectRoleFormType) => {
     console.log('Form Data:', data);
-    navigation.navigate('SignupEmail');
+    navigation.navigate('SignupEmail', { role: data.role });
   };
 
   return (

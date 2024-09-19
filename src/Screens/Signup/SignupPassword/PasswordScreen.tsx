@@ -15,7 +15,7 @@ import { passwordSchema } from '~Utils/validation';
 
 type PasswordScreenProps = StackScreenProps<PreAuthParamList>;
 
-export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation }) => {
+export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation, route }) => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -32,8 +32,14 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation }) => {
     },
   });
 
+  const role = route?.params?.role;
+  if (!role) {
+    throw new Error('Role is required');
+  }
+
+
   const onSubmit = (data: PasswordFormType) => {
-    navigation.navigate('RegistrationForm');
+    navigation.navigate('RegistrationForm', { role: role });
   };
 
   useFocusEffect(
@@ -48,7 +54,7 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation }) => {
         <View>
           <Heading title="Set up your password" style={theme.fonts.headerMediumBold} />
           <Text style={[theme.fonts.paragraphRegularSmall, styles.text]}>
-            Create a secure password for your account. This will be used to access your patient profile and services.
+            Create a secure password for your account. This will be used to access your {role.toLowerCase()} profile and services.
           </Text>
         </View>
 

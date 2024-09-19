@@ -19,7 +19,7 @@ type OtpScreenProps = StackScreenProps<PreAuthParamList>;
 
 const VALID_OTP = '123456'; 
 
-export const OtpScreen: FC<OtpScreenProps> = ({ navigation }) => {
+export const OtpScreen: FC<OtpScreenProps> = ({ navigation, route }) => {
   const theme = useTheme();
   const styles = useStyles();
 
@@ -36,6 +36,12 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation }) => {
     },
   });
 
+  const { role, email } = route.params as { role: string; email: string };
+  if (!role || !email) {
+    throw new Error('Role and email are required');
+  }
+
+
   const onSubmit = (data: { otp: string }) => {
     if (data.otp !== VALID_OTP) {
       setError('otp', {
@@ -44,11 +50,11 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation }) => {
       });
       return;
     }
-    navigation.navigate('PasswordScreen');
+    navigation.navigate('PasswordScreen', { role: role });
   };
 
   const handleResend = () => {
-    Alert.alert('OTP resent', 'A new OTP has been sent to example@gmail.com.');
+    Alert.alert('OTP resent', `A new OTP has been sent to ${email}`);
   };
 
   useFocusEffect(
@@ -63,7 +69,7 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation }) => {
         <IconVerify size="xl" />
         <Heading title="Enter a verification code" style={theme.fonts.headerSmallBold} />
         <Text style={[theme.fonts.paragraphRegularSmall, { color: theme.colors.lightGray1 }]}>
-          We’ve sent a code to example@gmail.com
+          We’ve sent a code to {email}
         </Text>
 
         <Controller

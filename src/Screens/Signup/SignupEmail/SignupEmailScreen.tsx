@@ -14,7 +14,7 @@ import { signupEmailSchema } from '~Utils/validation';
 
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
 
-export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation }) => {
+export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation, route }) => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -30,9 +30,14 @@ export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation }) =>
     },
   });
 
+  const role = route?.params?.role;
+  if (!role) {
+    throw new Error('Role is required');
+  }
+
   const onSubmit = (data: SignupEmailFormType) => {
     console.log('Form Data:', data);
-    navigation.navigate('SignupOtp');
+    navigation.navigate('SignupOtp', { email: data.email, role});
   };
 
   useFocusEffect(

@@ -7,6 +7,8 @@ export type PatientRegistrationFormType = {
   allergy?: string;
   medicalHistory: string;
   dateOfBirth: Date;
+  height: number;
+  weight: number;
   bmi: number;
   isToggleOn: boolean;
 };

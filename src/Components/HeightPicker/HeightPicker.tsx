@@ -9,7 +9,7 @@ import {
 import DropDownPicker from 'react-native-dropdown-picker';
 import {useTheme} from '~Contexts/ThemeContext';
 import {useStyles} from './HeightPicker.styles';
-import {IconArrowDown, IconChevronleft} from '~Components/Icons';
+import {IconArrowDown} from '~Components/Icons';
 
 interface HeightPickerProps {
   title?: string;
@@ -61,7 +61,7 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
       <View style={styles.inputContainer}>
         <View style={styles.input}>
           <TextInput
-            style={[theme.fonts.inputFieldSmall, { paddingBottom: 9}]}
+            style={[theme.fonts.inputFieldSmall, {paddingBottom: 9}]}
             placeholder={placeholder}
             placeholderTextColor={theme.colors.accentColor}
             keyboardType="numeric"
@@ -70,14 +70,14 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
           />
           <Text style={theme.fonts.inputFieldSmall}>{selectedUnit}</Text>
         </View>
-        <TouchableOpacity
-          onPress={() => setOpen(prev => !prev)}>
-          <IconArrowDown size='xxxs'/>
+        <TouchableOpacity onPress={() => setOpen(prev => !prev)}>
+          <IconArrowDown size="xxxs" />
         </TouchableOpacity>
       </View>
 
       {open && (
         <DropDownPicker
+          listMode="SCROLLVIEW"
           dropDownDirection="TOP"
           open={open}
           value={selectedUnit}
@@ -92,6 +92,10 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
           ]}
           selectedItemLabelStyle={{color: theme.colors.primaryColor}}
           dropDownContainerStyle={styles.dropDownContainer}
+          listItemContainerStyle={{
+            marginBottom: theme.spacing.H1,
+          }}
+          textStyle={theme.fonts.paragraphRegularSmall}
         />
       )}
     </View>
