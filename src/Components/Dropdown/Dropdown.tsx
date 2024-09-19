@@ -32,7 +32,6 @@ export const DropdownPicker: React.FC<DropdownPickerProps> = ({
 
   const pickDropDownItem = (value: any) => {
     onValueChange(value);
-    console.log(value)
     setOpen(false);
   };
 

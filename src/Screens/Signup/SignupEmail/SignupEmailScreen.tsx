@@ -36,7 +36,6 @@ export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation, rout
   }
 
   const onSubmit = (data: SignupEmailFormType) => {
-    console.log('Form Data:', data);
     navigation.navigate('SignupOtp', { email: data.email, role});
   };
 

@@ -15,6 +15,7 @@ import {ErrorMessage} from '~Components/Error';
 import {DateOfBirthInput} from '../DateOfBirth';
 import {PatientRegistrationFormType} from './types';
 import {useStyles} from './PatientRegistrationForm.styles';
+import {SearchableDropdown} from '~Components/SearchableDropdown';
 
 interface PatientRegistrationFormProps {
   navigation: any;
@@ -52,6 +53,14 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
     },
   });
 
+  const medicalHistoryItems = [
+    {label: 'Hypertension', value: 'hypertension'},
+    {label: 'Diabetes', value: 'diabetes'},
+    {label: 'Asthma', value: 'asthma'},
+    {label: 'Allergy', value: 'allergy'},
+    {label: 'Arthritis', value: 'arthritis'},
+  ];
+
   const isToggleOn = watch('isToggleOn');
   const [heightValue, setHeightValue] = useState<number>(0);
   const [weightValue, setWeightValue] = useState<number>(0);
@@ -69,7 +78,6 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
   }, [heightValue, weightValue, heightUnit]);
 
   const onSubmit = (data: PatientRegistrationFormType) => {
-    console.log('Form Data: ', data);
     const formData = {
       ...data,
       dateOfBirth: data.dateOfBirth.toISOString(),
@@ -261,7 +269,7 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
             )}
           />
 
-          <Controller
+          {/* <Controller
             name="medicalHistory"
             control={control}
             render={({field: {onChange, value}}) => (
@@ -273,7 +281,28 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
                 errorMessage={errors.medicalHistory?.message}
               />
             )}
+          /> */}
+
+          <Controller
+            name="medicalHistory" 
+            control={control} 
+            render={({field: {onChange, value}}) => (
+              <View style={{flex: 1}}>
+                <SearchableDropdown
+                  title="Select Medical History"
+                  placeholder="e.g. Hypertension"
+                  onValueChange={val => {
+                    onChange(val);
+                    trigger('medicalHistory');
+                  }}
+                  defaultValue={value || ''} 
+                  items={medicalHistoryItems}
+                  errorMessage={errors.medicalHistory?.message}
+                />
+              </View>
+            )}
           />
+
           <View
             style={{
               flex: 1,

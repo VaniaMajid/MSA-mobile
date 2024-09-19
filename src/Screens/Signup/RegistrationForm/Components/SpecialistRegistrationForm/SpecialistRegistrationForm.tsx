@@ -52,7 +52,6 @@ export const SpecialistRegistrationForm: FC<
   });
 
   const onSubmit = (data: SpecialistRegistrationFormType) => {
-    console.log('Form Data: ', data);
     const formData = {
       ...data,
       dateOfBirth: data.dateOfBirth.toISOString(),

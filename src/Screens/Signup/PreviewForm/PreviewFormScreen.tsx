@@ -21,7 +21,6 @@ export const PreviewFormScreen: FC<SignupEmailScreenProps> = ({
   const styles = useStyles();
 
   const {role, data} = route.params as {role: string; data: any};
-  console.log(role)
   if (!role || !data) {
     throw new Error('Role and data are required');
   }

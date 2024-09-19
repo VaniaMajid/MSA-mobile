@@ -10,3 +10,4 @@ export * from './HeightPicker'
 export * from './OtpInput';
 export * from './Error'
 export * from './InfoRow';
+export * from './SearchableDropdown';
