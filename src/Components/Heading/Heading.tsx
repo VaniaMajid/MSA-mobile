@@ -6,7 +6,7 @@ import { useTheme } from '~Contexts/ThemeContext';
 type HeadingProps = {
   fontSize?: number; 
   color?: string; 
-  style?: TextStyle; 
+  style?: TextStyle | TextStyle[]; 
   title: string; 
 };
 
