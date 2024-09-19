@@ -3,7 +3,9 @@ import React, {FC} from 'react';
 import {IconProps} from './props';
 import {getSize} from './utils/getSize';
 
+import IconArrowDownSvg from '~Assets/Icons/arrowDown.svg';
 import IconChevronleftSvg from '~Assets/Icons/chevronleft.svg';
+import IconConvertSvg from '~Assets/Icons/convert.svg';
 import IconEmailSvg from '~Assets/Icons/email.svg';
 import IconEyeSvg from '~Assets/Icons/eye.svg';
 import IconEyeHideSvg from '~Assets/Icons/eyeHide.svg';
@@ -21,6 +23,27 @@ import IconVerifySvg from '~Assets/Icons/verify.svg';
 
 export * from './props';
 
+export const IconArrowDown: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-arrowDown',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconArrowDownSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
 export const IconChevronleft: FC<IconProps> = ({
   color = '#000000',
   size = 'xxs',
@@ -30,6 +53,27 @@ export const IconChevronleft: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconChevronleftSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconConvert: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-convert',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconConvertSvg
       color={color}
       height={iconSize}
       width={iconSize}

@@ -5,7 +5,6 @@ export const useStyles = () => {
   const theme = useTheme();
 
   return StyleSheet.create({
-    container: {},
     label: {
         flexDirection: 'row', 
         alignItems: 'center', 
@@ -26,8 +25,15 @@ export const useStyles = () => {
       textAlign: 'center',
       color: theme.colors.darkGray,
     },
+    activeInput: {
+      borderColor: theme.colors.primaryColor,
+      borderWidth: 2,
+    },
     yearInput: {
       width: 100,
+    },
+    errorInputContainer: {
+      borderColor: theme.colors.error, 
     },
   });
 };

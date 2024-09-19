@@ -30,7 +30,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
   const [data, setData] = React.useState([
     {
       image: require('../../Assets/images/onboarding1.png'),
-      heading: 'A TRUSTED APPINION',
+      heading: 'A TRUST OPPINION',
       subHeading: 'IN YOUR POCKET',
     },
     {

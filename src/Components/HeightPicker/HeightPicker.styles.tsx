@@ -5,31 +5,30 @@ export const useStyles = () => {
   const theme = useTheme();
 
   return StyleSheet.create({
-    container: {
-      justifyContent: 'center',
-    },
-    label: {
-      marginBottom: theme.spacing.V1,
-    },
     inputContainer: {
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'space-between',
       borderWidth: 1,
       borderColor: theme.colors.accentColor,
-      backgroundColor: theme.colors.white,
       borderRadius: 6,
       padding: 10,
-      gap: theme.spacing.HGap3,
     },
     input: {
-      flex: 1,
-      maxHeight: 40
+      flexDirection: 'row',
+      alignItems: 'center',
+      maxWidth: 42,
+      maxHeight: 40,
     },
-    disabledInputContainer: { 
-      borderColor: theme.colors.disabled, 
+    hiddenPicker: {
+      display: 'none',
     },
-    errorInputContainer: {
-      borderColor: theme.colors.error, 
+    dropDownContainer: {
+      borderColor: theme.colors.accentColor,
+      position: 'absolute',
+      bottom: 55, 
+      width: '100%',
+      zIndex: 999, 
     },
   });
 };

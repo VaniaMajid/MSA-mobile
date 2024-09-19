@@ -7,13 +7,13 @@ const colors = {
   error: '#EB3F3A',
   pending: '##EF9815',
   approved: '#00AA3A',
+  disabled: '#E1E7EB',
   lightGray: '#C3C3C3',
   white: '#FFFFFF',
   accentColor: '#A8B4BD',
   black: '#000000',
   lightGray1: '#96969F',
-  grayBg: '#EFF0F6'
-
+  grayBg: '#EFF0F6',
 };
 
 export default colors;

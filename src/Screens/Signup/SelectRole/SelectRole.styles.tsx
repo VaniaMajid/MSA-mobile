@@ -24,6 +24,6 @@ export const useStyles = () => {
     },
     checkboxTextPrimary: {
       color: theme.colors.primaryColor
-    }
+    },
   });
 };

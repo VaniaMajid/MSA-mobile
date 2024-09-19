@@ -29,8 +29,6 @@ export const useStyles = () => {
     },
     text: {
       textAlign: 'center',
-      fontSize: 16,
-      color: theme.colors.darkGray,
     },
     row: {
       flexDirection: 'row',
@@ -41,6 +39,7 @@ export const useStyles = () => {
     forgotPass: {
       color: theme.colors.primaryColor, 
     },
+    
     checkboxIcon: {
       borderColor: theme.colors.primaryColor,
       borderRadius: 5,

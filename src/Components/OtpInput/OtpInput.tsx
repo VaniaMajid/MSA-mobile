@@ -1,17 +1,29 @@
-import React, {useRef, useState} from 'react';
+import React, {FC, useRef, useState, useEffect} from 'react';
 import {View, TextInput, StyleSheet} from 'react-native';
 import {useStyles} from './OtpInput.styles';
+import {ErrorMessage} from '~Components/Error';
 
 interface OtpInputProps {
   length: number;
+  value: string;
   onChange: (otp: string) => void;
+  error?: string | null;
 }
 
-export const OtpInput: React.FC<OtpInputProps> = ({length, onChange}) => {
+export const OtpInput: FC<OtpInputProps> = ({
+  length,
+  value,
+  onChange,
+  error,
+}) => {
   const styles = useStyles();
   const [otp, setOtp] = useState<string[]>(Array(length).fill(''));
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const inputs = useRef<Array<TextInput | null>>([]);
+
+  useEffect(() => {
+    setOtp(value.split('').concat(Array(length).fill('')).slice(0, length));
+  }, [value, length]);
 
   const handleChange = (text: string, index: number) => {
     if (/[^0-9]/.test(text)) return;
@@ -40,6 +52,7 @@ export const OtpInput: React.FC<OtpInputProps> = ({length, onChange}) => {
   };
 
   return (
+    <>
     <View style={styles.container}>
       {otp.map((digit, index) => (
         <TextInput
@@ -56,5 +69,8 @@ export const OtpInput: React.FC<OtpInputProps> = ({length, onChange}) => {
         />
       ))}
     </View>
+    {error && <ErrorMessage message={error} style={{marginTop: -4}}/>}
+    </>
+    
   );
 };
