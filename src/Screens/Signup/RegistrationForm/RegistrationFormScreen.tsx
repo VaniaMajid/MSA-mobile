@@ -331,12 +331,14 @@ export const RegistrationFormScreen: FC<SignupEmailScreenProps> = ({
             <ErrorMessage message={errors.bmi.message || ''} />
           ) : null}
         </View>
-
-        <Button
-          title="Submit"
-          onPress={handleSubmit(onSubmit)}
-          style={styles.submitButton}
-        />
+        <View style={{flexDirection: 'row'}}>
+          <Button
+            variant="filled"
+            title="Next"
+            onPress={() => {navigation.navigate('PreviewForm')}}
+            style={{marginTop: theme.spacing.V2, width: '100%'}}
+          />
+        </View>
       </ScrollView>
     </View>
   );

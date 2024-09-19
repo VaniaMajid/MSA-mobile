@@ -9,3 +9,4 @@ export * from './Header';
 export * from './HeightPicker'
 export * from './OtpInput';
 export * from './Error'
+export * from './InfoRow';
