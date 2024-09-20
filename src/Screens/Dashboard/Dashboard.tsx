@@ -1,15 +1,18 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, { FC } from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Path} from '~Navigators/routes';
+import { Path } from '~Navigators/routes';
+import { StackScreenProps } from '@react-navigation/stack';
+import { AuthParamList } from '~Navigators/AuthParamList';
 
-export const Dashboard = () => {
-  const navigation = useNavigation();
+type DashboardScreenProps = StackScreenProps<AuthParamList>;
+
+export const Dashboard: FC<DashboardScreenProps> = ({navigation}) => {
   return (
     <View>
       <Text
         onPress={() => {
-          navigation.navigate(Path.NOTIFICATION_SCREEN);
+          navigation.navigate(Path.NOTIFICATION_SCREEN)
         }}>
         Dashboard
       </Text>

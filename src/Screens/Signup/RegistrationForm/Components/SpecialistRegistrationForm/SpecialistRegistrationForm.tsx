@@ -11,6 +11,7 @@ import {specialistRegistrationSchema} from '~Utils/validation';
 import {DateOfBirthInput} from '../DateOfBirth';
 import {SpecialistRegistrationFormType} from './types';
 import {useStyles} from './SpecialistRegistrationForm.styles';
+import { Path } from '~Navigators/routes';
 
 interface SpecialistRegistrationFormProps {
   navigation: any;
@@ -56,7 +57,7 @@ export const SpecialistRegistrationForm: FC<
       ...data,
       dateOfBirth: data.dateOfBirth.toISOString(),
     };
-    navigation.navigate('PreviewForm', {role: 'Specialist', data: formData});
+    navigation.navigate(Path.PREVIEW_FORM_SCREEN, {role: 'Specialist', data: formData});
   };
 
   return (

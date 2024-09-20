@@ -4,7 +4,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {LoginScreen} from '~Screens/Login';
 import {SplashScreen} from '~Screens/SplashScreen';
 import {
-  OtpScreen,
   PasswordScreen,
   PreviewFormScreen,
   RegistrationFormScreen,
@@ -13,24 +12,63 @@ import {
 } from '~Screens/Signup';
 import {PreAuthParamList} from './PreAuthParamList';
 import {Header} from '~Components/index';
-import { useTheme } from '~Contexts/ThemeContext';
+import {useTheme} from '~Contexts/ThemeContext';
+import {
+  CreateNewPasswordScreen,
+  ForgotPasswordEmailScreen,
+  PasswordResetSuccessfulScreen,
+} from '~Screens/ForgotPassword';
+import {OtpScreen} from '~Screens/Otp';
 
 const PreAuthStack = createStackNavigator<PreAuthParamList>();
 export const PreAuthNavigator = () => {
   const theme = useTheme();
   return (
     <NavigationContainer>
-      <PreAuthStack.Navigator initialRouteName="Splash"
-      screenOptions={{
-        headerTitleAlign: 'center',
-        headerTitleStyle: {
-          ...theme.fonts.uiLabelSemiBold,
-        },
-      }}>
+      <PreAuthStack.Navigator
+        initialRouteName="Splash"
+        screenOptions={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            ...theme.fonts.uiLabelSemiBold,
+          },
+        }}>
         <PreAuthStack.Group screenOptions={{headerShown: false}}>
           <PreAuthStack.Screen name="Login" component={LoginScreen} />
           <PreAuthStack.Screen name="Splash" component={SplashScreen} />
         </PreAuthStack.Group>
+        <PreAuthStack.Screen
+          name="ForgotPasswordEmail"
+          component={ForgotPasswordEmailScreen}
+          options={{
+            title: 'Account Recovery',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
+        <PreAuthStack.Screen
+          name="Otp"
+          component={OtpScreen}
+          options={{
+            title: 'Authentication',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
+        <PreAuthStack.Screen
+          name="CreateNewPassword"
+          component={CreateNewPasswordScreen}
+          options={{
+            title: 'Reset Password',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
+        <PreAuthStack.Screen
+          name="PasswordResetSuccessful"
+          component={PasswordResetSuccessfulScreen}
+          options={{
+            title: 'Password Reset Successful',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
         <PreAuthStack.Screen
           name="SelectRole"
           component={SelectRoleScreen}
@@ -47,14 +85,7 @@ export const PreAuthNavigator = () => {
             headerLeft: ({}) => <Header />,
           }}
         />
-        <PreAuthStack.Screen
-          name="SignupOtp"
-          component={OtpScreen}
-          options={{
-            title: 'Authentication',
-            headerLeft: ({}) => <Header />,
-          }}
-        />
+
         <PreAuthStack.Screen
           name="PasswordScreen"
           component={PasswordScreen}

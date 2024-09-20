@@ -16,6 +16,7 @@ import {DateOfBirthInput} from '../DateOfBirth';
 import {PatientRegistrationFormType} from './types';
 import {useStyles} from './PatientRegistrationForm.styles';
 import {SearchableDropdown} from '~Components/SearchableDropdown';
+import { Path } from '~Navigators/routes';
 
 interface PatientRegistrationFormProps {
   navigation: any;
@@ -83,7 +84,7 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
       dateOfBirth: data.dateOfBirth.toISOString(),
       height: `${data.height} ${heightUnit}`,
     };
-    navigation.navigate('PreviewForm', {role: 'Patient', data: formData});
+    navigation.navigate(Path.PREVIEW_FORM_SCREEN, {role: 'Patient', data: formData});
   };
 
   const handleWeightChange = (text: string) => {

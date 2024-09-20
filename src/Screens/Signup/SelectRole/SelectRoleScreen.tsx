@@ -16,6 +16,7 @@ import {useForm, Controller} from 'react-hook-form';
 import {ErrorMessage} from '~Components/Error';
 import { selectRoleSchema } from '~Utils/validation';
 import { SelectRoleFormType } from './types';
+import { Path } from '~Navigators/routes';
 
 type SelectRoleScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -46,7 +47,7 @@ export const SelectRoleScreen: FC<SelectRoleScreenProps> = ({navigation}) => {
   };
 
   const onSubmit = (data: SelectRoleFormType) => {
-    navigation.navigate('SignupEmail', { role: data.role });
+    navigation.navigate(Path.SIGNUP_EMAIL_SCREEN, { role: data.role });
   };
 
   return (
