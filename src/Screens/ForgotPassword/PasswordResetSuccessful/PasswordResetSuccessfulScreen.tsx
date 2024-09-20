@@ -23,7 +23,7 @@ export const PasswordResetSuccessfulScreen: FC<
         <IconTickCircle size="xl" color={theme.colors.primaryColor} />
         <Text
           style={[
-            theme.fonts.paragraphRegularSmall,
+            theme.fonts.paragraphSmallSemiBold,
             {color: theme.colors.darkGray, textAlign: 'center'},
           ]}>
           Your password has been successfully reset. Please log in to your
