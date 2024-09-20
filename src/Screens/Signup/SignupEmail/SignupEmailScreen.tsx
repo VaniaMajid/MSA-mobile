@@ -1,16 +1,16 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { View, Text } from 'react-native';
 import { ImageBackgroundWrapper } from 'src/HOC';
 import { useTheme } from '~Contexts/ThemeContext';
-import { InputField, Button, Heading, ErrorMessage } from '~Components/index';
+import { InputField, Button, Heading} from '~Components/index';
 import { StackScreenProps } from '@react-navigation/stack';
 import { PreAuthParamList } from '~Navigators/PreAuthParamList';
 import { useStyles } from './SignupEmailScreen.styles';
-import { useFocusEffect } from '@react-navigation/native';
 import { SignupEmailFormType } from './types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import { signupEmailSchema } from '~Utils/validation';
+import { Path } from '~Navigators/routes';
 
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -31,19 +31,11 @@ export const SignupEmailScreen: FC<SignupEmailScreenProps> = ({ navigation, rout
   });
 
   const role = route?.params?.role;
-  if (!role) {
-    throw new Error('Role is required');
-  }
-
+  
   const onSubmit = (data: SignupEmailFormType) => {
-    navigation.navigate('SignupOtp', { email: data.email, role});
+    navigation.navigate(Path.OTP_SCREEN, { email: data.email, role, screenType: 'createPassword'});
+    reset();
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      reset();
-    }, [reset])
-  );
 
   return (
     <ImageBackgroundWrapper>

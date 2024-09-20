@@ -18,6 +18,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import SplashHeading from './components/SplashHeading/SplashHeading';
 import {PressableText} from '~Components/PressableText';
+import { Path } from '~Navigators/routes';
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 
@@ -75,7 +76,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
       ref.current?.next();
       setCounter(counter + 1);
     } else {
-      navigation.navigate('Login');
+      navigation.navigate(Path.LOGIN_SCREEN);
     }
   };
 

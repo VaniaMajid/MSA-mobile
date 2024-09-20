@@ -1,5 +1,5 @@
 import { View, Text, Alert } from 'react-native';
-import React, { FC, useCallback } from 'react';
+import React, { FC} from 'react';
 import { ImageBackgroundWrapper } from 'src/HOC';
 import { StackScreenProps } from '@react-navigation/stack';
 import { PreAuthParamList } from '~Navigators/PreAuthParamList';
@@ -10,10 +10,10 @@ import { IconVerify } from '~Components/Icons';
 import { PressableText } from '~Components/PressableText';
 import { useStyles } from './OtpScreen.styles';
 import { OtpInput } from '~Components/OtpInput';
-import { useFocusEffect } from '@react-navigation/native';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { otpSchema } from '~Utils/validation';
+import { Path } from '~Navigators/routes';
 
 type OtpScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -36,9 +36,9 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation, route }) => {
     },
   });
 
-  const { role, email } = route.params as { role: string; email: string };
-  if (!role || !email) {
-    throw new Error('Role and email are required');
+  const { role, email, screenType } = route.params as { role: string; email: string, screenType: string };
+  if (!email || !screenType) {
+    throw new Error('Email and screenType are required');
   }
 
 
@@ -50,18 +50,18 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation, route }) => {
       });
       return;
     }
-    navigation.navigate('PasswordScreen', { role: role });
+    if (screenType === 'forgotPassword') {
+      navigation.navigate(Path.CREATE_NEW_PASSWORD_SCREEN);
+    } else if (screenType === 'createPassword') {
+      navigation.navigate(Path.PASSWORD_SCREEN, { role }); 
+    }
+    reset();
   };
 
   const handleResend = () => {
     Alert.alert('OTP resent', `A new OTP has been sent to ${email}`);
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      reset();
-    }, [reset])
-  );12345
+  
 
   return (
     <ImageBackgroundWrapper>

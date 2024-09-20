@@ -1,8 +1,8 @@
 import {createStackNavigator} from '@react-navigation/stack';
+import { AuthParamList } from '~Navigators/AuthParamList';
 import {Path} from '~Navigators/routes';
 import {Dashboard} from '~Screens/Dashboard';
-import {NotificationScreen} from '~Screens/Notification';
-const HomeStackScreens = createStackNavigator();
+const HomeStackScreens = createStackNavigator<AuthParamList>();
 export const HomeStack = () => {
   return (
     <HomeStackScreens.Navigator>

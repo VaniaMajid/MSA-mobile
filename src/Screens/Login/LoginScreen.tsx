@@ -17,6 +17,7 @@ import {ErrorMessage} from '~Components/Error';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {loginSchema} from '~Utils/validation';
 import { LoginFormType } from './types';
+import { Path } from '~Navigators/routes';
 
 type LoginScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -41,7 +42,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
   const [loginError, setLoginError] = useState('');
 
   const handleForgotPasswordPress = () => {
-    // Logic to be handled
+    navigation.navigate(Path.FORGOT_PASSWORD_EMAIL_SCREEN)
   };
 
   const onSubmit = (data: LoginFormType) => {
@@ -51,6 +52,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
       setLoginError('Invalid email or password');
       return;
     }
+   
   };
 
   useFocusEffect(
@@ -141,7 +143,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
         <Button
           title="Register"
           onPress={() => {
-            navigation.navigate('SelectRole');
+            navigation.navigate(Path.SELECT_ROLE_SCREEN);
           }}
           textStyle={theme.fonts.buttonSemiBold}
           style={{width: '100%'}}

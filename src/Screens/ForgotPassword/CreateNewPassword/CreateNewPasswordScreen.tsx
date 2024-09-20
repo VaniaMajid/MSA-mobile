@@ -1,21 +1,28 @@
-import { View, Text } from 'react-native';
-import React, { FC } from 'react';
-import { ImageBackgroundWrapper } from 'src/HOC';
-import { StackScreenProps } from '@react-navigation/stack';
-import { PreAuthParamList } from '~Navigators/PreAuthParamList';
-import { useStyles } from './PasswordScreen.styles';
-import { useTheme } from '~Contexts/ThemeContext';
-import { InputField, Button, Heading, IconLock, IconEye } from '~Components/index';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, Controller } from 'react-hook-form';
-import { PasswordFormType } from './types';
-import { passwordSchema } from '~Utils/validation';
+import {View, Text} from 'react-native';
+import React, {FC} from 'react';
+import {ImageBackgroundWrapper} from 'src/HOC';
+import {StackScreenProps} from '@react-navigation/stack';
+import {PreAuthParamList} from '~Navigators/PreAuthParamList';
+import {useTheme} from '~Contexts/ThemeContext';
+import {
+  InputField,
+  Button,
+  Heading,
+  IconLock,
+  IconEye,
+} from '~Components/index';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {useForm, Controller} from 'react-hook-form';
+import {CreateNewPasswordFormType} from './types';
+import {passwordSchema} from '~Utils/validation';
+import {useStyles} from './CreateNewPasswordScreen.styles';
 import { Path } from '~Navigators/routes';
 
+type CreateNewPasswordScreenProps = StackScreenProps<PreAuthParamList>;
 
-type PasswordScreenProps = StackScreenProps<PreAuthParamList>;
-
-export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation, route }) => {
+export const CreateNewPasswordScreen: FC<CreateNewPasswordScreenProps> = ({
+  navigation,
+}) => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -23,8 +30,8 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation, route }) =
     control,
     handleSubmit,
     reset,
-    formState: { errors },
-  } = useForm<PasswordFormType>({
+    formState: {errors},
+  } = useForm<CreateNewPasswordFormType>({
     resolver: yupResolver(passwordSchema),
     defaultValues: {
       password: '',
@@ -32,24 +39,22 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation, route }) =
     },
   });
 
-  const role = route?.params?.role;
-  if (!role) {
-    throw new Error('Role is required');
-  }
-
-
-  const onSubmit = (data: PasswordFormType) => {
-    navigation.navigate(Path.REGISTRATION_FORM_SCREEN, { role: role });
+  const onSubmit = (data: CreateNewPasswordFormType) => {
+    navigation.navigate(Path.PASSWORD_RESET_SUCCESSFUL_SCREEN);
     reset();
   };
+  
 
   return (
     <ImageBackgroundWrapper>
       <View style={styles.container}>
         <View>
-          <Heading title="Set up your password" style={theme.fonts.headerMediumBold} />
+          <Heading
+            title="Create a new password"
+            style={theme.fonts.headerMediumBold}
+          />
           <Text style={[theme.fonts.paragraphRegularSmall, styles.text]}>
-            Create a secure password for your account. This will be used to access your {role.toLowerCase()} profile and services.
+            Your new password must be different from previously used passwords.
           </Text>
         </View>
 
@@ -58,7 +63,7 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation, route }) =
             <Controller
               name="password"
               control={control}
-              render={({ field: { onChange, value } }) => (
+              render={({field: {onChange, value}}) => (
                 <InputField
                   title="Password"
                   placeholder="Enter your password"
@@ -72,7 +77,8 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation, route }) =
               )}
             />
             <Text style={[theme.fonts.subtextSmall, styles.text]}>
-              Passwords must be at least 8 characters long and include a special character, an uppercase letter, and a lowercase letter.
+              Passwords must be at least 8 characters long and include a special
+              character, an uppercase letter, and a lowercase letter.
             </Text>
           </View>
 
@@ -80,7 +86,7 @@ export const PasswordScreen: FC<PasswordScreenProps> = ({ navigation, route }) =
             <Controller
               name="confirmPassword"
               control={control}
-              render={({ field: { onChange, value } }) => (
+              render={({field: {onChange, value}}) => (
                 <InputField
                   title="Confirm password"
                   placeholder="Confirm your password"
