@@ -1,9 +1,10 @@
 import React, {useState, useRef, useEffect, FC} from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {useStyles} from './DateOfBirth.styles';
 import {IconInfoCircle} from '~Components/Icons';
 import {useTheme} from '~Contexts/ThemeContext';
 import {ErrorMessage} from '~Components/Error';
+import {InfoOverlay} from '~Components/InfoOverlay';
 
 type DateOfBirthInputProps = {
   onChange: (day: string, month: string, year: string) => void;
@@ -24,6 +25,8 @@ export const DateOfBirthInput: FC<DateOfBirthInputProps> = ({
   const dayRef = useRef<TextInput>(null);
   const monthRef = useRef<TextInput>(null);
   const yearRef = useRef<TextInput>(null);
+
+  const [isInfoVisible, setInfoVisible] = useState(false);
 
   const styles = useStyles();
   const theme = useTheme();
@@ -61,11 +64,22 @@ export const DateOfBirthInput: FC<DateOfBirthInputProps> = ({
     ];
   };
 
+
+  const toggleInfo = () => {
+    setInfoVisible(!isInfoVisible);
+  };
+
   return (
     <View>
       <View style={styles.label}>
         <Text style={theme.fonts.inputFieldSmall}>Date of Birth</Text>
-        <IconInfoCircle size="xxxs" />
+        <TouchableOpacity onPress={toggleInfo}>
+          <IconInfoCircle size="xxxs" />
+        </TouchableOpacity>
+        <InfoOverlay
+          visible={isInfoVisible}
+          infoText="The minimum age requirement for using this App is 18 years old."
+        />
       </View>
       <View style={styles.inputRow}>
         <TextInput
