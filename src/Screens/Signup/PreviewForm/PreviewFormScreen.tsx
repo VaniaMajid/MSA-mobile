@@ -1,5 +1,5 @@
 import {View, Text, ScrollView} from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
 import {ImageBackgroundWrapper} from 'src/HOC';
@@ -9,12 +9,21 @@ import {useStyles} from './PreviewFormScreen.styles';
 import {StepIndicator} from '../RegistrationForm/Components';
 import {Heading} from '~Components/Heading';
 import {InfoRow} from '~Components/InfoRow';
+import {formatDateOfBirth} from '~Utils/formattedDOB';
 
 type SignupEmailScreenProps = StackScreenProps<PreAuthParamList>;
 
-export const PreviewFormScreen: FC<SignupEmailScreenProps> = ({navigation}) => {
+export const PreviewFormScreen: FC<SignupEmailScreenProps> = ({
+  navigation,
+  route,
+}) => {
   const theme = useTheme();
   const styles = useStyles();
+
+  const {role, data} = route.params as {role: string; data: any};
+  if (!role || !data) {
+    throw new Error('Role and data are required');
+  }
 
   return (
     <ImageBackgroundWrapper>
@@ -36,36 +45,51 @@ export const PreviewFormScreen: FC<SignupEmailScreenProps> = ({navigation}) => {
             please simply go back and edit.
           </Text>
           <View style={styles.infoContainer}>
-            <InfoRow label="First name" value="Aaron" />
-            <InfoRow label="Last name" value="Nace" />
-            <InfoRow label="Date of Birth" value="12 June 2023" />
-            <InfoRow label="Post Code" value="SW1A 1AA" />
-            <InfoRow label="Mobile Number" value="+44 32 23 12321" />
-            <InfoRow label="Gender" value="Female" />
-            <InfoRow label="Allergy" value="Pollen, Penicillin" />
-            <InfoRow label="Past Medical History" value="Hypertension" />
-            <InfoRow label="Height, Weight, BMI" value="5ft, 70KG, 22.8" />
-            <InfoRow label="Email" value="example@gmail.com" />
+            <InfoRow label="First name" value={data.firstName} />
+            <InfoRow label="Last name" value={data.lastName} />
+            {role === 'Specialist' && (
+              <InfoRow label="GMC Number" value={data.gmcNumber} />
+            )}
+            <InfoRow
+              label="Date of Birth"
+              value={formatDateOfBirth(data.dateOfBirth)}
+            />
+            <InfoRow label="Post Code" value={data.postCode} />
+            {role === 'Specialist' && (
+              <InfoRow label="Speciality" value={data.speciality} />
+            )}
+            <InfoRow label="Mobile Number" value={data.mobileNumber} />
+            <InfoRow label="Gender" value={data.gender} />
+            {role === 'Patient' && (
+              <>
+                <InfoRow label="Allergy" value={data.allergy || 'None'} />
+                <InfoRow
+                  label="Past Medical History"
+                  value={data.medicalHistory}
+                />
+                <InfoRow
+                  label="Height, Weight, BMI"
+                  value={`${data.height}, ${data.weight} KG, ${data.bmi.toFixed(1)}`}
+                />
+              </>
+            )}
           </View>
         </View>
-        
       </ScrollView>
-      <View style={[styles.buttons]}>
-          <Button
-            variant="outline"
-            title="Back"
-            onPress={() => {navigation.goBack()}}
-            style={{width: '43%'}}
-          />
-          <Button
-            variant="filled"
-            title="Get Started"
-            onPress={() => {
-              navigation.navigate('PasswordScreen');
-            }}
-            style={{width: '43%'}}
-          />
-        </View>
+      <View style={styles.buttons}>
+        <Button
+          variant="outline"
+          title="Back"
+          onPress={() => navigation.goBack()}
+          style={{width: '43%'}}
+        />
+        <Button
+          variant="filled"
+          title="Get Started"
+          onPress={() => {}}
+          style={{width: '43%'}}
+        />
+      </View>
     </ImageBackgroundWrapper>
   );
 };

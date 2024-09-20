@@ -47,8 +47,6 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
   const onSubmit = (data: LoginFormType) => {
     const {email, password} = data;
 
-    console.log('Login Data:', data);
-
     if (loginError) {
       setLoginError('Invalid email or password');
       return;

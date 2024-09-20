@@ -61,7 +61,7 @@ export const patientRegistrationSchema = Yup.object().shape({
 
       if (year < 1900 || year > new Date().getFullYear()) return false;
 
-      if (month < 0 || month > 11 || day < 1 || day > daysInMonth) return false;
+      if (month < 0 || month > 12 || day < 1 || day > daysInMonth) return false;
 
       if (date > new Date()) return false;
 
@@ -75,6 +75,12 @@ export const patientRegistrationSchema = Yup.object().shape({
       return isToggleOn || (value && value.trim().length > 0);
     },
   ),
+  height: Yup.number()
+    .required('Height is required')
+    .positive('Height must be greater than zero'),
+  weight: Yup.number()
+    .required('Weight is required')
+    .positive('Weight must be greater than zero'),
   bmi: Yup.number()
     .required('BMI is required')
     .positive('BMI must be greater than zero'),
@@ -83,3 +89,51 @@ export const patientRegistrationSchema = Yup.object().shape({
   isToggleOn: Yup.boolean().required(),
 });
 
+const calculateAge = (dateOfBirth: Date) => {
+  const today = new Date();
+  const birthDate = new Date(dateOfBirth);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
+export const specialistRegistrationSchema = Yup.object().shape({
+  inviteCode: Yup.string().required('Invite code is required'),
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  gmcNumber: Yup.string().required('GMC number is required'),
+  postCode: Yup.string().required('Post code is required'),
+  mobileNumber: Yup.string()
+    .required('Mobile number is required')
+    .matches(/^\d{11,14}$/, 'Mobile number must be valid'),
+  gender: Yup.string().required('Gender is required'),
+  dateOfBirth: Yup.date()
+    .required('Date of Birth is required')
+    .test('is-valid-date', 'Invalid Date of Birth', value => {
+      if (!value) return false;
+
+      const date = new Date(value);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const daysInMonth = new Date(year, month, 0).getDate();
+
+      if (year < 1900 || year > new Date().getFullYear()) return false;
+
+      if (month < 1 || month > 12 || day < 1 || day > daysInMonth) return false;
+
+      if (date > new Date()) return false;
+
+      return true;
+    })
+    .test('is-at-least-18', 'You must be at least 18 years old', value => {
+      const age = calculateAge(value);
+      return age >= 18;
+    }),
+
+    
+    speciality: Yup.string().required('Speciality is required'),
+});
