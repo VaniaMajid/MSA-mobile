@@ -6,17 +6,17 @@ export const useStyles = () => {
 
   return StyleSheet.create({
     container: {
-        alignItems: 'center',
-        gap: theme.spacing.HGap3
-      },
+      alignItems: 'center',
+      gap: theme.spacing.HGap3,
+    },
     containerIcon: {
       borderRadius: 100,
       alignItems: 'center',
       justifyContent: 'center',
     },
     label: {
-        ...theme.fonts.inputFieldSmall,
-        textAlign: 'center'
-    }
+      ...theme.fonts.inputFieldSmall,
+      textAlign: 'center',
+    },
   });
 };

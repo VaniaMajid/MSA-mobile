@@ -26,6 +26,7 @@ import IconPatientSvg from '~Assets/Icons/patient.svg';
 import IconProfileActiveSvg from '~Assets/Icons/profileActive.svg';
 import IconProfileInActiveSvg from '~Assets/Icons/profileInActive.svg';
 import IconRespiratorySvg from '~Assets/Icons/respiratory.svg';
+import IconSearchSvg from '~Assets/Icons/search.svg';
 import IconSpecialistSvg from '~Assets/Icons/specialist.svg';
 import IconTickCircleSvg from '~Assets/Icons/tickCircle.svg';
 import IconUserSvg from '~Assets/Icons/user.svg';
@@ -504,6 +505,27 @@ export const IconRespiratory: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconRespiratorySvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconSearch: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-search',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconSearchSvg
       color={color}
       height={iconSize}
       width={iconSize}
