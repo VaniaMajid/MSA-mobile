@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import React, {FC, useEffect, useState} from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -7,7 +7,7 @@ import {useTheme} from '~Contexts/ThemeContext';
 import {DropdownPicker} from '~Components/Dropdown';
 import {Toggle} from '~Components/Toggle';
 import {Button} from '~Components/Button';
-import {IconConvert, IconInfoCircle, IconUser} from '~Components/Icons';
+import {IconConvert, IconUser} from '~Components/Icons';
 import {HeightPicker} from '~Components/HeightPicker';
 import {calculateBMI} from '~Utils/bmiUtils';
 import {patientRegistrationSchema} from '~Utils/validation';
@@ -17,7 +17,7 @@ import {PatientRegistrationFormType} from './types';
 import {useStyles} from './PatientRegistrationForm.styles';
 import {SearchableDropdown} from '~Components/SearchableDropdown';
 import {Path} from '~Navigators/routes';
-import {InfoOverlay} from '~Components/InfoOverlay';
+import {InfoTooltip} from '~Components/InfoTooltip';
 
 interface PatientRegistrationFormProps {
   navigation: any;
@@ -237,15 +237,9 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
                     ]}>
                     Allergy
                   </Text>
-                  <TouchableOpacity onPress={toggleInfo}>
-                    <IconInfoCircle size="xxxs" />
-                  </TouchableOpacity>
-                  
+                  <InfoTooltip content="Please use commas to separate allergies when adding multiple entries." />
                 </View>
-                <InfoOverlay
-                    visible={isInfoVisible}
-                    infoText="Please use commas to separate allergies when adding multiple entries."
-                  />
+
                 <View style={styles.allergyToggle}>
                   <Text
                     style={[
