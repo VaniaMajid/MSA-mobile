@@ -3,6 +3,7 @@ import React, {FC} from 'react';
 import {IconProps} from './props';
 import {getSize} from './utils/getSize';
 
+import IconAboutSvg from '~Assets/Icons/about.svg';
 import IconAppinionsActiveSvg from '~Assets/Icons/appinionsActive.svg';
 import IconAppinionsInActiveSvg from '~Assets/Icons/appinionsInActive.svg';
 import IconArrowDownSvg from '~Assets/Icons/arrowDown.svg';
@@ -13,6 +14,8 @@ import IconDermatologySvg from '~Assets/Icons/dermatology.svg';
 import IconEmailSvg from '~Assets/Icons/email.svg';
 import IconEyeSvg from '~Assets/Icons/eye.svg';
 import IconEyeHideSvg from '~Assets/Icons/eyeHide.svg';
+import IconFaqsSvg from '~Assets/Icons/faqs.svg';
+import IconFeedbackSvg from '~Assets/Icons/feedback.svg';
 import IconHamburgerSvg from '~Assets/Icons/hamburger.svg';
 import IconHomeActiveSvg from '~Assets/Icons/homeActive.svg';
 import IconHomeInActiveSvg from '~Assets/Icons/homeInActive.svg';
@@ -23,17 +26,42 @@ import IconMedicalInfoInActiveSvg from '~Assets/Icons/medicalInfoInActive.svg';
 import IconNeurologySvg from '~Assets/Icons/neurology.svg';
 import IconNotificationSvg from '~Assets/Icons/notification.svg';
 import IconPatientSvg from '~Assets/Icons/patient.svg';
+import IconPricingSvg from '~Assets/Icons/pricing.svg';
+import IconPrivacyPolicySvg from '~Assets/Icons/privacyPolicy.svg';
 import IconProfileActiveSvg from '~Assets/Icons/profileActive.svg';
 import IconProfileInActiveSvg from '~Assets/Icons/profileInActive.svg';
 import IconRespiratorySvg from '~Assets/Icons/respiratory.svg';
 import IconSearchSvg from '~Assets/Icons/search.svg';
+import IconSignOutSvg from '~Assets/Icons/signOut.svg';
 import IconSpecialistSvg from '~Assets/Icons/specialist.svg';
+import IconTermsSvg from '~Assets/Icons/terms.svg';
 import IconTickCircleSvg from '~Assets/Icons/tickCircle.svg';
 import IconUserSvg from '~Assets/Icons/user.svg';
 import IconVerifySvg from '~Assets/Icons/verify.svg';
 
 export * from './props';
 
+export const IconAbout: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-about',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconAboutSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
 export const IconAppinionsActive: FC<IconProps> = ({
   color = '#000000',
   size = 'xxs',
@@ -232,6 +260,48 @@ export const IconEyeHide: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconEyeHideSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconFaqs: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-faqs',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconFaqsSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconFeedback: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-feedback',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconFeedbackSvg
       color={color}
       height={iconSize}
       width={iconSize}
@@ -454,6 +524,48 @@ export const IconPatient: FC<IconProps> = ({
     />
   );
 };
+export const IconPricing: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-pricing',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconPricingSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconPrivacyPolicy: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-privacyPolicy',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconPrivacyPolicySvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
 export const IconProfileActive: FC<IconProps> = ({
   color = '#000000',
   size = 'xxs',
@@ -538,6 +650,27 @@ export const IconSearch: FC<IconProps> = ({
     />
   );
 };
+export const IconSignOut: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-signOut',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconSignOutSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
 export const IconSpecialist: FC<IconProps> = ({
   color = '#000000',
   size = 'xxs',
@@ -547,6 +680,27 @@ export const IconSpecialist: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconSpecialistSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconTerms: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-terms',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconTermsSvg
       color={color}
       height={iconSize}
       width={iconSize}

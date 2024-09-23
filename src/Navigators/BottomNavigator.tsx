@@ -19,7 +19,6 @@ export const BottomTabNavigation = () => {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => {
           if (route.name === 'Home') {
-            console.log(focused)
             return focused ? (
               <IconHomeActive color={theme.colors.primaryColor} size="xxs" />
             ) : (

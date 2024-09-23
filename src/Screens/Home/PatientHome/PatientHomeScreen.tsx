@@ -72,9 +72,8 @@ export const PatientHomeScreen: FC<PatientHomeScreenProps> = ({navigation}) => {
         contentContainerStyle={styles.specialityContainer}
         showsVerticalScrollIndicator={false}>
         {filteredSpecialties.map((specialty, index) => (
-          <View style={styles.speciality}>
+          <View style={styles.speciality}  key={index}>
             <IconContainer
-              key={index}
               icon={specialty.icon}
               label={specialty.name}
             />
