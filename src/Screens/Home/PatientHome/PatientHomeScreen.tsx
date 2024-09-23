@@ -1,4 +1,4 @@
-import {View, TextInput} from 'react-native';
+import {View} from 'react-native';
 import React, {FC, useState} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {AuthParamList} from '~Navigators/AuthParamList';
@@ -64,8 +64,8 @@ export const PatientHomeScreen: FC<PatientHomeScreenProps> = ({navigation}) => {
         onChangeText={setSearchQuery}
       />
       <Heading
-        title="Select your Specialty"
-        style={theme.fonts.headerSmallBold}
+        title="Select your Specialist"
+        style={theme.fonts.paragraphBold}
       />
 
       <ScrollView

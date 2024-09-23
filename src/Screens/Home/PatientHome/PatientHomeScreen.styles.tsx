@@ -15,7 +15,7 @@ export const useStyles = () => {
       flexDirection: 'row',
       flexWrap: 'wrap',
       justifyContent: 'flex-start',
-      gap: theme.spacing.HGap1,
+      gap: 28,
     },
     speciality: {
       width: '28%',
