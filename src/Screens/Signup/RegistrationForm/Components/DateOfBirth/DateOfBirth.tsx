@@ -1,9 +1,10 @@
 import React, {useState, useRef, useEffect, FC} from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {useStyles} from './DateOfBirth.styles';
-import {IconInfoCircle} from '~Components/Icons';
 import {useTheme} from '~Contexts/ThemeContext';
 import {ErrorMessage} from '~Components/Error';
+import Tooltip from 'react-native-walkthrough-tooltip';
+import {InfoTooltip} from '~Components/InfoTooltip';
 
 type DateOfBirthInputProps = {
   onChange: (day: string, month: string, year: string) => void;
@@ -24,7 +25,7 @@ export const DateOfBirthInput: FC<DateOfBirthInputProps> = ({
   const dayRef = useRef<TextInput>(null);
   const monthRef = useRef<TextInput>(null);
   const yearRef = useRef<TextInput>(null);
-
+  
   const styles = useStyles();
   const theme = useTheme();
 
@@ -65,7 +66,9 @@ export const DateOfBirthInput: FC<DateOfBirthInputProps> = ({
     <View>
       <View style={styles.label}>
         <Text style={theme.fonts.inputFieldSmall}>Date of Birth</Text>
-        <IconInfoCircle size="xxxs" />
+        <InfoTooltip
+          content="The minimum age requirement for using this App is 18 years old."
+        />
       </View>
       <View style={styles.inputRow}>
         <TextInput
