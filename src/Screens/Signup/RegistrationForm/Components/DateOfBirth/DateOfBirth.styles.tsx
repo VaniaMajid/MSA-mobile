@@ -6,10 +6,10 @@ export const useStyles = () => {
 
   return StyleSheet.create({
     label: {
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        marginBottom: 10,
-        gap: theme.spacing.HGap3
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+      gap: theme.spacing.HGap3,
     },
     inputRow: {
       flexDirection: 'row',
@@ -33,7 +33,7 @@ export const useStyles = () => {
       width: 100,
     },
     errorInputContainer: {
-      borderColor: theme.colors.error, 
+      borderColor: theme.colors.error,
     },
   });
 };
