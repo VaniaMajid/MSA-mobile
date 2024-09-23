@@ -7,7 +7,7 @@ import {useTheme} from '~Contexts/ThemeContext';
 import {DropdownPicker} from '~Components/Dropdown';
 import {Toggle} from '~Components/Toggle';
 import {Button} from '~Components/Button';
-import {IconConvert, IconInfoCircle, IconUser} from '~Components/Icons';
+import {IconConvert, IconUser} from '~Components/Icons';
 import {HeightPicker} from '~Components/HeightPicker';
 import {calculateBMI} from '~Utils/bmiUtils';
 import {patientRegistrationSchema} from '~Utils/validation';
@@ -16,7 +16,8 @@ import {DateOfBirthInput} from '../DateOfBirth';
 import {PatientRegistrationFormType} from './types';
 import {useStyles} from './PatientRegistrationForm.styles';
 import {SearchableDropdown} from '~Components/SearchableDropdown';
-import { Path } from '~Navigators/routes';
+import {Path} from '~Navigators/routes';
+import {InfoTooltip} from '~Components/InfoTooltip';
 
 interface PatientRegistrationFormProps {
   navigation: any;
@@ -67,6 +68,8 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
   const [weightValue, setWeightValue] = useState<number>(0);
   const [heightUnit, setHeightUnit] = useState<string>('cm');
 
+  const [isInfoVisible, setInfoVisible] = useState(false);
+
   const [bmi, setBmi] = useState<number>(0);
 
   useEffect(() => {
@@ -84,12 +87,19 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
       dateOfBirth: data.dateOfBirth.toISOString(),
       height: `${data.height} ${heightUnit}`,
     };
-    navigation.navigate(Path.PREVIEW_FORM_SCREEN, {role: 'Patient', data: formData});
+    navigation.navigate(Path.PREVIEW_FORM_SCREEN, {
+      role: 'Patient',
+      data: formData,
+    });
   };
 
   const handleWeightChange = (text: string) => {
     const weight = parseFloat(text);
     setWeightValue(isNaN(weight) ? 0 : weight);
+  };
+
+  const toggleInfo = () => {
+    setInfoVisible(!isInfoVisible);
   };
 
   return (
@@ -227,8 +237,9 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
                     ]}>
                     Allergy
                   </Text>
-                  <IconInfoCircle size="xxxs" />
+                  <InfoTooltip content="Please use commas to separate allergies when adding multiple entries." />
                 </View>
+
                 <View style={styles.allergyToggle}>
                   <Text
                     style={[
@@ -270,23 +281,9 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
             )}
           />
 
-          {/* <Controller
+          <Controller
             name="medicalHistory"
             control={control}
-            render={({field: {onChange, value}}) => (
-              <InputField
-                title="Past Medical History"
-                placeholder="e.g. hypertension"
-                value={value}
-                onChangeText={onChange}
-                errorMessage={errors.medicalHistory?.message}
-              />
-            )}
-          /> */}
-
-          <Controller
-            name="medicalHistory" 
-            control={control} 
             render={({field: {onChange, value}}) => (
               <View style={{flex: 1}}>
                 <SearchableDropdown
@@ -296,7 +293,7 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
                     onChange(val);
                     trigger('medicalHistory');
                   }}
-                  defaultValue={value || ''} 
+                  defaultValue={value || ''}
                   items={medicalHistoryItems}
                   errorMessage={errors.medicalHistory?.message}
                 />

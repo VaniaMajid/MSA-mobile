@@ -37,6 +37,7 @@ export const useStyles = () => {
       marginTop: theme.spacing.V1,
       flexDirection: 'row',
       justifyContent: 'space-between',
+      alignItems: 'center',
     },
     allergyToggle: {
       flexDirection: 'row',
@@ -45,7 +46,6 @@ export const useStyles = () => {
     label: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 10,
       gap: theme.spacing.HGap3,
     },
     toggleText: {
