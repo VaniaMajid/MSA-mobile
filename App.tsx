@@ -12,8 +12,9 @@ import BootSplash from 'react-native-bootsplash';
 
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {AuthStack} from '~Navigators/AuthNavigator';
+import {AuthNavigator} from '~Navigators/AuthNavigator';
 import {PreAuthNavigator} from '~Navigators/PreAuthNavigator';
+import { RootNavigator } from '~Navigators/RootNavigator';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -61,8 +62,7 @@ function App(): React.JSX.Element {
   }, []);
   return (
     <SafeAreaProvider>
-      {/* <AuthStack /> */}
-      <PreAuthNavigator />
+      <RootNavigator />
     </SafeAreaProvider>
   );
 }

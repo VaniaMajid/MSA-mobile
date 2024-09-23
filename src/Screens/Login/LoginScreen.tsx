@@ -19,6 +19,7 @@ import {loginSchema} from '~Utils/validation';
 import { LoginFormType } from './types';
 import { Path } from '~Navigators/routes';
 
+
 type LoginScreenProps = StackScreenProps<PreAuthParamList>;
 
 export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
@@ -52,7 +53,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
       setLoginError('Invalid email or password');
       return;
     }
-   
+    // navigation.replace('AuthNavigator', { userRole: 'patient' });
   };
 
   useFocusEffect(

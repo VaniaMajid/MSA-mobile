@@ -1,24 +1,53 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {DrawerNavigation} from './DrawerNavigator';
+import {AuthParamList} from './AuthParamList';
+import {FC} from 'react';
+import {PatientDrawerNavigator} from './PatientNavigator';
+import {SpecialistDrawerNavigator} from './SpecialistNavigator';
 import {Path} from './routes';
 import {NotificationScreen} from '~Screens/Notification';
-import { AuthParamList } from './AuthParamList';
+import {Header} from '~Components/Header';
+import {useTheme} from '~Contexts/ThemeContext';
 const AuthStackNavigation = createStackNavigator<AuthParamList>();
-export const AuthStack = () => (
-  <NavigationContainer>
-    <AuthStackNavigation.Navigator initialRouteName="Drawer">
-      <AuthStackNavigation.Screen
-        name="Drawer"
-        component={DrawerNavigation}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <AuthStackNavigation.Screen
-        name={Path.NOTIFICATION_SCREEN}
-        component={NotificationScreen}
-      />
-    </AuthStackNavigation.Navigator>
-  </NavigationContainer>
-);
+
+interface AuthNavProps {
+  userRole: string;
+}
+export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
+  const theme = useTheme();
+  return (
+      <AuthStackNavigation.Navigator
+        screenOptions={{
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            ...theme.fonts.uiLabelSemiBold,
+          },
+        }}>
+        {userRole === 'patient' ? (
+          <AuthStackNavigation.Screen
+            name="PatientDrawer"
+            component={PatientDrawerNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+        ) : (
+          <AuthStackNavigation.Screen
+            name="SpecialistDrawer"
+            component={SpecialistDrawerNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+        )}
+        <AuthStackNavigation.Screen
+          name={Path.NOTIFICATION_SCREEN}
+          component={NotificationScreen}
+          options={{
+            title: 'Notifications',
+            headerLeft: ({}) => <Header />,
+          }}
+        />
+      </AuthStackNavigation.Navigator>
+  );
+};

@@ -24,7 +24,6 @@ const PreAuthStack = createStackNavigator<PreAuthParamList>();
 export const PreAuthNavigator = () => {
   const theme = useTheme();
   return (
-    <NavigationContainer>
       <PreAuthStack.Navigator
         initialRouteName="Splash"
         screenOptions={{
@@ -111,6 +110,5 @@ export const PreAuthNavigator = () => {
           }}
         />
       </PreAuthStack.Navigator>
-    </NavigationContainer>
   );
 };

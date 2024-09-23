@@ -11,4 +11,7 @@ export * from './OtpInput';
 export * from './Error'
 export * from './InfoRow';
 export * from './SearchableDropdown';
+export * from './CustomHeader';
+export * from './IconContainer';
+export * from './TabBarIcon';
 export * from './InfoTooltip';

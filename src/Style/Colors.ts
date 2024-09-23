@@ -2,6 +2,7 @@ const colors = {
   transparent: 'rgba(0,0,0,0)',
   primaryColor: '#613CF2',
   secondaryColor: '#b8a8f9',
+  secondaryLight: '#613CF21F',
   darkGray: '#4B4B4B',
   darkBlue: '#132A4F',
   error: '#EB3F3A',

@@ -13,10 +13,12 @@ export enum Path {
   
   /// Auth Stack
   BOTTOM_TABS = 'BottomTabs',
-  HOME_SCREEN = 'Home',
-  FEEDBACK_SCREEN = 'Feedback',
-  DASHBOARD_SCREEN = 'Dashboard',
-  MEDICAL_INFO_SCREEN = 'MedicalInfo',
+  HOME_STACK= 'HomeStack',
   NOTIFICATION_SCREEN = 'Notification',
+  HOME_SCREEN = 'Home',
+  MEDICAL_INFO_SCREEN = 'MedicalInfo',
+  APPINIONS_SCREEN = 'Appinions',
+  PROFILE_SCREEN = 'Profile',
+  FEEDBACK_SCREEN = 'Feedback',
   ABOUT_SCREEN = 'About',
 }

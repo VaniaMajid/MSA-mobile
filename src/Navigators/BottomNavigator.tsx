@@ -15,9 +15,9 @@ export const BottomTabNavigation = () => {
   const theme = useTheme();
   return (
     <BottomTabNavigator.Navigator
+      detachInactiveScreens={false}
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
-          let iconName;
+        tabBarIcon: ({focused}) => {
           if (route.name === 'Home') {
             return focused ? (
               <IconHomeActive color={theme.colors.primaryColor} size="xxs" />
@@ -25,6 +25,7 @@ export const BottomTabNavigation = () => {
               <IconHomeInActive color={theme.colors.accentColor} size="xxs" />
             );
           } else if (route.name === 'MedicalInfo') {
+            console.log(focused)
             return focused ? (
               <IconMedicalInfoActive
                 color={theme.colors.primaryColor}
