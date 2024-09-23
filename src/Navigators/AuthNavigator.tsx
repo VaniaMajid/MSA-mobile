@@ -16,38 +16,45 @@ interface AuthNavProps {
 export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
   const theme = useTheme();
   return (
-      <AuthStackNavigation.Navigator
-        screenOptions={{
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            ...theme.fonts.uiLabelSemiBold,
-          },
-        }}>
-        {userRole === 'patient' ? (
-          <AuthStackNavigation.Screen
-            name="PatientDrawer"
-            component={PatientDrawerNavigator}
-            options={{
-              headerShown: false,
-            }}
-          />
-        ) : (
-          <AuthStackNavigation.Screen
-            name="SpecialistDrawer"
-            component={SpecialistDrawerNavigator}
-            options={{
-              headerShown: false,
-            }}
-          />
-        )}
+    <AuthStackNavigation.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerTitleStyle: {
+          ...theme.fonts.uiLabelSemiBold,
+        },
+        headerStyle: {
+          shadowColor: theme.colors.darkGray,
+          shadowOffset: { width: 0, height: 2 }, 
+          shadowOpacity: 0.25, 
+          shadowRadius: 3.84, 
+          elevation: 5, 
+        },
+      }}>
+      {userRole === 'patient' ? (
         <AuthStackNavigation.Screen
-          name={Path.NOTIFICATION_SCREEN}
-          component={NotificationScreen}
+          name="PatientDrawer"
+          component={PatientDrawerNavigator}
           options={{
-            title: 'Notifications',
-            headerLeft: ({}) => <Header />,
+            headerShown: false,
           }}
         />
-      </AuthStackNavigation.Navigator>
+      ) : (
+        <AuthStackNavigation.Screen
+          name="SpecialistDrawer"
+          component={SpecialistDrawerNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+      )}
+      <AuthStackNavigation.Screen
+        name={Path.NOTIFICATION_SCREEN}
+        component={NotificationScreen}
+        options={{
+          title: 'Notifications',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+    </AuthStackNavigation.Navigator>
   );
 };
