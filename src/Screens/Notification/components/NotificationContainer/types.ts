@@ -1,10 +1,12 @@
+import { ImageSourcePropType } from "react-native";
+
 export type NotificationContainerProps = {
     title: string;
     time: string;
     subtext: string;
     showBadge: boolean;
     icon?: JSX.Element; 
-    imageSource?: any; 
+    imageSource?: ImageSourcePropType; 
     backgroundColor?: string;
   }
   

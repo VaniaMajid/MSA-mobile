@@ -1,7 +1,7 @@
-import { ImageStyle } from "react-native";
+import { ImageSourcePropType, ImageStyle } from "react-native";
 
 export type CustomImageProps = {
-    source: any; 
+    source: ImageSourcePropType; 
     style?: ImageStyle;
     showBadge?: boolean;
   }
