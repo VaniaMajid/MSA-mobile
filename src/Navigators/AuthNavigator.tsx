@@ -1,4 +1,3 @@
-import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthParamList} from './AuthParamList';
 import {FC} from 'react';
@@ -18,9 +17,11 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
   return (
     <AuthStackNavigation.Navigator
       screenOptions={{
+        
         headerTitleAlign: 'center',
         headerTitleStyle: {
           ...theme.fonts.uiLabelSemiBold,
+          color: theme.colors.darkBlue
         },
         headerStyle: {
           shadowColor: theme.colors.darkGray,

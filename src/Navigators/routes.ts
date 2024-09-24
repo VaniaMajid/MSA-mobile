@@ -19,6 +19,11 @@ export enum Path {
   MEDICAL_INFO_SCREEN = 'MedicalInfo',
   APPINIONS_SCREEN = 'Appinions',
   PROFILE_SCREEN = 'Profile',
-  FEEDBACK_SCREEN = 'Feedback',
   ABOUT_SCREEN = 'About',
+  TERMS_SCREEN = 'Terms',
+  PRIVACY_POLICY_SCREEN = 'PrivacyPolicy',
+  FAQS_SCREEN = 'Faqs',
+  PRICING_SCREEN = 'Pricing',
+  FEEDBACK_SCREEN = 'Feedback',
+ 
 }

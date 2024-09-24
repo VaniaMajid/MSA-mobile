@@ -23,6 +23,7 @@ import {ReactComponent as IconMedicalInfoInActiveSvg} from '~Assets/Icons/medica
 import {ReactComponent as IconNeurologySvg} from '~Assets/Icons/neurology.svg';
 import {ReactComponent as IconNotificationSvg} from '~Assets/Icons/notification.svg';
 import {ReactComponent as IconPatientSvg} from '~Assets/Icons/patient.svg';
+import {ReactComponent as IconPaymentSvg} from '~Assets/Icons/payment.svg';
 import {ReactComponent as IconPricingSvg} from '~Assets/Icons/pricing.svg';
 import {ReactComponent as IconPrivacyPolicySvg} from '~Assets/Icons/privacyPolicy.svg';
 import {ReactComponent as IconProfileActiveSvg} from '~Assets/Icons/profileActive.svg';
@@ -61,6 +62,7 @@ export const IconMedicalInfoInActive = makeIconWeb(IconMedicalInfoInActiveSvg);
 export const IconNeurology = makeIconWeb(IconNeurologySvg);
 export const IconNotification = makeIconWeb(IconNotificationSvg);
 export const IconPatient = makeIconWeb(IconPatientSvg);
+export const IconPayment = makeIconWeb(IconPaymentSvg);
 export const IconPricing = makeIconWeb(IconPricingSvg);
 export const IconPrivacyPolicy = makeIconWeb(IconPrivacyPolicySvg);
 export const IconProfileActive = makeIconWeb(IconProfileActiveSvg);

@@ -15,3 +15,4 @@ export * from './CustomHeader';
 export * from './IconContainer';
 export * from './TabBarIcon';
 export * from './InfoTooltip';
+export * from './CustomDrawerContent'

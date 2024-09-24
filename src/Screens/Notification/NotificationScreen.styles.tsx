@@ -6,10 +6,15 @@ export const useStyles = () => {
 
   return StyleSheet.create({
     container: {
-      flex: 1,
+      flexGrow: 1,
       backgroundColor: theme.colors.white,
-      padding: theme.spacing.H5,
+      paddingVertical: theme.spacing.H5,
+      paddingHorizontal: theme.spacing.H6,
       gap: theme.spacing.HGap2,
+    },
+    label: {
+      ...theme.fonts.notificationSubtext,
+      color: theme.colors.lightGray1,
     },
   });
 };

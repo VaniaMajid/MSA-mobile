@@ -117,7 +117,7 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
                 placeholder="First name"
                 value={value}
                 onChangeText={onChange}
-                leftIcon={<IconUser size="ss" />}
+                leftIcon={<IconUser size="ss" color={theme.colors.accentColor}/>}
                 errorMessage={errors.firstName?.message}
               />
             )}
@@ -132,7 +132,7 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
                 placeholder="Last name"
                 value={value}
                 onChangeText={onChange}
-                leftIcon={<IconUser size="ss" />}
+                leftIcon={<IconUser size="ss" color={theme.colors.accentColor}/>}
                 errorMessage={errors.lastName?.message}
               />
             )}

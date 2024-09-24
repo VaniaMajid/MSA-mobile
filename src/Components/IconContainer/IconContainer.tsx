@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {View, ViewStyle, Text, TouchableOpacity} from 'react-native';
 import {IconContainerProps} from './types';
-import { Colors } from '~Style/index';
-import { useStyles } from './IconContainer.styles';
+import {Colors} from '~Style/index';
+import {useStyles} from './IconContainer.styles';
 
 export const IconContainer: FC<IconContainerProps> = ({
   height = 70,
@@ -10,19 +10,33 @@ export const IconContainer: FC<IconContainerProps> = ({
   backgroundColor = Colors.secondaryLight,
   icon,
   label,
+  isInteractive = true,
+  showBadge = false
 }) => {
-    const styles = useStyles();
+  const styles = useStyles();
+
   const containerStyle: ViewStyle = {
     height,
     width,
     backgroundColor,
-    ...styles.containerIcon
+    ...styles.containerIcon,
   };
 
-  return(
-    <TouchableOpacity style={styles.container}>
+  const Content = (
+    <>
       <View style={containerStyle}>{icon}</View>
-      {label && <Text style={styles.label} numberOfLines={1} ellipsizeMode="tail">{label}</Text>}
-    </TouchableOpacity>
-  )
+      {label && (
+        <Text style={styles.label} numberOfLines={1} ellipsizeMode="tail">
+          {label}
+        </Text>
+      )}
+      {showBadge && <View style={styles.badge} />}
+    </>
+  );
+
+  return isInteractive ? (
+    <TouchableOpacity style={styles.container}>{Content}</TouchableOpacity>
+  ) : (
+    <View style={styles.container}>{Content}</View>
+  );
 };
