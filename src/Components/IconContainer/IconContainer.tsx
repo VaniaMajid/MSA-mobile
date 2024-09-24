@@ -11,7 +11,8 @@ export const IconContainer: FC<IconContainerProps> = ({
   icon,
   label,
   isInteractive = true,
-  showBadge = false
+  showBadge = false,
+  onPress
 }) => {
   const styles = useStyles();
 
@@ -35,7 +36,7 @@ export const IconContainer: FC<IconContainerProps> = ({
   );
 
   return isInteractive ? (
-    <TouchableOpacity style={styles.container}>{Content}</TouchableOpacity>
+    <TouchableOpacity style={styles.container} onPress={onPress}>{Content}</TouchableOpacity>
   ) : (
     <View style={styles.container}>{Content}</View>
   );

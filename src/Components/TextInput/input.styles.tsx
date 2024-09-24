@@ -16,14 +16,12 @@ export const useStyles = () => {
       alignItems: 'center',
       borderWidth: 1,
       borderColor: theme.colors.accentColor,
-      backgroundColor: theme.colors.white,
       borderRadius: 6,
       padding: 10,
       gap: theme.spacing.HGap3,
     },
     input: {
       flex: 1,
-      maxHeight: 40
     },
     disabledInputContainer: { 
       borderColor: theme.colors.disabled, 

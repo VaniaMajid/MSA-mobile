@@ -21,5 +21,18 @@ export const useStyles = () => {
       width: '28%',
       marginBottom: theme.spacing.V1,
     },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    },
+    modalContent: {
+      width: '80%',
+      padding: 20,
+      backgroundColor: 'white',
+      borderRadius: 10,
+      alignItems: 'center',
+    },    
   });
 };

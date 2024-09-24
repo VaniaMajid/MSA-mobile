@@ -7,6 +7,7 @@ import {Path} from './routes';
 import {NotificationScreen} from '~Screens/Notification';
 import {Header} from '~Components/Header';
 import {useTheme} from '~Contexts/ThemeContext';
+import { AppinionRequestScreen } from '~Screens/AppinionRequest';
 const AuthStackNavigation = createStackNavigator<AuthParamList>();
 
 interface AuthNavProps {
@@ -53,6 +54,14 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
         component={NotificationScreen}
         options={{
           title: 'Notifications',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name={Path.APPINION_REQUEST_SCREEN}
+        component={AppinionRequestScreen}
+        options={{
+          title: 'Query',
           headerLeft: ({}) => <Header />,
         }}
       />

@@ -14,8 +14,10 @@ export enum Path {
   /// Auth Stack
   BOTTOM_TABS = 'BottomTabs',
   HOME_STACK= 'HomeStack',
-  NOTIFICATION_SCREEN = 'Notification',
   HOME_SCREEN = 'Home',
+  NOTIFICATION_SCREEN = 'Notification',
+  APPINION_REQUEST_SCREEN = 'AppinionRequest',
+  APPINION_REQUEST_PREVIEW_SCREEN = 'AppinionRequestPreview',
   MEDICAL_INFO_SCREEN = 'MedicalInfo',
   APPINIONS_SCREEN = 'Appinions',
   PROFILE_SCREEN = 'Profile',

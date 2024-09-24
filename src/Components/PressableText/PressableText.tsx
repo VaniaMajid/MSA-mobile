@@ -7,6 +7,7 @@ interface PressableTextProps {
   style?: TextStyle | TextStyle[];
   containerStyle?: ViewStyle;
   disabled?: boolean; 
+  icon?: React.ReactNode; 
 }
 
 export const PressableText: FC<PressableTextProps> = ({
@@ -15,6 +16,7 @@ export const PressableText: FC<PressableTextProps> = ({
   style,
   containerStyle,
   disabled = false, 
+  icon
 }) => {
   return (
     <TouchableOpacity
@@ -22,6 +24,7 @@ export const PressableText: FC<PressableTextProps> = ({
       style={[containerStyle, disabled ? { opacity: 0.5 } : {}]} 
       disabled={disabled} 
     >
+      {icon && icon}
       <Text style={style}>{text}</Text>
     </TouchableOpacity>
   );

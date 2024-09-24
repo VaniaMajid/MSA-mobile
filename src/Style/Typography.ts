@@ -17,7 +17,7 @@ export const FontSize = {
   subtextBlack: hp('2.2'), // 18px
   inputFieldLabelText: hp('2.4'), // 18px
   uiLabelSemiBold: hp('2.3'), // 17px
-  popupCTAText: hp('2.3'), // 17px
+  popupCTAText: hp('2.2'), // 17px
   paragraphRegular: hp('2.2'), // 16px
   paragraphBold: hp('2.2'), // 16px
   paragraphSemiBold: hp('2.2'), // 16px
