@@ -20,7 +20,6 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
 
       <TouchableOpacity
         onPress={() => {
-          console.log('Notification icon pressed');
           navigation.navigate(Path.NOTIFICATION_SCREEN);
         }}
         style={styles.notificationIcon}>

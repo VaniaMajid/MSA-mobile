@@ -27,7 +27,7 @@ export const FontSize = {
   labelMedium: hp('2.2'), // 16px
   paragraph: hp('2.1'), // 15px
   chatText: hp('2.1'), // 15px
-  notificationHeader: hp('2.1'), // 15px
+  notificationHeader: hp('2.0'), // 15px
   linkBold: hp('1.9'), // 14px
   paragraphSmallSemiBold: hp('1.9'), // 14px
   paragraphRegularSmall: hp('1.9'), // 14px

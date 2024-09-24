@@ -18,5 +18,16 @@ export const useStyles = () => {
       ...theme.fonts.inputFieldSmall,
       textAlign: 'center',
     },
+    badge: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      width: 10,
+      height: 10,
+      borderRadius: 5,
+      backgroundColor: theme.colors.error, 
+      borderWidth: 1,
+      borderColor: 'white',
+    },
   });
 };

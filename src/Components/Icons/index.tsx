@@ -26,6 +26,7 @@ import IconMedicalInfoInActiveSvg from '~Assets/Icons/medicalInfoInActive.svg';
 import IconNeurologySvg from '~Assets/Icons/neurology.svg';
 import IconNotificationSvg from '~Assets/Icons/notification.svg';
 import IconPatientSvg from '~Assets/Icons/patient.svg';
+import IconPaymentSvg from '~Assets/Icons/payment.svg';
 import IconPricingSvg from '~Assets/Icons/pricing.svg';
 import IconPrivacyPolicySvg from '~Assets/Icons/privacyPolicy.svg';
 import IconProfileActiveSvg from '~Assets/Icons/profileActive.svg';
@@ -512,6 +513,27 @@ export const IconPatient: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconPatientSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconPayment: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-payment',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconPaymentSvg
       color={color}
       height={iconSize}
       width={iconSize}
