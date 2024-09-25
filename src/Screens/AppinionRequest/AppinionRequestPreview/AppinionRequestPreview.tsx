@@ -121,37 +121,39 @@ export const AppinionRequestPreviewScreen: FC<
               {data.query}
             </Text>
           </View>
-          <View style={styles.question}>
-            <Heading title="Attachments" style={[theme.fonts.linkSemiBold]} />
-            <View style={styles.attachments}>
-              {data.attachments.map(
-                (attachment: DocumentPickerResponse, index: number) => (
-                  <View key={index}>
-                    {attachment.type?.startsWith('image/') ? (
-                      <Image
-                        source={{uri: attachment.uri}}
-                        style={styles.attachmentImage}
-                      />
-                    ) : (
-                      <View style={styles.docAttachment}>
-                        <IconDocument
-                          size="s"
-                          color={theme.colors.primaryColor}
+          {data.attachments && data.attachments.some((attachment: DocumentPickerResponse | null) => attachment) && (
+            <View style={styles.question}>
+              <Heading title="Attachments" style={[theme.fonts.linkSemiBold]} />
+              <View style={styles.attachments}>
+                {data.attachments
+                  .filter((attachment: DocumentPickerResponse | null) => attachment !== null)
+                  .map((attachment: DocumentPickerResponse, index: number) => (
+                    <View key={index}>
+                      {attachment.type?.startsWith('image/') ? (
+                        <Image
+                          source={{uri: attachment.uri}}
+                          style={styles.attachmentImage}
                         />
-                        <Text
-                          style={[
-                            theme.fonts.filterText,
-                            {textAlign: 'center'},
-                          ]}>
-                          {attachment.name}
-                        </Text>
-                      </View>
-                    )}
-                  </View>
-                ),
-              )}
+                      ) : (
+                        <View style={styles.docAttachment}>
+                          <IconDocument
+                            size="s"
+                            color={theme.colors.primaryColor}
+                          />
+                          <Text
+                            style={[
+                              theme.fonts.filterText,
+                              {textAlign: 'center'},
+                            ]}>
+                            {attachment.name}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
+                  ))}
+              </View>
             </View>
-          </View>
+          )}
         </View>
       </ScrollView>
       <View style={styles.buttons}>
