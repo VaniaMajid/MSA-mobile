@@ -25,13 +25,13 @@ export const useStyles = () => {
       gap: theme.spacing.HGap1,
     },
     attachmentImage: {
-      width: 170,
-      height: 150,
+      width: 110,
+      height: 110,
       borderRadius: 6,
     },
     docAttachment: {
-      width: 170,
-      height: 150,
+      width: 110,
+      height: 110,
       borderRadius: 6,
       borderColor: theme.colors.accentColor,
       borderWidth: 1,
@@ -44,6 +44,10 @@ export const useStyles = () => {
       height: 100,
       backgroundColor: theme.colors.grayBg,
       borderRadius: 100,
+    },
+    removeButton: {
+      paddingVertical: theme.spacing.V1,
+      paddingHorizontal: theme.spacing.H1,
     },
     addButtonContainer: {
         gap: theme.spacing.HGap3,
@@ -58,6 +62,14 @@ export const useStyles = () => {
         color: theme.colors.primaryColor,
         textDecorationLine: 'underline',
         marginTop: theme.spacing.V2,
+      },
+      iconStyle: {
+        borderRadius: 20
+      },
+      radioButtons: {
+        flexDirection: 'row',
+        gap: theme.spacing.HGap1,
       }
+
   });
 };

@@ -19,7 +19,8 @@ import {PressableText} from '~Components/PressableText';
 import {Heading} from '~Components/Heading';
 import {CustomModal} from '~Components/CustomModal';
 import {Path} from '~Navigators/routes';
-import { Questions } from '../questions';
+import {Questions} from '../questions';
+import {Checkbox} from '~Components/Checkbox';
 
 type AppinionRequestScreenProps = StackScreenProps<AuthParamList>;
 
@@ -55,6 +56,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
     (DocumentPickerResponse | null)[]
   >([null, null]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [appinionModalVisible, setAppinionModalVisible] = useState(false);
 
   const handlePreviousStep = () => {
     setCurrentStep(prevStep => (prevStep > 1 ? prevStep - 1 : prevStep));
@@ -146,6 +148,53 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
         <View style={styles.formContainer}>
           {currentStep === 1 && (
             <>
+              <View>
+                <Text
+                  style={[
+                    theme.fonts.inputFieldSmall,
+                    {marginBottom: theme.spacing.V1},
+                  ]}>
+                  Who is this Appinion for?
+                </Text>
+                <View style={styles.radioButtons}>
+                  <Checkbox
+                    text={
+                      <Text
+                        style={[theme.fonts.inputFieldSmall, {marginLeft: 10}]}>
+                        For myself
+                      </Text>
+                    }
+                    isChecked={true}
+                    onPress={() => {}}
+                    iconStyle={styles.iconStyle}
+                    lockChecked={true}
+                  />
+
+                  <Checkbox
+                    text={
+                      <Text
+                        style={[theme.fonts.inputFieldSmall, {marginLeft: 10}]}>
+                        Someone Else
+                      </Text>
+                    }
+                    isChecked={false}
+                    onPress={() => setAppinionModalVisible(true)}
+                    iconStyle={styles.iconStyle}
+                  />
+                  <CustomModal
+                    visible={appinionModalVisible}
+                    header="Appinion For Someone Else?"
+                    description={
+                      'The Appinion requests on this App establish a medical record for the logged in client.  It is therefore essential that Appinions are sought for the User only and not for third parties.\n' +
+                      '\nPlease log out from the current session to create an account for a different user.'
+                    }
+                    descriptionStyle={{textAlign: 'center'}}
+                    button1Text="Acknowledge"
+                    button1Handler={() => setAppinionModalVisible(false)}
+                  />
+                </View>
+              </View>
+
               <Controller
                 name="problem"
                 control={control}
@@ -305,14 +354,13 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                                 </Text>
                               </View>
                             )}
-                            <View style={{marginTop: theme.spacing.H1}}>
-                              <PressableText
-                                text="Remove"
+                            <View style={{marginTop: theme.spacing.V1}}>
+                              <Button
                                 onPress={() => removeAttachment(index)}
-                                style={[
-                                  theme.fonts.subtextSmall,
-                                  {color: theme.colors.primaryColor},
-                                ]}
+                                variant="outline"
+                                title="Remove"
+                                textStyle={theme.fonts.paragraphSmallSemiBold}
+                                style={styles.removeButton}
                               />
                             </View>
                           </>
