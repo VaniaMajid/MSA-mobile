@@ -5,8 +5,8 @@ export type AuthParamList = {
     BottomTabs: undefined;
     Home: undefined;
     Notification: undefined;
-    AppinionRequest: undefined;
-    AppinionRequestPreview: undefined;
+    AppinionRequest: { speciality: string};
+    AppinionRequestPreview: { speciality: string, data: any};
     MedicalInfo: undefined;
     Appinions: undefined;
     Profile: undefined;

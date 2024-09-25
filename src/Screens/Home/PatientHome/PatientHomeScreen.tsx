@@ -49,8 +49,8 @@ export const PatientHomeScreen: FC<PatientHomeScreenProps> = ({navigation}) => {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedSpecialty, setSelectedSpecialty] = useState<string | null>(
-    null,
+  const [selectedSpecialty, setSelectedSpecialty] = useState<string>(
+    '',
   );
 
   const filteredSpecialties = specialties.filter(specialty =>
@@ -64,7 +64,7 @@ export const PatientHomeScreen: FC<PatientHomeScreenProps> = ({navigation}) => {
 
   const handleAcknowledgePress = () => {
     setModalVisible(false);
-    navigation.navigate(Path.APPINION_REQUEST_SCREEN);
+    navigation.navigate(Path.APPINION_REQUEST_SCREEN, { speciality: selectedSpecialty || '' });
   };
 
   return (

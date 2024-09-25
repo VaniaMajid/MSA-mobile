@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {ScrollView, View, Image, Text, TouchableOpacity} from 'react-native';
+import {ScrollView, View, Image, Text} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useStyles} from './AppinionRequestScreen.styles';
 import {AuthParamList} from '~Navigators/AuthParamList';
@@ -14,15 +14,18 @@ import {Button} from '~Components/Button';
 import DocumentPicker, {
   DocumentPickerResponse,
 } from 'react-native-document-picker';
-import {IconAbout, IconAdd, IconDocument} from '~Components/Icons';
+import {IconAdd, IconDocument} from '~Components/Icons';
 import {PressableText} from '~Components/PressableText';
 import {Heading} from '~Components/Heading';
 import {CustomModal} from '~Components/CustomModal';
+import {Path} from '~Navigators/routes';
+import { Questions } from '../questions';
 
 type AppinionRequestScreenProps = StackScreenProps<AuthParamList>;
 
 export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
   navigation,
+  route,
 }) => {
   const styles = useStyles();
   const theme = useTheme();
@@ -113,12 +116,22 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
     setAttachments(updatedAttachments);
   };
 
+  const speciality = route?.params?.speciality;
+
+  if (!speciality) {
+    throw new Error('Role and data are required');
+  }
+
   const onSubmit = (data: AppinionRequestFormType) => {
     const finalData = {
       ...data,
       attachments,
     };
     console.log(finalData);
+    navigation.navigate(Path.APPINION_REQUEST_PREVIEW_SCREEN, {
+      speciality: speciality,
+      data: finalData,
+    });
   };
 
   return (
@@ -138,7 +151,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                 control={control}
                 render={({field: {onChange, value}}) => (
                   <InputField
-                    title="What is your main problem?"
+                    title={Questions.QUESTION_1}
                     value={value}
                     onChangeText={text => {
                       onChange(text);
@@ -154,7 +167,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                 control={control}
                 render={({field: {onChange, value}}) => (
                   <InputField
-                    title="How long has it been going on?"
+                    title={Questions.QUESTION_2}
                     value={value}
                     onChangeText={text => {
                       onChange(text);
@@ -170,7 +183,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                 control={control}
                 render={({field: {onChange, value}}) => (
                   <InputField
-                    title="Have you noticed any associated symptoms?"
+                    title={Questions.QUESTION_3}
                     value={value}
                     onChangeText={text => {
                       onChange(text);
@@ -190,7 +203,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                 control={control}
                 render={({field: {onChange, value}}) => (
                   <InputField
-                    title="Have any tests been done so far? If so what were the results?"
+                    title={Questions.QUESTION_4}
                     value={value}
                     onChangeText={text => {
                       onChange(text);
@@ -206,7 +219,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                 control={control}
                 render={({field: {onChange, value}}) => (
                   <InputField
-                    title="What do you think is going on?"
+                    title={Questions.QUESTION_5}
                     value={value}
                     onChangeText={text => {
                       onChange(text);
@@ -222,7 +235,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                 control={control}
                 render={({field: {onChange, value}}) => (
                   <InputField
-                    title="What are your concerns?"
+                    title={Questions.QUESTION_6}
                     value={value}
                     onChangeText={text => {
                       onChange(text);
@@ -242,7 +255,7 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                 control={control}
                 render={({field: {onChange, value}}) => (
                   <InputField
-                    title="What would you like to know from the specialist?"
+                    title={Questions.QUESTION_6}
                     value={value}
                     onChangeText={text => {
                       onChange(text);
