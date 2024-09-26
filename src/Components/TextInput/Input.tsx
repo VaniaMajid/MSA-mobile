@@ -16,6 +16,7 @@ export const InputField = forwardRef<TextInput, InputFieldProps>(
       rightIcon,
       disabled = false,
       errorMessage = '',
+      multiline,
       ...rest
     },
     ref
@@ -34,6 +35,7 @@ export const InputField = forwardRef<TextInput, InputFieldProps>(
         <View
           style={[
             styles.inputContainer,
+            multiline ? { height: 110 ,} : {},
             disabled ? styles.disabledInputContainer : {},
             errorMessage ? styles.errorInputContainer : {},
             isFocused
@@ -44,8 +46,12 @@ export const InputField = forwardRef<TextInput, InputFieldProps>(
           {leftIcon && leftIcon}
           <TextInput
             ref={ref}
-            style={[theme.fonts.subtextSmall, styles.input]}
-            multiline={false}
+            style={[
+              theme.fonts.subtextSmall,
+              styles.input,
+              multiline ? { height: '100%', textAlignVertical: 'top' } : {},
+            ]}
+            multiline={multiline}
             placeholder={placeholder}
             placeholderTextColor={
               disabled ? theme.colors.disabled : theme.colors.accentColor

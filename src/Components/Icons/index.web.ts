@@ -1,13 +1,16 @@
 //  This file is auto-generated and read-only
 import {makeIconWeb} from './utils/makeIconWeb';
 import {ReactComponent as IconAboutSvg} from '~Assets/Icons/about.svg';
+import {ReactComponent as IconAddSvg} from '~Assets/Icons/add.svg';
 import {ReactComponent as IconAppinionsActiveSvg} from '~Assets/Icons/appinionsActive.svg';
 import {ReactComponent as IconAppinionsInActiveSvg} from '~Assets/Icons/appinionsInActive.svg';
 import {ReactComponent as IconArrowDownSvg} from '~Assets/Icons/arrowDown.svg';
 import {ReactComponent as IconCardiologySvg} from '~Assets/Icons/cardiology.svg';
 import {ReactComponent as IconChevronleftSvg} from '~Assets/Icons/chevronleft.svg';
 import {ReactComponent as IconConvertSvg} from '~Assets/Icons/convert.svg';
+import {ReactComponent as IconCrossSvg} from '~Assets/Icons/cross.svg';
 import {ReactComponent as IconDermatologySvg} from '~Assets/Icons/dermatology.svg';
+import {ReactComponent as IconDocumentSvg} from '~Assets/Icons/document.svg';
 import {ReactComponent as IconEmailSvg} from '~Assets/Icons/email.svg';
 import {ReactComponent as IconEyeSvg} from '~Assets/Icons/eye.svg';
 import {ReactComponent as IconEyeHideSvg} from '~Assets/Icons/eyeHide.svg';
@@ -40,13 +43,16 @@ import {ReactComponent as IconVerifySvg} from '~Assets/Icons/verify.svg';
 export * from './props';
 
 export const IconAbout = makeIconWeb(IconAboutSvg);
+export const IconAdd = makeIconWeb(IconAddSvg);
 export const IconAppinionsActive = makeIconWeb(IconAppinionsActiveSvg);
 export const IconAppinionsInActive = makeIconWeb(IconAppinionsInActiveSvg);
 export const IconArrowDown = makeIconWeb(IconArrowDownSvg);
 export const IconCardiology = makeIconWeb(IconCardiologySvg);
 export const IconChevronleft = makeIconWeb(IconChevronleftSvg);
 export const IconConvert = makeIconWeb(IconConvertSvg);
+export const IconCross = makeIconWeb(IconCrossSvg);
 export const IconDermatology = makeIconWeb(IconDermatologySvg);
+export const IconDocument = makeIconWeb(IconDocumentSvg);
 export const IconEmail = makeIconWeb(IconEmailSvg);
 export const IconEye = makeIconWeb(IconEyeSvg);
 export const IconEyeHide = makeIconWeb(IconEyeHideSvg);

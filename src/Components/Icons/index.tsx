@@ -4,13 +4,16 @@ import {IconProps} from './props';
 import {getSize} from './utils/getSize';
 
 import IconAboutSvg from '~Assets/Icons/about.svg';
+import IconAddSvg from '~Assets/Icons/add.svg';
 import IconAppinionsActiveSvg from '~Assets/Icons/appinionsActive.svg';
 import IconAppinionsInActiveSvg from '~Assets/Icons/appinionsInActive.svg';
 import IconArrowDownSvg from '~Assets/Icons/arrowDown.svg';
 import IconCardiologySvg from '~Assets/Icons/cardiology.svg';
 import IconChevronleftSvg from '~Assets/Icons/chevronleft.svg';
 import IconConvertSvg from '~Assets/Icons/convert.svg';
+import IconCrossSvg from '~Assets/Icons/cross.svg';
 import IconDermatologySvg from '~Assets/Icons/dermatology.svg';
+import IconDocumentSvg from '~Assets/Icons/document.svg';
 import IconEmailSvg from '~Assets/Icons/email.svg';
 import IconEyeSvg from '~Assets/Icons/eye.svg';
 import IconEyeHideSvg from '~Assets/Icons/eyeHide.svg';
@@ -51,6 +54,27 @@ export const IconAbout: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconAboutSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconAdd: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-add',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconAddSvg
       color={color}
       height={iconSize}
       width={iconSize}
@@ -189,6 +213,27 @@ export const IconConvert: FC<IconProps> = ({
     />
   );
 };
+export const IconCross: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-cross',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCrossSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
 export const IconDermatology: FC<IconProps> = ({
   color = '#000000',
   size = 'xxs',
@@ -198,6 +243,27 @@ export const IconDermatology: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconDermatologySvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconDocument: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-document',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconDocumentSvg
       color={color}
       height={iconSize}
       width={iconSize}

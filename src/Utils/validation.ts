@@ -137,3 +137,14 @@ export const specialistRegistrationSchema = Yup.object().shape({
     
     speciality: Yup.string().required('Speciality is required'),
 });
+
+export const AppinionRequestSchema = Yup.object().shape({
+  problem: Yup.string().required('Please specify the problem'),
+  problemTime: Yup.string().required('Please specify how long the problem has been going for'),
+  associatedSyptoms: Yup.string().required('Please specify associated symptoms'),
+  testResults: Yup.string().required('Please specify test results'),
+  goingOn: Yup.string().required('Please tell what you think is going on'),
+  concerns: Yup.string().required('Please specify your concerns'),
+  query: Yup.string().required('Please specify your query for specialist'),
+  attachments: Yup.array().optional()
+});

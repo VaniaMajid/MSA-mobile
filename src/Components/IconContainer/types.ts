@@ -6,4 +6,5 @@ export type IconContainerProps = {
     label?: string;
     isInteractive?: boolean,
     showBadge?: boolean,
+    onPress?: () => void; 
   }

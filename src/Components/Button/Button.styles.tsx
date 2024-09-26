@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {useTheme} from '~Contexts/ThemeContext';
 
-export const useStyles = (variant: 'outline' | 'filled') => {
+export const useStyles = (variant: 'outline' | 'filled', disabled: boolean) => {
   const theme = useTheme();
 
   const styles = {
@@ -9,7 +9,7 @@ export const useStyles = (variant: 'outline' | 'filled') => {
       button: {
         backgroundColor: theme.colors.white,
         borderWidth: 1,
-        borderColor: theme.colors.primaryColor,
+        borderColor: disabled? theme.colors.secondaryColor: theme.colors.primaryColor,
         paddingVertical: 15,
         paddingHorizontal: 25,
         borderRadius: 6,
@@ -17,12 +17,12 @@ export const useStyles = (variant: 'outline' | 'filled') => {
         justifyContent: 'center',
       },
       text: {
-        color: theme.colors.primaryColor,
+        color: disabled? theme.colors.secondaryColor: theme.colors.primaryColor,
       },
     },
     filled: {
       button: {
-        backgroundColor: theme.colors.primaryColor,
+        backgroundColor: disabled? theme.colors.secondaryColor: theme.colors.primaryColor,
         paddingVertical: 15,
         paddingHorizontal: 25,
         borderRadius: 6,

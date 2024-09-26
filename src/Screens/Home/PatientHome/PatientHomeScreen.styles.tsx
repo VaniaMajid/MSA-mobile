@@ -20,6 +20,6 @@ export const useStyles = () => {
     speciality: {
       width: '28%',
       marginBottom: theme.spacing.V1,
-    },
+    },   
   });
 };

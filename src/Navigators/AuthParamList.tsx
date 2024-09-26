@@ -4,10 +4,17 @@ export type AuthParamList = {
     SpecialistDrawer: undefined;
     BottomTabs: undefined;
     Home: undefined;
-    Feedback: undefined;
-    Dashboard: undefined;
-    MedicalInfo: undefined;
     Notification: undefined;
+    AppinionRequest: { speciality: string};
+    AppinionRequestPreview: { speciality: string, data: any};
+    MedicalInfo: undefined;
+    Appinions: undefined;
+    Profile: undefined;
     About: undefined;
+    Terms: undefined;
+    PrivacyPolicy: undefined;
+    Faqs: undefined;
+    Pricing: undefined;
+    Feedback: undefined;
   };
   
