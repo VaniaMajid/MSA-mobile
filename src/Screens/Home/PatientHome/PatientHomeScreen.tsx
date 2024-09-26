@@ -96,16 +96,16 @@ export const PatientHomeScreen: FC<PatientHomeScreenProps> = ({navigation}) => {
 
       <CustomModal
         visible={modalVisible}
-        header="Attenthtion!"
+        header="Attention!"
         description={
           'Please click below to acknowledge that this is not a medical emergency (e.g. chest pain, shortness of breath, heavy bleeding, serious injuries, seizures or signs of stroke).\n' +
           'If so, please call 999 or attend your nearest A&E department.'
         }
         descriptionStyle={{textAlign: 'center'}}
-        button1Text="Acknowledge"
-        button1Handler={handleAcknowledgePress}
-        button2Text="Cancel"
-        button2Handler={() => setModalVisible(false)}
+        primaryButtonText="Acknowledge"
+        primaryButtonHandler={handleAcknowledgePress}
+        secondaryButtonText="Cancel"
+        secondaryButtonHandler={() => setModalVisible(false)}
       />
     </View>
   );

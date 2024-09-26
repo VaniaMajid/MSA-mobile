@@ -13,11 +13,11 @@ export const useStyles = () => {
         backgroundColor: 'rgba(0, 0, 0, 0.4)',
       },
       modalContent: {
-        width: 320,
         paddingTop: 20,
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
         borderRadius: 10,
-        gap: theme.spacing.HGap2
+        gap: theme.spacing.HGap2,
+        marginHorizontal: 20,
       },
       modalText: {
         paddingHorizontal: 20, 

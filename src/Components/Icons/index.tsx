@@ -11,6 +11,7 @@ import IconArrowDownSvg from '~Assets/Icons/arrowDown.svg';
 import IconCardiologySvg from '~Assets/Icons/cardiology.svg';
 import IconChevronleftSvg from '~Assets/Icons/chevronleft.svg';
 import IconConvertSvg from '~Assets/Icons/convert.svg';
+import IconCrossSvg from '~Assets/Icons/cross.svg';
 import IconDermatologySvg from '~Assets/Icons/dermatology.svg';
 import IconDocumentSvg from '~Assets/Icons/document.svg';
 import IconEmailSvg from '~Assets/Icons/email.svg';
@@ -200,6 +201,27 @@ export const IconConvert: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconConvertSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconCross: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-cross',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCrossSvg
       color={color}
       height={iconSize}
       width={iconSize}

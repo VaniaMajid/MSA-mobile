@@ -24,7 +24,7 @@ export const FontSize = {
   headerSmallBold: hp('2.2'), // 16px
   ctaBoldTransparent: hp('2.2'), // 16px
   buttonSemiBold: hp('2.2'), // 16px
-  labelMedium: hp('2.2'), // 16px
+labelMedium: hp('2.2'), // 16px
   paragraph: hp('2.1'), // 15px
   chatText: hp('2.1'), // 15px
   notificationHeader: hp('2.0'), // 15px

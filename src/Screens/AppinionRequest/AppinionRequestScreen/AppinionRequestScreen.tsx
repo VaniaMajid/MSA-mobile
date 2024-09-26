@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {ScrollView, View, Image, Text} from 'react-native';
+import {ScrollView, View, Image, Text, TouchableOpacity} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useStyles} from './AppinionRequestScreen.styles';
 import {AuthParamList} from '~Navigators/AuthParamList';
@@ -14,7 +14,7 @@ import {Button} from '~Components/Button';
 import DocumentPicker, {
   DocumentPickerResponse,
 } from 'react-native-document-picker';
-import {IconAdd, IconDocument} from '~Components/Icons';
+import {IconAdd, IconCross, IconDocument} from '~Components/Icons';
 import {PressableText} from '~Components/PressableText';
 import {Heading} from '~Components/Heading';
 import {CustomModal} from '~Components/CustomModal';
@@ -189,8 +189,8 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                       '\nPlease log out from the current session to create an account for a different user.'
                     }
                     descriptionStyle={{textAlign: 'center'}}
-                    button1Text="Acknowledge"
-                    button1Handler={() => setAppinionModalVisible(false)}
+                    primaryButtonText="Acknowledge"
+                    primaryButtonHandler={() => setAppinionModalVisible(false)}
                   />
                 </View>
               </View>
@@ -333,37 +333,43 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                     {attachments.map((attachment, index) => (
                       <View key={index}>
                         {attachment ? (
-                          <>
+                          <View style={styles.attachment}>
                             {attachment.type?.startsWith('image/') ? (
-                              <Image
-                                source={{uri: attachment.uri}}
-                                style={styles.attachmentImage}
-                              />
+                              <View>
+                                <Image
+                                  source={{uri: attachment.uri}}
+                                  style={styles.attachmentImage}
+                                />
+                                <TouchableOpacity
+                                  style={styles.removeIcon}
+                                  onPress={() => removeAttachment(index)}>
+                                  <IconCross
+                                    size="xxxs"
+                                    color={theme.colors.primaryColor}
+                                  />
+                                </TouchableOpacity>
+                              </View>
                             ) : (
                               <View style={styles.docAttachment}>
                                 <IconDocument
                                   size="s"
                                   color={theme.colors.primaryColor}
                                 />
-                                <Text
-                                  style={[
-                                    theme.fonts.filterText,
-                                    {textAlign: 'center'},
-                                  ]}>
-                                  {attachment.name}
-                                </Text>
+                                <TouchableOpacity
+                                  style={styles.removeIcon}
+                                  onPress={() => removeAttachment(index)}>
+                                  <IconCross
+                                    size="xxxs"
+                                    color={theme.colors.primaryColor}
+                                  />
+                                </TouchableOpacity>
                               </View>
                             )}
-                            <View style={{marginTop: theme.spacing.V1}}>
-                              <Button
-                                onPress={() => removeAttachment(index)}
-                                variant="outline"
-                                title="Remove"
-                                textStyle={theme.fonts.paragraphSmallSemiBold}
-                                style={styles.removeButton}
-                              />
-                            </View>
-                          </>
+
+                            <Text style={theme.fonts.notificationSubtext}>
+                              {attachment.name}
+                            </Text>
+                          </View>
                         ) : (
                           <View style={styles.addButtonContainer}>
                             <Button
@@ -411,8 +417,8 @@ export const AppinionRequestScreen: FC<AppinionRequestScreenProps> = ({
                           'Maximum number of pages per document = 2\n'
                         }
                         descriptionStyle={{textAlign: 'left'}}
-                        button1Text="Got it"
-                        button1Handler={() => setModalVisible(false)}
+                        primaryButtonText="Got it"
+                        primaryButtonHandler={() => setModalVisible(false)}
                       />
                     </>
                   )}
