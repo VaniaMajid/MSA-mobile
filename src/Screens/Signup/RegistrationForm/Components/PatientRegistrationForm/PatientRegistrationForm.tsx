@@ -68,7 +68,6 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
   const [weightValue, setWeightValue] = useState<number>(0);
   const [heightUnit, setHeightUnit] = useState<string>('cm');
 
-  const [isInfoVisible, setInfoVisible] = useState(false);
 
   const [bmi, setBmi] = useState<number>(0);
 
@@ -97,10 +96,7 @@ export const PatientRegistrationForm: FC<PatientRegistrationFormProps> = ({
     const weight = parseFloat(text);
     setWeightValue(isNaN(weight) ? 0 : weight);
   };
-
-  const toggleInfo = () => {
-    setInfoVisible(!isInfoVisible);
-  };
+  
 
   return (
     <>

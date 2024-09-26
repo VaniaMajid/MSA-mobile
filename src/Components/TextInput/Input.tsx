@@ -35,7 +35,7 @@ export const InputField = forwardRef<TextInput, InputFieldProps>(
         <View
           style={[
             styles.inputContainer,
-            multiline ? { height: 110 ,} : {},
+            multiline ? { height: 110 } : {},
             disabled ? styles.disabledInputContainer : {},
             errorMessage ? styles.errorInputContainer : {},
             isFocused

@@ -19,6 +19,7 @@ export enum Path {
   APPINION_REQUEST_SCREEN = 'AppinionRequest',
   APPINION_REQUEST_PREVIEW_SCREEN = 'AppinionRequestPreview',
   MEDICAL_INFO_SCREEN = 'MedicalInfo',
+  ADD_MEDICAL_INFO_SCREEN = 'AddMedicalInfo',
   APPINIONS_SCREEN = 'Appinions',
   PROFILE_SCREEN = 'Profile',
   ABOUT_SCREEN = 'About',

@@ -94,7 +94,10 @@ const calculateAge = (dateOfBirth: Date) => {
   const birthDate = new Date(dateOfBirth);
   let age = today.getFullYear() - birthDate.getFullYear();
   const monthDifference = today.getMonth() - birthDate.getMonth();
-  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birthDate.getDate())
+  ) {
     age--;
   }
   return age;
@@ -134,17 +137,155 @@ export const specialistRegistrationSchema = Yup.object().shape({
       return age >= 18;
     }),
 
-    
-    speciality: Yup.string().required('Speciality is required'),
+  speciality: Yup.string().required('Speciality is required'),
 });
 
 export const AppinionRequestSchema = Yup.object().shape({
   problem: Yup.string().required('Please specify the problem'),
-  problemTime: Yup.string().required('Please specify how long the problem has been going for'),
-  associatedSyptoms: Yup.string().required('Please specify associated symptoms'),
+  problemTime: Yup.string().required(
+    'Please specify how long the problem has been going for',
+  ),
+  associatedSyptoms: Yup.string().required(
+    'Please specify associated symptoms',
+  ),
   testResults: Yup.string().required('Please specify test results'),
   goingOn: Yup.string().required('Please tell what you think is going on'),
   concerns: Yup.string().required('Please specify your concerns'),
   query: Yup.string().required('Please specify your query for specialist'),
-  attachments: Yup.array().optional()
+  attachments: Yup.array().optional(),
+});
+
+import * as yup from 'yup';
+
+export const AddMedicalInfoSchema = yup.object().shape({
+  medicalInfoType: yup.string().required('Medical Info Type is required'),
+
+  // Type medications
+  medicationName: yup
+    .string()
+    .when('medicalInfoType', (medicalInfoType, schema) => {
+      if (medicalInfoType.toString() === 'Medications') {
+        return schema.required('Medication name is required');
+      } else {
+        return schema.notRequired();
+      }
+    }),
+  dosage: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (medicalInfoType.toString() === 'Medications') {
+      return schema.required('Dosage is required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+  frequency: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (medicalInfoType.toString() === 'Medications') {
+      return schema.required('Frequency is required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+  notesMedication: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (
+      medicalInfoType.toString() === ('Medications')
+    ) {
+      return schema.required('Notes are required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+
+  // Type medical conditions
+  conditionName: yup
+    .string()
+    .when('medicalInfoType', (medicalInfoType, schema) => {
+      if (medicalInfoType.toString() === 'Medical Conditions') {
+        return schema.required('Condition name is required');
+      } else {
+        return schema.notRequired();
+      }
+    }),
+  diagnosisDate: yup
+    .string()
+    .when('medicalInfoType', (medicalInfoType, schema) => {
+      if (medicalInfoType.toString() === 'Medical Conditions') {
+        return schema.required('Diagnosis date is required');
+      } else {
+        return schema.notRequired();
+      }
+    }),
+    notesCondition: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+      if (
+        medicalInfoType.toString() === ('Medical Conditions')
+      ) {
+        return schema.required('Notes are required');
+      } else {
+        return schema.notRequired();
+      }
+    }),
+
+  // Type surgical procedures
+  procedureName: yup
+    .string()
+    .when('medicalInfoType', (medicalInfoType, schema) => {
+      if (medicalInfoType.toString() === 'Surgical Procedures') {
+        return schema.required('Procedure name is required');
+      } else {
+        return schema.notRequired();
+      }
+    }),
+  surgeryDate: yup
+    .string()
+    .when('medicalInfoType', (medicalInfoType, schema) => {
+      if (medicalInfoType.toString() === 'Surgical Procedures') {
+        return schema.required('Surgery date is required');
+      } else {
+        return schema.notRequired();
+      }
+    }),
+  surgeon: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (medicalInfoType.toString() === 'Surgical Procedures') {
+      return schema.required('Surgeon is required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+  reason: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (medicalInfoType.toString() === 'Surgical Procedures') {
+      return schema.required('Reason for surgery is required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+
+  // Type Allergies
+  allergy: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (medicalInfoType.toString() === 'Allergies') {
+      return schema.required('Allergy is required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+  reaction: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (medicalInfoType.toString() === 'Allergies') {
+      return schema.required('Reaction is required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+  severity: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (medicalInfoType.toString() === 'Allergies') {
+      return schema.required('Severity is required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
+  notesAllergy: yup.string().when('medicalInfoType', (medicalInfoType, schema) => {
+    if (
+      medicalInfoType.toString() === ('Allergies')
+    ) {
+      return schema.required('Notes are required');
+    } else {
+      return schema.notRequired();
+    }
+  }),
 });

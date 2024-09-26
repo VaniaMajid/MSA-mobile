@@ -8,6 +8,7 @@ export type AuthParamList = {
     AppinionRequest: { speciality: string};
     AppinionRequestPreview: { speciality: string, data: any};
     MedicalInfo: undefined;
+    AddMedicalInfo: undefined;
     Appinions: undefined;
     Profile: undefined;
     About: undefined;

@@ -8,6 +8,7 @@ import {NotificationScreen} from '~Screens/Notification';
 import {Header} from '~Components/Header';
 import {useTheme} from '~Contexts/ThemeContext';
 import { AppinionRequestPreviewScreen, AppinionRequestScreen } from '~Screens/AppinionRequest';
+import { AddMedicalInfoScreen } from '~Screens/AddMedicalInfo';
 const AuthStackNavigation = createStackNavigator<AuthParamList>();
 
 interface AuthNavProps {
@@ -70,6 +71,14 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
         component={AppinionRequestPreviewScreen}
         options={{
           title: 'Query',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name={Path.ADD_MEDICAL_INFO_SCREEN}
+        component={AddMedicalInfoScreen}
+        options={{
+          title: 'Add Medical Info',
           headerLeft: ({}) => <Header />,
         }}
       />

@@ -60,6 +60,7 @@ export const DropdownPicker: React.FC<DropdownPickerProps> = ({
           width: '100%',
           borderRadius: 6,
           height: 60,
+          zIndex: 999
         }}
         value={value}
         items={items}

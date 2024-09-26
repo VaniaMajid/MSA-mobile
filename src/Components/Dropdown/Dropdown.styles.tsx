@@ -8,7 +8,7 @@ export const useStyles = () => {
     dropdownContainer: {
       borderColor: theme.colors.accentColor,
       padding: theme.spacing.H2,
-      zIndex: 999,
+      zIndex: 1000,
     },
     searchTextInput: {
       borderColor: theme.colors.accentColor,
