@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useTheme } from '~Contexts/ThemeContext';
-import { useStyles } from './InfoRow.styles';
-import { InfoRowProps } from './types';
+import React, {FC} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {useTheme} from '~Contexts/ThemeContext';
+import {useStyles} from './InfoRow.styles';
+import {InfoRowProps} from './types';
+import {StyledText} from '~Components/StyledText';
 
 export const InfoRow: FC<InfoRowProps> = ({
   label,
@@ -17,12 +18,9 @@ export const InfoRow: FC<InfoRowProps> = ({
   const renderValue = () => {
     if (label === 'Allergy') {
       const allergyList = value.split(',').map((item, index) => (
-        <Text
-          key={index}
-          style={[theme.fonts.inputFieldSmall, styles.value, valueStyle]}
-        >
-          {item.trim()}
-        </Text>
+        <View key={index}>
+          <StyledText text={item.trim()} textColor={theme.colors.error} style={valueStyle}/>
+        </View>
       ));
       return <View style={styles.list}>{allergyList}</View>;
     }
@@ -31,10 +29,9 @@ export const InfoRow: FC<InfoRowProps> = ({
       <Text
         style={[
           theme.fonts.inputFieldSmall,
-          { color: theme.colors.darkBlue },
+          {color: theme.colors.darkBlue},
           valueStyle,
-        ]}
-      >
+        ]}>
         {value}
       </Text>
     );
@@ -45,10 +42,9 @@ export const InfoRow: FC<InfoRowProps> = ({
       <Text
         style={[
           theme.fonts.linkSemiBold,
-          { color: theme.colors.darkBlue },
+          {color: theme.colors.darkBlue},
           labelStyle,
-        ]}
-      >
+        ]}>
         {label}
       </Text>
       {renderValue()}

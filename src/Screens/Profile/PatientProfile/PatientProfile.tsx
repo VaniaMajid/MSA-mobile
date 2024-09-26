@@ -1,18 +1,20 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, ScrollView, Image, TouchableOpacity} from 'react-native';
 import React, {FC} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
-import {ImageBackgroundWrapper} from 'src/HOC';
 import {useTheme} from '~Contexts/ThemeContext';
 import {Button} from '~Components/Button';
 import {Heading} from '~Components/Heading';
 import {InfoRow} from '~Components/InfoRow';
-import {formatDateOfBirth} from '~Utils/formattedDOB';
 import {useStyles} from './PatientProfile.styles';
 import {AuthParamList} from '~Navigators/AuthParamList';
+import {StyledText} from '~Components/StyledText';
+import {IconEdit} from '~Components/Icons';
 
 type PatientProfileScreenProps = StackScreenProps<AuthParamList>;
 
-export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({navigation}) => {
+export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
+  navigation,
+}) => {
   const theme = useTheme();
   const styles = useStyles();
 
@@ -32,59 +34,101 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({navigation}
   };
 
   return (
-    <ImageBackgroundWrapper>
-      <ScrollView
-        style={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
-          <Heading
-            title="Form Preview Details"
-            style={[theme.fonts.paragraphBold, {textAlign: 'center'}]}
-          />
-          <Text
-            style={[
-              theme.fonts.subtextSmall,
-              {color: theme.colors.lightGray1},
-            ]}>
-            Take a moment to review the details. If any adjustments are needed,
-            please simply go back and edit.
-          </Text>
-          <View style={styles.infoContainer}>
-            <InfoRow label="Name" value={patientData.name} />
-            <InfoRow label="Birthdate" value={patientData.birthdate} />
-            <InfoRow label="Gender" value={patientData.gender} />
-            <InfoRow label="Allergy" value={patientData.allergies || 'None'} />
-            <InfoRow label="Postal Code" value={patientData.postalCode} />
-            <InfoRow label="Mobile Number" value={patientData.mobileNumber} />
-            <InfoRow
-              label="Past Medical History"
-              value={patientData.pastMedicalHistory}
+    <ScrollView
+      style={styles.scrollContainer}
+      showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.editButton}>
+          <IconEdit size="40" color={theme.colors.primaryColor} />
+        </TouchableOpacity>
+
+        <View style={styles.infoContainer}>
+          <View style={styles.details}>
+            <Image
+              source={require('../../../Assets/images/onboarding1.png')}
+              style={styles.image}
             />
-            <InfoRow
-              label="Height, Weight, BMI"
-              value={`${patientData.height}, ${patientData.weight} KG, ${patientData.bmi}`}
+            <Heading
+              title={patientData.name}
+              style={[
+                theme.fonts.largeSubHeaderSemiBold,
+                {textAlign: 'center', marginBottom: theme.spacing.V1},
+              ]}
             />
-            <InfoRow
-              label="Email"
-              value={patientData.email}
+            <StyledText
+              text="27 years old"
+              textColor={theme.colors.white}
+              backgroundColor={theme.colors.darkBlue}
+              style={[
+                theme.fonts.filterText,
+                {width: '38%', alignSelf: 'center'},
+              ]}
             />
           </View>
+
+          <InfoRow
+            label="Name"
+            value={patientData.name}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Birthdate"
+            value={patientData.birthdate}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Gender"
+            value={patientData.gender}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Allergy"
+            value={patientData.allergies || 'None'}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Postal Code"
+            value={patientData.postalCode}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Mobile Number"
+            value={patientData.mobileNumber}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Past Medical History"
+            value={patientData.pastMedicalHistory}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Height, Weight, BMI"
+            value={`${patientData.height}, ${patientData.weight} KG, ${patientData.bmi}`}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
+          <InfoRow
+            label="Email"
+            value={patientData.email}
+            valueStyle={styles.valueStyle}
+            labelStyle={styles.valueStyle}
+          />
         </View>
-      </ScrollView>
-      <View style={styles.buttons}>
         <Button
           variant="outline"
-          title="Back"
+          title="Payment History"
           onPress={() => navigation.goBack()}
-          style={{width: '43%'}}
-        />
-        <Button
-          variant="filled"
-          title="Get Started"
-          onPress={() => {}}
-          style={{width: '43%'}}
+          style={styles.paymentButton}
+          textStyle={theme.fonts.filterText}
         />
       </View>
-    </ImageBackgroundWrapper>
+    </ScrollView>
   );
 };

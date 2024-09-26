@@ -14,6 +14,7 @@ import IconConvertSvg from '~Assets/Icons/convert.svg';
 import IconCrossSvg from '~Assets/Icons/cross.svg';
 import IconDermatologySvg from '~Assets/Icons/dermatology.svg';
 import IconDocumentSvg from '~Assets/Icons/document.svg';
+import IconEditSvg from '~Assets/Icons/edit.svg';
 import IconEmailSvg from '~Assets/Icons/email.svg';
 import IconEyeSvg from '~Assets/Icons/eye.svg';
 import IconEyeHideSvg from '~Assets/Icons/eyeHide.svg';
@@ -264,6 +265,27 @@ export const IconDocument: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconDocumentSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconEdit: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-edit',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconEditSvg
       color={color}
       height={iconSize}
       width={iconSize}

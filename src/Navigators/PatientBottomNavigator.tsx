@@ -6,6 +6,7 @@ import {HomeStack} from './Stacks/HomeStack';
 import {useTheme} from '~Contexts/ThemeContext';
 import { TabBarIcon } from '~Components/TabBarIcon';
 import { PatientProfileScreen } from '~Screens/Profile';
+import { ProfileStack } from './Stacks/ProfileStack';
 const PatientBottomTabNavigator = createBottomTabNavigator();
 export const PatientBottomTabNavigation = () => {
   const theme = useTheme();
@@ -44,11 +45,11 @@ export const PatientBottomTabNavigation = () => {
         component={MedicalInfoScreen}
         options={{tabBarLabel: 'Appinions'}}
       />
-      {/* <PatientBottomTabNavigator.Screen
-        name={Path.PROFILE_SCREEN}
-        component={PatientProfileScreen}
+      <PatientBottomTabNavigator.Screen
+        name={Path.PROFILE_STACK}
+        component={ProfileStack}
         options={{tabBarLabel: 'Profile'}}
-      /> */}
+      />
     </PatientBottomTabNavigator.Navigator>
   );
 };

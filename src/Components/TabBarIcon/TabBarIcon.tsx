@@ -37,7 +37,7 @@ export const TabBarIcon: FC<TabBarIconProps> = ({routeName, focused}) => {
         <IconAppinionsInActive color={theme.colors.accentColor} size="xxs" />
       );
 
-    case 'Profile':
+    case 'ProfileStack':
       return focused ? (
         <IconProfileActive color={theme.colors.primaryColor} size="xxs" />
       ) : (
