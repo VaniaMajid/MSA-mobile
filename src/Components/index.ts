@@ -17,3 +17,4 @@ export * from './TabBarIcon';
 export * from './InfoTooltip';
 export * from './CustomDrawerContent';
 export * from './CustomModal';
+export * from './DatePicker';

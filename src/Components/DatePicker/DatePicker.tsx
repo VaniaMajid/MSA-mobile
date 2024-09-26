@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {CustomDatePickerProps} from './types';
 import {useStyles} from './DatePicker.styles';

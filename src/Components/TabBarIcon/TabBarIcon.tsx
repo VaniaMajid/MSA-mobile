@@ -23,7 +23,7 @@ export const TabBarIcon: FC<TabBarIconProps> = ({routeName, focused}) => {
         <IconHomeInActive color={theme.colors.accentColor} size="xxs" />
       );
 
-    case 'MedicalInfo':
+    case 'MedicalInfoStack':
       return focused ? (
         <IconMedicalInfoActive color={theme.colors.primaryColor} size="xxs" />
       ) : (
@@ -48,4 +48,3 @@ export const TabBarIcon: FC<TabBarIconProps> = ({routeName, focused}) => {
       return <View />;
   }
 };
-

@@ -1,10 +1,10 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Path} from './routes';
-import {MedicalInfoScreen} from '~Screens/MedicalInfo';
 import {HomeStack} from './Stacks/HomeStack';
 import {useTheme} from '~Contexts/ThemeContext';
 import { TabBarIcon } from '~Components/TabBarIcon';
+import { MedicalInfoStack } from './Stacks/MedicalInfoStack';
 const PatientBottomTabNavigator = createBottomTabNavigator();
 export const PatientBottomTabNavigation = () => {
   const theme = useTheme();
@@ -34,18 +34,18 @@ export const PatientBottomTabNavigation = () => {
         options={{tabBarLabel: 'Home'}}
       />
       <PatientBottomTabNavigator.Screen
-        name={Path.MEDICAL_INFO_SCREEN}
-        component={MedicalInfoScreen}
+        name={Path.MEDICAL_INFO_STACK}
+        component={MedicalInfoStack}
         options={{tabBarLabel: 'Medical Info'}}
       />
       <PatientBottomTabNavigator.Screen
         name={Path.APPINIONS_SCREEN}
-        component={MedicalInfoScreen}
+        component={MedicalInfoStack}
         options={{tabBarLabel: 'Appinions'}}
       />
       <PatientBottomTabNavigator.Screen
         name={Path.PROFILE_SCREEN}
-        component={MedicalInfoScreen}
+        component={MedicalInfoStack}
         options={{tabBarLabel: 'Profile'}}
       />
     </PatientBottomTabNavigator.Navigator>
