@@ -371,9 +371,9 @@ export const AddMedicalInfoScreen: FC<AddMedicalInfoScreenProps> = ({
                       title="Severity"
                       placeholder="Severity Level"
                       items={[
-                        {label: 'High', value: 'High'},
+                        {label: 'Mild', value: 'Mild'},
                         {label: 'Moderate', value: 'Moderate'},
-                        {label: 'Low', value: 'Low'},
+                        {label: 'Severe', value: 'Severe'},
                       ]}
                       value={value}
                       onValueChange={val => {
