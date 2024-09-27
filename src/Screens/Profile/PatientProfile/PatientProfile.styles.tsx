@@ -58,5 +58,14 @@ export const useStyles = () => {
       paddingHorizontal: 5,
       alignSelf: 'flex-end',
     },
+    arrow: {
+      borderColor: theme.colors.grayBg,
+      backgroundColor: theme.colors.white,
+      borderWidth: 1,
+      padding: theme.spacing.H1,
+      shadowColor: 'rgba(0, 0, 0, 0.4)',
+      elevation: 5,
+      borderRadius: 6,
+    }
   });
 };

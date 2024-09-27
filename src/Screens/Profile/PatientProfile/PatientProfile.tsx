@@ -1,5 +1,11 @@
-import {View, ScrollView, Image, TouchableOpacity} from 'react-native';
-import React, {FC} from 'react';
+import {
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Animated,
+} from 'react-native';
+import React, {FC, useState} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useTheme} from '~Contexts/ThemeContext';
 import {Button} from '~Components/Button';
@@ -8,7 +14,7 @@ import {InfoRow} from '~Components/InfoRow';
 import {useStyles} from './PatientProfile.styles';
 import {AuthParamList} from '~Navigators/AuthParamList';
 import {StyledText} from '~Components/StyledText';
-import {IconEdit} from '~Components/Icons';
+import {IconArrowDown, IconEdit} from '~Components/Icons';
 
 type PatientProfileScreenProps = StackScreenProps<AuthParamList>;
 
@@ -17,6 +23,9 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
 }) => {
   const theme = useTheme();
   const styles = useStyles();
+
+  const [isExpanded, setIsExpanded] = useState(true);
+  const arrowRotation = isExpanded ? '180deg' : '0deg';
 
   const patientData = {
     name: 'Aaron Nace',
@@ -65,61 +74,77 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
               ]}
             />
           </View>
-
-          <InfoRow
-            label="Name"
-            value={patientData.name}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Birthdate"
-            value={patientData.birthdate}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Gender"
-            value={patientData.gender}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Allergy"
-            value={patientData.allergies || 'None'}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Postal Code"
-            value={patientData.postalCode}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Mobile Number"
-            value={patientData.mobileNumber}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Past Medical History"
-            value={patientData.pastMedicalHistory}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Height, Weight, BMI"
-            value={`${patientData.height}, ${patientData.weight} KG, ${patientData.bmi}`}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
-          <InfoRow
-            label="Email"
-            value={patientData.email}
-            valueStyle={styles.valueStyle}
-            labelStyle={styles.valueStyle}
-          />
+          <View style={{flexDirection: 'row'}}>
+            <Heading title="User Info" style={theme.fonts.headerSmallBold} />
+            <TouchableOpacity
+              style={styles.arrow}
+              onPress={() => setIsExpanded(prev => !prev)}>
+              <Animated.View
+                style={{
+                  transform: [{rotate: arrowRotation}],
+                }}>
+                <IconArrowDown color={theme.colors.primaryColor} />
+              </Animated.View>
+            </TouchableOpacity>
+          </View>
+          {isExpanded && (
+            <View style={{gap: theme.spacing.HGap1}}>
+              <InfoRow
+                label="Name"
+                value={patientData.name}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Birthdate"
+                value={patientData.birthdate}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Gender"
+                value={patientData.gender}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Allergy"
+                value={patientData.allergies || 'None'}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Postal Code"
+                value={patientData.postalCode}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Mobile Number"
+                value={patientData.mobileNumber}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Past Medical History"
+                value={patientData.pastMedicalHistory}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Height, Weight, BMI"
+                value={`${patientData.height}, ${patientData.weight} KG, ${patientData.bmi}`}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+              <InfoRow
+                label="Email"
+                value={patientData.email}
+                valueStyle={styles.valueStyle}
+                labelStyle={styles.valueStyle}
+              />
+            </View>
+          )}
         </View>
         <Button
           variant="outline"

@@ -71,7 +71,7 @@ export const HeightPicker: React.FC<HeightPickerProps> = ({
           <Text style={theme.fonts.inputFieldSmall}>{selectedUnit}</Text>
         </View>
         <TouchableOpacity onPress={() => setOpen(prev => !prev)}>
-          <IconArrowDown size="xxxs" />
+          <IconArrowDown size="xxxs" color={theme.colors.darkGray}/>
         </TouchableOpacity>
       </View>
 
