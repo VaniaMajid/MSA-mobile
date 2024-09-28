@@ -15,6 +15,7 @@ export enum Path {
   BOTTOM_TABS = 'BottomTabs',
   HOME_STACK= 'HomeStack',
   MEDICAL_INFO_STACK= 'MedicalInfoStack',
+  PROFILE_STACK= 'ProfileStack',
   HOME_SCREEN = 'Home',
   NOTIFICATION_SCREEN = 'Notification',
   APPINION_REQUEST_SCREEN = 'AppinionRequest',
