@@ -31,24 +31,24 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
   const [data, setData] = React.useState([
     {
       image: require('../../Assets/images/onboarding1.png'),
-      heading: 'A TRUST OPPINION',
-      subHeading: 'IN YOUR POCKET',
+      heading: 'Welcome to WholeSalers Seller Center!',
+      subHeading: 'Empowering Wholesalers to Thrive in a Digital Marketplace.',
     },
     {
       image: require('../../Assets/images/onboarding2.png'),
-      superHeading: 'CHOOSE FROM A RANGE OF',
-      heading: 'MEDICAL SPECIALTIES',
+      superHeading: 'Unlock Your Potential!',
+      heading: 'Connect with retailers and grow your business effortlessly.',
     },
     {
       image: require('../../Assets/images/onboarding3.png'),
-      superHeading: 'CONNECT DIRECTLY TO ONE OF OUR',
-      heading: 'UK BASED CONSULTANTS',
+      superHeading: 'Streamline Your Sales Process',
+      heading: 'Manage orders, inventory, and customer relationships—all in one place.',
     },
     {
       image: require('../../Assets/images/onboarding4.png'),
       superHeading: 'INTERACT WITH OUR',
-      heading: 'SPECIALISTS ON',
-      subHeading: 'OUR MEDIA MESSAGING PLATFORM',
+      heading: 'Simple. Efficient. Profitable.',
+      subHeading: 'Harness the power of technology to enhance your wholesale business.',
     },
   ]);
   const isPagingEnabled = React.useRef(true);
@@ -104,7 +104,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
           }}
           renderItem={({item}) => {
             return (
-              <View style={{flex: 1, marginTop: 45}}>
+              <View style={{flex: 1, marginTop: 45, }}>
                 <SplashHeading
                   superHeading={item.superHeading}
                   heading={item.heading}
@@ -118,7 +118,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
                       width: '100%',
                       height: '100%',
                     }}
-                    resizeMode="contain"
+                    resizeMode="cover"
                   />
                 </View>
               </View>

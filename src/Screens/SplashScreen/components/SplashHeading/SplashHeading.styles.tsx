@@ -11,9 +11,13 @@ export const useStyles = () => {
     },
     superSubHeading: {
       color: theme.colors.darkGray, 
+      textAlign: 'center',
+      width: '80%',
     },
     heading: {
       color: theme.colors.primaryColor, 
+      textAlign: 'center',
+      width: '90%',
     },
   });
 };

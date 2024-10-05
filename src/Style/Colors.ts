@@ -1,9 +1,10 @@
 const colors = {
   transparent: 'rgba(0,0,0,0)',
-  primaryColor: '#613CF2',
+  primaryColor: '#00B2EB',
   secondaryColor: '#b8a8f9',
   secondaryLight: '#613CF21F',
   darkGray: '#4B4B4B',
+  darkGreen: "#232337",
   darkBlue: '#132A4F',
   error: '#EB3F3A',
   pending: '##EF9815',

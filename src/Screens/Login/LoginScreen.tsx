@@ -65,10 +65,9 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
 
   return (
     <ImageBackgroundWrapper>
-      <Image
-        source={require('../../Assets/images/nameLogo.png')}
-        style={styles.logo}
-      />
+      <View>
+        <Text style={[styles.text, theme.fonts.headerBlack, ]}>Welcome to WholeSalers App!</Text>
+      </View>
       <View style={styles.form}>
         <Heading style={theme.fonts.headerBold} title="Login" />
 

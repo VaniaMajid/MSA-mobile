@@ -9,7 +9,7 @@ export const RootNavigator = ({}) => {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? (
+      {!isAuthenticated ? (
         <AuthNavigator userRole={userRole} />
       ) : (
         <PreAuthNavigator />
