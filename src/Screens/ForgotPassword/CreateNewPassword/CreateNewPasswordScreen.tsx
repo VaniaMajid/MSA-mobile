@@ -17,7 +17,7 @@ import {CreateNewPasswordFormType} from './types';
 import {passwordSchema} from '~Utils/validation';
 import {useStyles} from './CreateNewPasswordScreen.styles';
 import { Path } from '~Navigators/routes';
-
+import Colors from '~Style/Colors';
 type CreateNewPasswordScreenProps = StackScreenProps<PreAuthParamList>;
 
 export const CreateNewPasswordScreen: FC<CreateNewPasswordScreenProps> = ({
@@ -49,10 +49,9 @@ export const CreateNewPasswordScreen: FC<CreateNewPasswordScreenProps> = ({
     <ImageBackgroundWrapper>
       <View style={styles.container}>
         <View>
-          <Heading
-            title="Create a new password"
-            style={theme.fonts.headerMediumBold}
-          />
+          <Text style={[theme.fonts.headerMediumBold, styles.text, {color: Colors.black}]}>
+            Create a new password
+          </Text>
           <Text style={[theme.fonts.paragraphRegularSmall, styles.text]}>
             Your new password must be different from previously used passwords.
           </Text>

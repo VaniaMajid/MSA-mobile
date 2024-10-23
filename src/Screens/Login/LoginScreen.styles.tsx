@@ -11,6 +11,14 @@ export const useStyles = () => {
       alignItems: 'center',
       padding: 25,
     },
+    registerButton: {
+      color: theme.colors.secondaryColor,
+    },
+    bottomText:{
+      color: theme.colors.darkGray,
+      textAlign: 'center',
+      marginTop: 20,
+    },
     logo: {
         width: 200, 
         height: 50, 
@@ -19,14 +27,17 @@ export const useStyles = () => {
       },
     form: {
       width: '100%',
-      gap: 20,
+      gap: 15,
     },
     register: {
       width: '100%', 
-      alignItems: 'center', 
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: 10, 
       gap: 10, 
       marginTop: 60,
-    },
+      flexDirection: 'row',
+    },   
     text: {
       textAlign: 'center',
     },
@@ -53,5 +64,19 @@ export const useStyles = () => {
       color: theme.colors.darkGray,
       textDecorationLine: 'none',
     },
+    bg: {
+      backgroundColor: theme.colors.backgroundColor,
+      justifyContent: 'flex-end', // Align children to the bottom
+      alignItems: 'center', // Center children horizontally
+      padding: 20,
+      position: 'absolute', // Positioning it absolutely
+      bottom: 0, // Align it to the bottom of the parent
+      left: 10, // Align it to the left
+      right: 10, // Align it to the right
+      borderTopLeftRadius: 44, // Adjust as needed for your design
+      borderTopRightRadius: 44, // Adjust as needed for your design
+    },
+
+    
   });
 };

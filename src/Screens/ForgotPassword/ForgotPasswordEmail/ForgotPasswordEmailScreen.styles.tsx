@@ -6,11 +6,16 @@ export const useStyles = () => {
 
   return StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignSelf: 'flex-start',
+      backgroundColor: theme.colors.backgroundColor,
+      width: '100%',
+      height: '70%',
+      justifyContent: 'flex-start',
+      paddingTop: 30,
+      paddingHorizontal: 20,
+      alignItems: 'center',
       gap: theme.spacing.HGap1,
-      marginBottom: theme.spacing.V5
+      borderTopLeftRadius: 44, // Adjust as needed for your design
+      borderTopRightRadius: 44, // Adjust as needed for your design
     },
     text: {
       color: theme.colors.lightGray1, 

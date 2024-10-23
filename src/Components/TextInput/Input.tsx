@@ -17,14 +17,28 @@ export const InputField = forwardRef<TextInput, InputFieldProps>(
       disabled = false,
       errorMessage = '',
       multiline,
+      variant, // Include variant here
+      number = false, // New prop for numeric input
       ...rest
     },
     ref
   ) => {
-    const styles = useStyles();
+    const styles = useStyles(variant); // Pass variant to styles
     const theme = useTheme();
     const [secureTextEntry, setSecureTextEntry] = useState(isPassword);
     const [isFocused, setIsFocused] = useState(false);
+    const [inputValue, setInputValue] = useState(''); // Local state for input value
+
+    // Function to handle input change and allow only numbers if 'number' prop is set
+    const handleInputChange = (text: string) => {
+      if (number) {
+        // Filter out non-numeric characters
+        const numericText = text.replace(/[^0-9]/g, '');
+        setInputValue(numericText);
+      } else {
+        setInputValue(text);
+      }
+    };
 
     return (
       <View style={styles.container}>
@@ -38,7 +52,10 @@ export const InputField = forwardRef<TextInput, InputFieldProps>(
             multiline ? { height: 110 } : {},
             disabled ? styles.disabledInputContainer : {},
             errorMessage ? styles.errorInputContainer : {},
-            isFocused
+            // Remove focus border color for 'forms' variant
+            variant === 'forms' || variant === 'forms50'
+              ? {}
+              : isFocused
               ? { borderColor: theme.colors.primaryColor, borderWidth: 2 }
               : {},
           ]}
@@ -60,6 +77,9 @@ export const InputField = forwardRef<TextInput, InputFieldProps>(
             editable={!disabled}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
+            keyboardType={number ? 'numeric' : 'default'} // Set keyboard type based on 'number' prop
+            value={inputValue} // Controlled value for input field
+            onChangeText={handleInputChange} // Handle input change with numeric filtering
             {...rest}
           />
           {isPassword && rightIcon && (

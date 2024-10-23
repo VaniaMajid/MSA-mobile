@@ -6,9 +6,9 @@ export const ImageBackgroundWrapper: FC<any> = ({children}) => {
     <ImageBackground
       style={{
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
-        padding: 25,
+        paddingHorizontal: 20,
       }}
       source={require('../Assets/images/authBackground.png')}>
       {children}

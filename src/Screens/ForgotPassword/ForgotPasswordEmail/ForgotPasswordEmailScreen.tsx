@@ -11,7 +11,7 @@ import {signupEmailSchema} from '~Utils/validation';
 import {useStyles} from './ForgotPasswordEmailScreen.styles';
 import {ForgotPasswordEmailFormType} from './types';
 import { Path } from '~Navigators/routes';
-
+import Colors from '~Style/Colors';
 type ForgotPasswordEmailScreenProps = StackScreenProps<PreAuthParamList>;
 
 export const ForgotPasswordEmailScreen: FC<ForgotPasswordEmailScreenProps> = ({
@@ -44,10 +44,9 @@ export const ForgotPasswordEmailScreen: FC<ForgotPasswordEmailScreenProps> = ({
     <ImageBackgroundWrapper>
       <View style={styles.container}>
         <View>
-          <Heading
-            title="Forgot Password?"
-            style={theme.fonts.headerMediumBold}
-          />
+          <View>
+            <Text style={[styles.text, theme.fonts.headerBold, {color: Colors.black}]}>Forgot Password?</Text>
+          </View>
           <Text style={[theme.fonts.paragraphRegularSmall, styles.text]}>
             Enter the email associated with your account. We will send you an
             OTP for verification.
@@ -71,7 +70,7 @@ export const ForgotPasswordEmailScreen: FC<ForgotPasswordEmailScreenProps> = ({
         <Button
           title="Verify Email"
           onPress={handleSubmit(onSubmit)}
-          textStyle={theme.fonts.buttonSemiBold}
+          textStyle={[theme.fonts.buttonSemiBold]}
         />
       </View>
     </ImageBackgroundWrapper>

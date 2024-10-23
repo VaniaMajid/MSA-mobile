@@ -9,7 +9,7 @@ export const useStyles = () => {
         borderRadius: 5,
       },
       checkboxInnerIcon: {
-        borderWidth: 1,
+        borderWidth: 0,
         borderRadius: 5,
       },
       checkboxText: {

@@ -2,7 +2,7 @@ import {View, Text, ScrollView} from 'react-native';
 import React, {FC} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {PreAuthParamList} from '~Navigators/PreAuthParamList';
-import {ImageBackgroundWrapper} from 'src/HOC';
+import {ImageBackgroundWrapperChild} from 'src/HOC/ImageWrapperChild';
 import {useTheme} from '~Contexts/ThemeContext';
 import {Button} from '~Components/Button';
 import {useStyles} from './PreviewFormScreen.styles';
@@ -20,13 +20,13 @@ export const PreviewFormScreen: FC<SignupEmailScreenProps> = ({
   const theme = useTheme();
   const styles = useStyles();
 
-  const {role, data} = route.params as {role: string; data: any};
-  if (!role || !data) {
+  const {data} = route.params as {data: any};
+  if (!data) {
     throw new Error('Role and data are required');
   }
 
   return (
-    <ImageBackgroundWrapper>
+    <ImageBackgroundWrapperChild>
       <StepIndicator currentStep={2} />
       <ScrollView
         style={styles.scrollContainer}
@@ -45,34 +45,20 @@ export const PreviewFormScreen: FC<SignupEmailScreenProps> = ({
             please simply go back and edit.
           </Text>
           <View style={styles.infoContainer}>
-            <InfoRow label="First name" value={data.firstName} />
+            <InfoRow label="First Name" value={data.firstName} />
             <InfoRow label="Last name" value={data.lastName} />
-            {role === 'Specialist' && (
-              <InfoRow label="GMC Number" value={data.gmcNumber} />
-            )}
+            
+            <InfoRow label="Email" value={data.email} />
+        
             <InfoRow
-              label="Date of Birth"
-              value={formatDateOfBirth(data.dateOfBirth)}
+              label="Phone Number"
+              value={data.phoneNumber}
             />
-            <InfoRow label="Post Code" value={data.postCode} />
-            {role === 'Specialist' && (
-              <InfoRow label="Speciality" value={data.speciality} />
-            )}
-            <InfoRow label="Mobile Number" value={data.mobileNumber} />
-            <InfoRow label="Gender" value={data.gender} />
-            {role === 'Patient' && (
-              <>
-                <InfoRow label="Allergy" value={data.allergy || 'None'} />
-                <InfoRow
-                  label="Past Medical History"
-                  value={data.medicalHistory}
-                />
-                <InfoRow
-                  label="Height, Weight, BMI"
-                  value={`${data.height}, ${data.weight} KG, ${data.bmi.toFixed(1)}`}
-                />
-              </>
-            )}
+            <InfoRow label="CNIC" value={data.cnic} />
+            
+            <InfoRow label="Address" value={data.address} />
+           
+            <InfoRow label="City" value={data.city} />
           </View>
         </View>
       </ScrollView>
@@ -90,6 +76,6 @@ export const PreviewFormScreen: FC<SignupEmailScreenProps> = ({
           style={{width: '43%'}}
         />
       </View>
-    </ImageBackgroundWrapper>
+    </ImageBackgroundWrapperChild>
   );
 };

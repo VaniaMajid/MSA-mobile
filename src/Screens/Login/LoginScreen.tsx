@@ -1,8 +1,8 @@
 import React, {FC, useCallback, useState} from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Button} from '~Components/Button';
 import {Heading} from '~Components/Heading';
-import {IconEye, IconLock} from '~Components/Icons';
+import {IconEye, IconLock, IconGoogle, IconRightArrow} from '~Components/Icons';
 import {InputField} from '~Components/TextInput';
 import {useStyles} from './LoginScreen.styles';
 import {Checkbox} from '~Components/Checkbox';
@@ -18,7 +18,7 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {loginSchema} from '~Utils/validation';
 import { LoginFormType } from './types';
 import { Path } from '~Navigators/routes';
-
+import Colors from '~Style/Colors';
 
 type LoginScreenProps = StackScreenProps<PreAuthParamList>;
 
@@ -65,90 +65,100 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
 
   return (
     <ImageBackgroundWrapper>
-      <View>
-        <Text style={[styles.text, theme.fonts.headerBlack, ]}>Welcome to WholeSalers App!</Text>
-      </View>
-      <View style={styles.form}>
-        <Heading style={theme.fonts.headerBold} title="Login" />
-
-        <Controller
-          control={control}
-          name="email"
-          render={({field: {onChange, value}}) => (
-            <InputField
-              title="Email"
-              placeholder="yourname@example.com"
-              value={value}
-              onChangeText={onChange}
-              errorMessage={errors.email?.message}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name="password"
-          render={({field: {onChange, value}}) => (
-            <InputField
-              title="Password"
-              placeholder=""
-              isPassword={true}
-              leftIcon={<IconLock />}
-              rightIcon={<IconEye />}
-              value={value}
-              onChangeText={onChange}
-              errorMessage={errors.password?.message}
-            />
-          )}
-        />
-
-        <View style={styles.row}>
+      <View style= {styles.bg}>
+        <View>
+          <Text style={[styles.text, theme.fonts.headerBold, {color: Colors.black}]}>Welcome to WholeSalers App!</Text>
+        </View>
+        <View style={styles.form}>
           <Controller
             control={control}
-            name="rememberMe"
+            name="email"
             render={({field: {onChange, value}}) => (
-              <Checkbox
-                text={
-                  <Text style={[theme.fonts.labelMedium, {marginLeft: 10}]}>
-                    Remember me
-                  </Text>
-                }
-                isChecked={value}
-                onPress={checked => onChange(checked)}
-                style={{width: 200}}
-                textStyle={styles.checkboxText}
+              <InputField
+                placeholder="Username or Email"
+                value={value}
+                onChangeText={onChange}
+                errorMessage={errors.email?.message}
               />
             )}
           />
-          <PressableText
-            text="Forgot Password?"
-            onPress={handleForgotPasswordPress}
-            style={[theme.fonts.linkBold, styles.forgotPass]}
+
+          <Controller
+            control={control}
+            name="password"
+            render={({field: {onChange, value}}) => (
+              <InputField
+                placeholder=""
+                isPassword={true}
+                leftIcon={<IconLock />}
+                rightIcon={<IconEye />}
+                value={value}
+                onChangeText={onChange}
+                errorMessage={errors.password?.message}
+              />
+            )}
+          />
+          <Button
+            title="LOGIN"
+            textStyle={theme.fonts.buttonSemiBold}
+            onPress={handleSubmit(onSubmit)}
+          />
+          <View style={styles.row}>
+            <Controller
+              control={control}
+              name="rememberMe"
+              render={({field: {onChange, value}}) => (
+                <Checkbox
+                  text={
+                    <Text style={[theme.fonts.labelMedium, {marginLeft: 10}]}>
+                      Remember me
+                    </Text>
+                  }
+                  isChecked={value}
+                  onPress={checked => onChange(checked)}
+                  style={{width: 200}}
+                  textStyle={styles.checkboxText}
+                />
+              )}
+            />
+            <PressableText
+              text="Forgot Password?"
+              onPress={handleForgotPasswordPress}
+              style={[theme.fonts.linkBold, styles.forgotPass]}
+            />
+          </View>
+
+          {loginError ? <ErrorMessage message={loginError} /> : null}
+
+          <Button
+            title="Login with Google"
+            textStyle={theme.fonts.buttonSemiBold}
+            onPress={handleSubmit(onSubmit)}
+            variant="outline"
+            leftIcon={<IconGoogle />}
+            rightIcon={<IconRightArrow/>}
           />
         </View>
 
-        {loginError ? <ErrorMessage message={loginError} /> : null}
-
-        <Button
-          title="Login"
-          textStyle={theme.fonts.buttonSemiBold}
-          onPress={handleSubmit(onSubmit)}
-        />
-      </View>
-
-      <View style={styles.register}>
-        <Text style={[styles.text, theme.fonts.paragraph]}>
-          Don't have an account?
-        </Text>
-        <Button
-          title="Register"
-          onPress={() => {
-            navigation.navigate(Path.SELECT_ROLE_SCREEN);
-          }}
-          textStyle={theme.fonts.buttonSemiBold}
-          style={{width: '100%'}}
-          variant="outline"
-        />
+        <View style={styles.register}>
+          <Text style={[styles.text, theme.fonts.paragraph]}>
+            Not a member?
+          </Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(Path.SIGNUP_SCREEN);
+            }}
+          >
+            <Text style={[theme.fonts.buttonBold, styles.registerButton]}>
+              Create an Account
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Text style={[styles.bottomText, theme.fonts.subtextSmall]}>
+            Deliver All Over Pakistan in 10-15 days 🛻
+          </Text>
+        </View>
       </View>
     </ImageBackgroundWrapper>
   );

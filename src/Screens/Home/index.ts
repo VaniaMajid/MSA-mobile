@@ -1,1 +1,1 @@
-export * from './PatientHome';
+export * from './SellerHome';

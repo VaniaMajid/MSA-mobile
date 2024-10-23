@@ -3,12 +3,12 @@ import {View} from 'react-native';
 import {
   IconHomeActive,
   IconHomeInActive,
-  IconMedicalInfoActive,
-  IconMedicalInfoInActive,
-  IconAppinionsActive,
-  IconAppinionsInActive,
   IconProfileActive,
   IconProfileInActive,
+  IconToolsInactive,
+  IconToolsActive,
+  IconMessageActive,
+  IconMessageInactive,
 } from '~Components/Icons'
 import { useTheme } from '~Contexts/ThemeContext';
 import { TabBarIconProps } from './types';
@@ -23,18 +23,18 @@ export const TabBarIcon: FC<TabBarIconProps> = ({routeName, focused}) => {
         <IconHomeInActive color={theme.colors.accentColor} size="xxs" />
       );
 
-    case 'MedicalInfoStack':
+    case 'ToolsStack':
       return focused ? (
-        <IconMedicalInfoActive color={theme.colors.primaryColor} size="xxs" />
+        <IconToolsActive color={theme.colors.primaryColor} size="xxxs" />
       ) : (
-        <IconMedicalInfoInActive color={theme.colors.accentColor} size="xxs" />
+        <IconToolsInactive color={theme.colors.accentColor} size="xxxs" />
       );
 
-    case 'Appinions':
+    case 'Chat':
       return focused ? (
-        <IconAppinionsActive color={theme.colors.primaryColor} size="xxs" />
+        <IconMessageActive size="xxs" />
       ) : (
-        <IconAppinionsInActive color={theme.colors.accentColor} size="xxs" />
+        <IconMessageInactive size="xxs" />
       );
 
     case 'ProfileStack':

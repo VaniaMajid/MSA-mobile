@@ -67,7 +67,9 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation, route }) => {
     <ImageBackgroundWrapper>
       <View style={styles.mainContainer}>
         <IconVerify size="xl" />
-        <Heading title="Enter a verification code" style={theme.fonts.headerSmallBold} />
+        <Text style={[theme.fonts.headerSmallBold, { color: theme.colors.black }]}>
+        Enter a verification code
+        </Text>
         <Text style={[theme.fonts.paragraphRegularSmall, { color: theme.colors.lightGray1 }]}>
           We’ve sent a code to {email}
         </Text>
@@ -90,24 +92,23 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation, route }) => {
           <PressableText
             text="Click to resend"
             onPress={handleResend}
-            style={[theme.fonts.paragraphSmallSemiBold, { color: theme.colors.primaryColor }]}
+            style={[theme.fonts.paragraphSmallSemiBold, { color: theme.colors.primaryColor, marginBottom: theme.spacing.V1/2 }]}
           />
         </View>
-      </View>
-
-      <View style={[styles.container, styles.buttons]}>
-        <Button
-          variant="outline"
-          title="Cancel"
-          onPress={() => navigation.goBack()}
-          style={{ width: '40%' }}
-        />
-        <Button
-          variant="filled"
-          title="Verify"
-          onPress={handleSubmit(onSubmit)}
-          style={{ width: '40%' }}
-        />
+        <View style={[styles.container, styles.buttons]}>
+          <Button
+            variant="outline2"
+            title="Cancel"
+            onPress={() => navigation.goBack()}
+            style={{ width: '40%' }}
+          />
+          <Button
+            variant="filled"
+            title="Verify"
+            onPress={handleSubmit(onSubmit)}
+            style={{ width: '40%' }}
+          />
+        </View>
       </View>
     </ImageBackgroundWrapper>
   );

@@ -29,17 +29,17 @@ export const PasswordResetSuccessfulScreen: FC<
           Your password has been successfully reset. Please log in to your
           account with your new credentials.
         </Text>
-      </View>
 
-      <Button
-        title="Go back to Login"
-        onPress={() => {
-          navigation.navigate(Path.LOGIN_SCREEN);
-        }}
-        style={{width: '100%', marginBottom: theme.spacing.V4}}
-        textStyle={theme.fonts.buttonSemiBold}
-        variant="filled"
-      />
+        <Button
+          title="Go back to Login"
+          onPress={() => {
+            navigation.navigate(Path.LOGIN_SCREEN);
+          }}
+          style={{width: '100%', marginTop: theme.spacing.V20}}
+          textStyle={theme.fonts.buttonSemiBold}
+          variant="filled"
+        />
+      </View>
     </ImageBackgroundWrapper>
   );
 };

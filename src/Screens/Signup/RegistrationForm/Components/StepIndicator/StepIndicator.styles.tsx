@@ -11,6 +11,7 @@ export const useStyles = () => {
         justifyContent: 'space-between', 
         paddingBottom: 10,
         paddingHorizontal: 50, 
+        marginTop: 20,
       },
       stepContainer: {
         alignItems: 'center',

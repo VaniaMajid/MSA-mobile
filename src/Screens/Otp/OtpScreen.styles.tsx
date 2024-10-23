@@ -6,20 +6,25 @@ export const useStyles = () => {
 
   return StyleSheet.create({
     mainContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom:  theme.spacing.V5,
-        gap: theme.spacing.HGap3
+      backgroundColor: theme.colors.backgroundColor,
+      width: '100%',
+      height: '80%',
+      paddingTop: 30,
+      paddingHorizontal: 20,
+      alignItems: 'center',
+      gap: theme.spacing.HGap1,
+      borderTopLeftRadius: 44, // Adjust as needed for your design
+      borderTopRightRadius: 44, // Adjust as needed for your design
     },
     container: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginBottom: theme.spacing.V2,
     },
     buttons: {
         gap: theme.spacing.HGap1,
         justifyContent: 'flex-end',
-        paddingTop:  theme.spacing.V10,
     }
   });
 };

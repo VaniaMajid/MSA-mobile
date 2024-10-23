@@ -3,7 +3,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {Path} from './routes';
 import {FeedbackScreen} from '~Screens/Feedback';
 import {CustomHeader} from '~Components/CustomHeader';
-import {PatientBottomTabNavigation} from './PatientBottomNavigator';
+import {BottomTabNavigation} from './BottomNavigator';
 import {Header} from '~Components/Header';
 import {useTheme} from '~Contexts/ThemeContext';
 import {AboutScreen} from '~Screens/About';
@@ -54,7 +54,7 @@ export const PatientDrawerNavigator = () => {
       })}>
       <PatientDrawer.Screen
         name={Path.BOTTOM_TABS}
-        component={PatientBottomTabNavigation}
+        component={BottomTabNavigation}
         options={({navigation}) => ({
           drawerItemStyle: {display: 'none'},
           header: () => <CustomHeader navigation={navigation} title="" />,

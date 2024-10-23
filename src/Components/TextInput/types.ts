@@ -8,4 +8,6 @@ export type InputFieldProps = TextInputProps & {
   rightIcon?: JSX.Element;
   disabled?: boolean;
   errorMessage?: string;
+  number?: boolean; // Add number prop here
+  variant?: 'default' | 'forms' | 'forms50'; // Add variant here
 };

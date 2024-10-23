@@ -8,6 +8,33 @@ export const loginSchema = Yup.object().shape({
   rememberMe: Yup.boolean(),
 });
 
+export const signupSchema = Yup.object().shape({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Email is required'),
+  
+  password: Yup.string()
+    .min(8, 'Password must be at least 8 characters')
+    .required('Password is required'),
+
+  phoneNumber: Yup.string()
+    .matches(/^(?:\+92|0)?3[0-9]{2}-?[0-9]{7}$/, 'Invalid Pakistani phone number')
+    .required('Phone number is required'),
+
+  cnic: Yup.string()
+    .matches(/^\d{5}-\d{7}-\d{1}$/, 'Invalid CNIC format (XXXXX-XXXXXXX-X)')
+    .required('CNIC is required'),
+
+  address: Yup.string()
+    .min(10, 'Address must be at least 10 characters')
+    .required('Address is required'),
+
+  city: Yup.string()
+    .required('City is required'),
+});
+
 export const selectRoleSchema = Yup.object().shape({
   role: Yup.string().required('Please select a role to proceed.'),
   terms: Yup.boolean()
@@ -287,5 +314,52 @@ export const AddMedicalInfoSchema = yup.object().shape({
     } else {
       return schema.notRequired();
     }
-  }),
+  }),  
+});
+
+
+export const AddProductsSchema = Yup.object().shape({
+  images: Yup.array()
+    .of(Yup.string().url('Must be a valid URL')) // Validate each image URL
+    .min(5, 'At least 5 images are required.')
+    .required('Images are required.'),
+  nameEn: Yup.string()
+    .required('Product name in English is required.'),
+  nameUr: Yup.string()
+    .required('Product name in Urdu is required.'),
+  category: Yup.string()
+    .required('Category is required.'),
+  range1: Yup.string()
+    .required('Range 1 is required.'),
+  price1: Yup.number()
+    .required('Price 1 is required.')
+    .positive('Price must be a positive number.')
+    .typeError('Price must be a number.'),
+  range2: Yup.string().optional(),
+  price2: Yup.number()
+    .positive('Price must be a positive number.')
+    .typeError('Price must be a number.')
+    .optional(),
+  range3: Yup.string().optional(),
+  price3: Yup.number()
+    .positive('Price must be a positive number.')
+    .typeError('Price must be a number.')
+    .optional(),
+  packageWeight: Yup.number()
+    .required('Package weight is required.')
+    .positive('Weight must be a positive number.')
+    .typeError('Weight must be a number.'),
+  packageLength: Yup.number()
+    .required('Package length is required.')
+    .positive('Length must be a positive number.')
+    .typeError('Length must be a number.'),
+  packageWidth: Yup.number()
+    .required('Package width is required.')
+    .positive('Width must be a positive number.')
+    .typeError('Width must be a number.'),
+  packageHeight: Yup.number()
+    .required('Package height is required.')
+    .positive('Height must be a positive number.')
+    .typeError('Height must be a number.'),
+  isFragile: Yup.boolean().optional(), // Optional checkbox for fragile goods
 });

@@ -3,3 +3,4 @@ export * from './SignupEmail';
 export * from './SignupPassword';
 export * from './RegistrationForm';
 export * from './PreviewForm';
+export * from './SignupForm';

@@ -12,6 +12,7 @@ export const useStyles = () => {
         marginVertical: theme.spacing.H3,
       },
       input: {
+        backgroundColor: theme.colors.white,
         width: 45,
         height: 45,
         borderWidth: 1,

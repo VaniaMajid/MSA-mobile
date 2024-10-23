@@ -14,14 +14,29 @@ export const NotificationScreen = () => {
       <Text style={styles.label}>Today</Text>
       <View style={{ gap: theme.spacing.HGap1 }}>
         <NotificationContainer
-          title="Specialist Responded"
+          title="Message from Ali"
           time="Today at 9:42 AM"
           subtext="Dr Halt, has responded to your query. Click here for revealing the details."
           showBadge={true}
           imageSource={require('../../Assets/images/onboarding1.png')}
           backgroundColor={theme.colors.primaryColor} 
         />
-
+        <NotificationContainer
+          title="Order Placed"
+          time="Today at 9:42 AM"
+          subtext="Your order has been successfully placed with order ID #123456."
+          showBadge={true}
+          imageSource={require('../../Assets/images/productImg1.png')}
+          backgroundColor={theme.colors.primaryColor} 
+        />
+        <NotificationContainer
+          title="Order Cancelled"
+          time="Today at 9:42 AM"
+          subtext="Your order has been cancelled. The order ID is #123456."
+          showBadge={true}
+          imageSource={require('../../Assets/images/productImg2.png')}
+          backgroundColor={theme.colors.primaryColor} 
+        />
         <NotificationContainer
           title="Payment Successful"
           time="Today at 9:42 AM"

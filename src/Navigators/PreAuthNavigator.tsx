@@ -9,6 +9,7 @@ import {
   RegistrationFormScreen,
   SelectRoleScreen,
   SignupEmailScreen,
+  SignupScreen,
 } from '~Screens/Signup';
 import {PreAuthParamList} from './PreAuthParamList';
 import {Header} from '~Components/index';
@@ -35,6 +36,7 @@ export const PreAuthNavigator = () => {
         <PreAuthStack.Group screenOptions={{headerShown: false}}>
           <PreAuthStack.Screen name="Login" component={LoginScreen} />
           <PreAuthStack.Screen name="Splash" component={SplashScreen} />
+          <PreAuthStack.Screen name="Signup" component={SignupScreen} />
         </PreAuthStack.Group>
         <PreAuthStack.Screen
           name="ForgotPasswordEmail"
@@ -44,6 +46,7 @@ export const PreAuthNavigator = () => {
             headerLeft: ({}) => <Header />,
           }}
         />
+        
         <PreAuthStack.Screen
           name="Otp"
           component={OtpScreen}

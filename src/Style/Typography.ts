@@ -23,14 +23,16 @@ export const FontSize = {
   paragraphSemiBold: hp('2.2'), // 16px
   headerSmallBold: hp('2.2'), // 16px
   ctaBoldTransparent: hp('2.2'), // 16px
-  buttonSemiBold: hp('2.2'), // 16px
+  buttonBold: hp('2.2'), // 16px
+  buttonSemiBold: hp('2.0'), // 16px
+  subHeadingSemibold: hp('2.0'), // 16px
   labelMedium: hp('2.2'), // 16px
   paragraph: hp('2.1'), // 15px
   chatText: hp('2.1'), // 15px
   notificationHeader: hp('2.0'), // 15px
   linkBold: hp('1.9'), // 14px
-  paragraphSmallSemiBold: hp('1.9'), // 14px
-  paragraphRegularSmall: hp('1.9'), // 14px
+  paragraphSmallSemiBold: hp('1.7'), // 14px
+  paragraphRegularSmall: hp('1.7'), // 14px
   linkSemiBold: hp('1.9'), // 14px
   inputFieldSmall: hp('1.9'), // 14px
   notificationSubtext: hp('1.9'), // 14px
@@ -74,7 +76,7 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   largeSubHeaderSemiBold: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.largeSubHeaderSemiBold,
     color: Colors.darkGray,
     letterSpacing: 0.0,
@@ -98,13 +100,13 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   uiLabelSemiBold: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.uiLabelSemiBold,
     color: Colors.darkGray,
     letterSpacing: -0.41,
   },
   popupCTAText: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.popupCTAText,
     color: Colors.darkGray,
     letterSpacing: -0.41,
@@ -122,13 +124,13 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   paragraphSemiBold: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.paragraphSemiBold,
     color: Colors.darkGray,
     letterSpacing: 0.0,
   },
   headerSmallBold: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.headerSmallBold,
     color: Colors.darkGray,
     letterSpacing: 0.0,
@@ -139,8 +141,14 @@ const fontConfig: IThemeFonts = {
     color: Colors.darkGray,
     letterSpacing: 0.0,
   },
+  buttonBold: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: FontSize.buttonBold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
+  },
   buttonSemiBold: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-Medium',
     fontSize: FontSize.buttonSemiBold,
     color: Colors.darkGray,
     letterSpacing: 0.0,
@@ -157,6 +165,12 @@ const fontConfig: IThemeFonts = {
     color: Colors.darkGray,
     letterSpacing: 0.0,
   },
+  subHeadingSemibold: {
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: FontSize.subHeadingSemibold,
+    color: Colors.darkGray,
+    letterSpacing: 0.0,
+  },
   chatText: {
     fontFamily: 'Poppins-Regular',
     fontSize: FontSize.chatText,
@@ -164,7 +178,7 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   notificationHeader: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.notificationHeader,
     color: Colors.darkGray,
     letterSpacing: 0.0,
@@ -176,7 +190,7 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   paragraphSmallSemiBold: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.paragraphSmallSemiBold,
     color: Colors.darkGray,
     letterSpacing: 0.0,
@@ -188,7 +202,7 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   linkSemiBold: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.linkSemiBold,
     color: Colors.darkGray,
     letterSpacing: 0.0,
@@ -218,7 +232,7 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   filterText: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.filterText,
     color: Colors.darkGray,
     letterSpacing: -0.24,
@@ -230,7 +244,7 @@ const fontConfig: IThemeFonts = {
     letterSpacing: 0.0,
   },
   allCapsSubtext: {
-    fontFamily: 'Poppins-Semibold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: FontSize.allCapsSubtext,
     color: Colors.darkGray,
     letterSpacing: 0.0,

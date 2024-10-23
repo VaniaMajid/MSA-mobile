@@ -8,7 +8,11 @@ import {NotificationScreen} from '~Screens/Notification';
 import {Header} from '~Components/Header';
 import {useTheme} from '~Contexts/ThemeContext';
 import { AppinionRequestPreviewScreen, AppinionRequestScreen } from '~Screens/AppinionRequest';
-import { AddMedicalInfoScreen } from '~Screens/AddMedicalInfo';
+import { AddProductsScreen } from '~Screens/AddProducts';
+import { TrackSalesScreen } from '~Screens/TrackSales';
+import { TrackTotalSalesScreen } from '~Screens/TrackTotalSales';
+import { ProductsScreen } from '~Screens/Products';
+import { OrdersScreen } from '~Screens/Orders';
 const AuthStackNavigation = createStackNavigator<AuthParamList>();
 
 interface AuthNavProps {
@@ -19,7 +23,6 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
   return (
     <AuthStackNavigation.Navigator
       screenOptions={{
-        
         headerTitleAlign: 'center',
         headerTitleStyle: {
           ...theme.fonts.uiLabelSemiBold,
@@ -33,7 +36,7 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
           elevation: 5, 
         },
       }}>
-      {userRole === 'patient' ? (
+      {userRole === 'seller' ? (
         <AuthStackNavigation.Screen
           name="PatientDrawer"
           component={PatientDrawerNavigator}
@@ -75,10 +78,43 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
         }}
       />
       <AuthStackNavigation.Screen
-        name={Path.ADD_MEDICAL_INFO_SCREEN}
-        component={AddMedicalInfoScreen}
+        name={Path.ADD_PRODUCTS_SCREEN}
+        component={AddProductsScreen}
         options={{
-          title: 'Add Medical Info',
+          title: 'Add Product',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name={Path.PRODUCTS_SCREEN}
+        component={ProductsScreen}
+        options={{
+          title: 'My Products',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name={Path.ORDERS_SCREEN}
+        component={OrdersScreen}
+        options={{
+          title: 'My Orders',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      
+      <AuthStackNavigation.Screen
+        name={Path.TRACK_SALES_SCREEN}
+        component={TrackSalesScreen}
+        options={{
+          title: 'Track Sales',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name={Path.TRACK_TOTAL_SALES_SCREEN}
+        component={TrackTotalSalesScreen}
+        options={{
+          title: 'Track Total Sales',
           headerLeft: ({}) => <Header />,
         }}
       />

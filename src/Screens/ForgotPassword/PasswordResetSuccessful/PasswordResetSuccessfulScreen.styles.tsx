@@ -6,11 +6,15 @@ export const useStyles = () => {
 
   return StyleSheet.create({
     mainContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: theme.spacing.HGap1,
-
+      backgroundColor: theme.colors.backgroundColor,
+      width: '100%',
+      height: '80%',
+      paddingTop: 30,
+      paddingHorizontal: 20,
+      alignItems: 'center',
+      gap: theme.spacing.HGap1,
+      borderTopLeftRadius: 44, // Adjust as needed for your design
+      borderTopRightRadius: 44, // Adjust as needed for your design
     },
   });
 };

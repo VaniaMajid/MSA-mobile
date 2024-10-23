@@ -26,6 +26,7 @@ export const useStyles = () => {
         gap: theme.spacing.V4,
         justifyContent: 'center',
         flexDirection: 'row',
+        marginBottom: theme.spacing.V10,
     }
   });
 };

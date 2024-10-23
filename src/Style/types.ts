@@ -43,6 +43,7 @@ export interface IThemeFonts {
   paragraphSemiBold: TextStyle;
   headerSmallBold: TextStyle;
   ctaBoldTransparent: TextStyle;
+  buttonBold: TextStyle;
   buttonSemiBold: TextStyle;
   labelMedium: TextStyle;
   paragraph: TextStyle;
@@ -50,6 +51,7 @@ export interface IThemeFonts {
   notificationHeader: TextStyle;
   linkBold: TextStyle;
   paragraphSmallSemiBold: TextStyle;
+  subHeadingSemibold: TextStyle;
   paragraphRegularSmall: TextStyle;
   linkSemiBold: TextStyle;
   inputFieldSmall: TextStyle;

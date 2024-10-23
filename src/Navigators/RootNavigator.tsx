@@ -5,11 +5,11 @@ import {AuthNavigator} from './AuthNavigator';
 
 export const RootNavigator = ({}) => {
   const isAuthenticated = true;
-  const userRole = 'patient';
+  const userRole = 'seller';
 
   return (
     <NavigationContainer>
-      {!isAuthenticated ? (
+      {isAuthenticated ? (
         <AuthNavigator userRole={userRole} />
       ) : (
         <PreAuthNavigator />

@@ -7,8 +7,11 @@ export type AuthParamList = {
     Notification: undefined;
     AppinionRequest: { speciality: string};
     AppinionRequestPreview: { speciality: string, data: any};
-    MedicalInfo: undefined;
-    AddMedicalInfo: undefined;
+    Tools: undefined;
+    AddProducts: undefined;
+    Products: undefined;
+    Orders: undefined;
+    Chat: undefined;
     Appinions: undefined;
     Profile: undefined;
     About: undefined;
@@ -17,5 +20,7 @@ export type AuthParamList = {
     Faqs: undefined;
     Pricing: undefined;
     Feedback: undefined;
+    TrackSales: undefined;
+    TrackTotalSales: undefined;
   };
   
