@@ -8,7 +8,7 @@ export const useStyles = () => {
   return StyleSheet.create({
     scrollContainer: {
       flexGrow: 1,
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.backgroundColor,
       padding: theme.spacing.H5,
     },
     container: {
@@ -34,7 +34,7 @@ export const useStyles = () => {
       borderRadius: 100,
       borderColor: theme.colors.grayBg,
       borderWidth: 1,
-      backgroundColor: theme.colors.primaryColor,
+      backgroundColor: theme.colors.primaryOrange,
     },
     infoContainer: {
       position: 'relative',
@@ -44,8 +44,6 @@ export const useStyles = () => {
       borderWidth: 1,
       gap: theme.spacing.HGap1,
       borderRadius: 6,
-      shadowColor: 'rgba(0, 0, 0, 0.4)',
-      elevation: 5,
       marginTop: theme.spacing.H2,
     },
     valueStyle: {

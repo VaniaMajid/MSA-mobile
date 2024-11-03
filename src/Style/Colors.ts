@@ -24,6 +24,7 @@ const colors = {
   grayBg: '#EFF0F6',
   backgroundColor: "#F0F0F0",
   primaryOrange: "#fc9044",
+  secondaryOrange: "#F96316",
   primaryYellow: "#FFC727",
   primaryGreen: "#10B981",
   pastelGray: "#D0E0DC",

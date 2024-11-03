@@ -11,6 +11,12 @@ import IconAppinionsInActiveSvg from '~Assets/Icons/appinionsInActive.svg';
 import IconArrowDownSvg from '~Assets/Icons/arrowDown.svg';
 import IconBankSvg from '~Assets/Icons/bank.svg';
 import IconCardiologySvg from '~Assets/Icons/cardiology.svg';
+import IconCartActiveSvg from '~Assets/Icons/cartActive.svg';
+import IconCartBlackSvg from '~Assets/Icons/cartBlack.svg';
+import IconCartInactiveSvg from '~Assets/Icons/cartInactive.svg';
+import IconCartWhiteSvg from '~Assets/Icons/cartWhite.svg';
+import IconCategoriesActiveSvg from '~Assets/Icons/categoriesActive.svg';
+import IconCategoriesInactiveSvg from '~Assets/Icons/categoriesInactive.svg';
 import IconCheckSvg from '~Assets/Icons/check.svg';
 import IconChevronleftSvg from '~Assets/Icons/chevronleft.svg';
 import IconConvertSvg from '~Assets/Icons/convert.svg';
@@ -54,7 +60,6 @@ import IconProfileInActiveSvg from '~Assets/Icons/profileInActive.svg';
 import IconRespiratorySvg from '~Assets/Icons/respiratory.svg';
 import IconReturnOrdersSvg from '~Assets/Icons/returnOrders.svg';
 import IconReviewsSvg from '~Assets/Icons/reviews.svg';
-import IconRightArrowSvg from '~Assets/Icons/rightArrow.svg';
 import IconRightArrowGraySvg from '~Assets/Icons/rightArrowGray.svg';
 import IconRightArrowWhiteSvg from '~Assets/Icons/rightArrowWhite.svg';
 import IconSearchSvg from '~Assets/Icons/search.svg';
@@ -62,6 +67,9 @@ import IconShareSvg from '~Assets/Icons/share.svg';
 import IconShopSvg from '~Assets/Icons/shop.svg';
 import IconSignOutSvg from '~Assets/Icons/signOut.svg';
 import IconSpecialistSvg from '~Assets/Icons/specialist.svg';
+import IconStarSvg from '~Assets/Icons/star.svg';
+import IconStarEmptySvg from '~Assets/Icons/starEmpty.svg';
+import IconStarHalfSvg from '~Assets/Icons/starHalf.svg';
 import IconTermsSvg from '~Assets/Icons/terms.svg';
 import IconTickCircleSvg from '~Assets/Icons/tickCircle.svg';
 import IconToolsActiveSvg from '~Assets/Icons/toolsActive.svg';
@@ -73,6 +81,9 @@ import IconTrackSalesLightSvg from '~Assets/Icons/trackSalesLight.svg';
 import IconTrackSalesYellowSvg from '~Assets/Icons/trackSalesYellow.svg';
 import IconUserSvg from '~Assets/Icons/user.svg';
 import IconVerifySvg from '~Assets/Icons/verify.svg';
+import IconWhislistActiveSvg from '~Assets/Icons/whislistActive.svg';
+import IconWishlistActiveFilledSvg from '~Assets/Icons/wishlistActiveFilled.svg';
+import IconWishlistInactiveSvg from '~Assets/Icons/wishlistInactive.svg';
 
 export * from './props';
 
@@ -232,6 +243,132 @@ export const IconCardiology: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconCardiologySvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconCartActive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-cartActive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCartActiveSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconCartBlack: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-cartBlack',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCartBlackSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconCartInactive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-cartInactive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCartInactiveSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconCartWhite: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-cartWhite',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCartWhiteSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconCategoriesActive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-categoriesActive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCategoriesActiveSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconCategoriesInactive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-categoriesInactive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconCategoriesInactiveSvg
       color={color}
       height={iconSize}
       width={iconSize}
@@ -1147,27 +1284,6 @@ export const IconReviews: FC<IconProps> = ({
     />
   );
 };
-export const IconRightArrow: FC<IconProps> = ({
-  color = '#000000',
-  size = 'xxs',
-  isRTL = false,
-  testID = 'icon-rightArrow',
-}) => {
-  const iconSize = getSize(size);
-  return (
-    <IconRightArrowSvg
-      color={color}
-      height={iconSize}
-      width={iconSize}
-      style={{
-        transform: isRTL ? [{scaleX: -1}] : [],
-      }}
-      testID={testID}
-      accessible={true}
-      accessibilityRole="image"
-    />
-  );
-};
 export const IconRightArrowGray: FC<IconProps> = ({
   color = '#000000',
   size = 'xxs',
@@ -1303,6 +1419,69 @@ export const IconSpecialist: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconSpecialistSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconStar: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-star',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconStarSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconStarEmpty: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-starEmpty',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconStarEmptySvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconStarHalf: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-starHalf',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconStarHalfSvg
       color={color}
       height={iconSize}
       width={iconSize}
@@ -1534,6 +1713,69 @@ export const IconVerify: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconVerifySvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconWhislistActive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-whislistActive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconWhislistActiveSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconWishlistActiveFilled: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-wishlistActiveFilled',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconWishlistActiveFilledSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconWishlistInactive: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-wishlistInactive',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconWishlistInactiveSvg
       color={color}
       height={iconSize}
       width={iconSize}

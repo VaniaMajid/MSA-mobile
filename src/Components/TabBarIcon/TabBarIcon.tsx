@@ -9,6 +9,12 @@ import {
   IconToolsActive,
   IconMessageActive,
   IconMessageInactive,
+  IconWhislistActive,
+  IconWishlistInactive,
+  IconCategoriesActive,
+  IconCategoriesInactive,
+  IconCartActive,
+  IconCartInactive,
 } from '~Components/Icons'
 import { useTheme } from '~Contexts/ThemeContext';
 import { TabBarIconProps } from './types';
@@ -18,23 +24,30 @@ export const TabBarIcon: FC<TabBarIconProps> = ({routeName, focused}) => {
     switch (routeName) {
     case 'HomeStack':
       return focused ? (
-        <IconHomeActive color={theme.colors.primaryColor} size="xxs" />
+        <IconHomeActive color={theme.colors.white} size="xxs" />
       ) : (
         <IconHomeInActive color={theme.colors.accentColor} size="xxs" />
       );
 
+    case 'WishlistStack':
+    return focused ? (
+      <IconWhislistActive color={theme.colors.white} size="xxs" />
+    ) : (
+      <IconWishlistInactive color={theme.colors.accentColor} size="xxs" />
+    );
+
     case 'ToolsStack':
       return focused ? (
-        <IconToolsActive color={theme.colors.primaryColor} size="xxxs" />
+        <IconCategoriesActive color={theme.colors.primaryColor} size="xs" />
       ) : (
-        <IconToolsInactive color={theme.colors.accentColor} size="xxxs" />
+        <IconCategoriesInactive color={theme.colors.accentColor} size="xs" />
       );
 
-    case 'Chat':
+    case 'CartStack':
       return focused ? (
-        <IconMessageActive size="xxs" />
+        <IconCartActive size="xxs" />
       ) : (
-        <IconMessageInactive size="xxs" />
+        <IconCartInactive size="xxs" />
       );
 
     case 'ProfileStack':

@@ -80,6 +80,9 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
           name="images" // Make sure to provide the correct name that corresponds to your form's structure
         />
         <View style={styles.fieldContainer}>
+          <Text style= {[theme.fonts.paragraphSemiBold, styles.headings]}>
+            Basic Information
+          </Text>
           <Controller
             name="nameEn"
             control={control}
@@ -136,6 +139,9 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
               />
             )}
           />
+          <Text style= {[theme.fonts.paragraphSemiBold, styles.headings]}>
+            Pricing Packages
+          </Text>
           <View style={styles.compactFieldContainer}>
             <Controller
               name="range1"
@@ -160,7 +166,7 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
               render={({field: {onChange, value}}) => (
                 <InputField
                   variant="forms50"
-                  title="Price"
+                  title="Price (per piece)"
                   placeholder="Enter price"
                   value={value.toString()} // Convert to string for input
                   keyboardType="numeric"
@@ -197,7 +203,7 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
               render={({field: {onChange, value}}) => (
                 <InputField
                   variant="forms50"
-                  title="Price"
+                  title="Price  (per piece)"
                   placeholder="Enter price"
                   value={value?.toString()} // Convert to string for input
                   keyboardType="numeric"
@@ -234,7 +240,7 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
               render={({field: {onChange, value}}) => (
                 <InputField
                   variant="forms50"
-                  title="Price"
+                  title="Price  (per piece)"
                   placeholder="Enter price"
                   value={value?.toString()} // Convert to string for input
                   keyboardType="numeric"
@@ -247,13 +253,16 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
               )}
             />
           </View>
+          <Text style= {[theme.fonts.paragraphSemiBold, styles.headings]}>
+            Shipping Information
+          </Text>
           <Controller
             name="packageWeight"
             control={control}
             render={({field: {onChange, value}}) => (
               <InputField
                 variant="forms"
-                title="Package Weight"
+                title="Package Weight (Kgs)"
                 placeholder="Enter package weight"
                 value={value.toString()}
                 keyboardType="numeric"
@@ -271,7 +280,7 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
             render={({field: {onChange, value}}) => (
               <InputField
                 variant="forms"
-                title="Package Length"
+                title="Package Length (Inches)"
                 placeholder="Enter package length"
                 value={value.toString()}
                 keyboardType="numeric"
@@ -289,7 +298,7 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
             render={({field: {onChange, value}}) => (
               <InputField
                 variant="forms"
-                title="Package Width"
+                title="Package Width (Inches)"
                 placeholder="Enter package width"
                 value={value.toString()}
                 keyboardType="numeric"
@@ -307,7 +316,7 @@ export const AddProductsScreen: FC<AddProductsScreenProps> = ({navigation}) => {
             render={({field: {onChange, value}}) => (
               <InputField
                 variant="forms"
-                title="Package Height"
+                title="Package Height (Inches)"
                 placeholder="Enter package height"
                 value={value.toString()}
                 keyboardType="numeric"

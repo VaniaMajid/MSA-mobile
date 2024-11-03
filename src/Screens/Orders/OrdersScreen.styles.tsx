@@ -78,7 +78,7 @@ export const useStyles = () => {
         alignItems: 'center',
     },
     activeFilterButton: {
-      backgroundColor: theme.colors.primaryColor,
+      backgroundColor: theme.colors.primaryOrange,
     },
     filterButtonText: {
       color: theme.colors.black,

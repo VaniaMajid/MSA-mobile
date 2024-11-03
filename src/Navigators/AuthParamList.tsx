@@ -10,8 +10,10 @@ export type AuthParamList = {
     Tools: undefined;
     AddProducts: undefined;
     Products: undefined;
+    ProductDetails: { product: {id: number;name: string;details: string;ratings: number;images: any[];speciality: string;unit: string;priceRanges: { range: string; price: string }[];reviews: { user: string; comment: string; rating: number }[];cn: string;};};
     Orders: undefined;
-    Chat: undefined;
+    Contacts: undefined;
+    Chat: { contact: { id: number; name: string; lastMessage: string; lastMessageTime: string } };
     Appinions: undefined;
     Profile: undefined;
     About: undefined;

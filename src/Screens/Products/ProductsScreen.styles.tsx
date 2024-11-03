@@ -64,10 +64,10 @@ export const useStyles = () => {
         textAlign: 'center',
     },
     activeFilterButton:{
-        backgroundColor: theme.colors.primaryColor,
+        backgroundColor: theme.colors.white,
     },
     activeFilterButtonText:{
-        color: theme.colors.white,
+        color: theme.colors.black,
         textAlign: 'center',
     },
     editText: {

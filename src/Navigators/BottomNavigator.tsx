@@ -8,6 +8,7 @@ import { ToolsStack } from './Stacks/ToolsStack';
 import { PatientProfileScreen } from '~Screens/Profile';
 import { ProfileStack } from './Stacks/ProfileStack';
 import { ChatScreen } from '~Screens/ChatSystem';
+import { MessagesStack } from './Stacks/MessagesStack';
 const BottomTabNavigator = createBottomTabNavigator();
 export const BottomTabNavigation = () => {
   const theme = useTheme();
@@ -20,12 +21,13 @@ export const BottomTabNavigation = () => {
           fontFamily: 'Poppins-Medium',
           fontSize: 12,
         },
-        tabBarActiveTintColor: theme.colors.primaryColor,
+        tabBarActiveTintColor: theme.colors.primaryOrange,
         tabBarInActiveTintColor: theme.colors.accentColor,
         tabBarStyle: {
           height: 80,
           paddingTop: 15,
           paddingBottom: 20,
+          backgroundColor: theme.colors.white,
         },
         tabBarIcon: ({focused}) => (
           <TabBarIcon routeName={route.name} focused={focused} />
@@ -37,14 +39,19 @@ export const BottomTabNavigation = () => {
         options={{tabBarLabel: 'Home'}}
       />
       <BottomTabNavigator.Screen
-        name={Path.TOOLS_STACK}
-        component={ToolsStack}
-        options={{tabBarLabel: 'Tools'}}
+        name={Path.WISHLIST_STACK}
+        component={HomeStack}
+        options={{tabBarLabel: 'Wishlist'}}
       />
       <BottomTabNavigator.Screen
-        name={Path.CHAT_SCREEN}
-        component={ChatScreen}
-        options={{tabBarLabel: 'Messages'}}
+        name={Path.TOOLS_STACK}
+        component={ToolsStack}
+        options={{tabBarLabel: 'Categories'}}
+      />
+      <BottomTabNavigator.Screen
+        name={Path.CART_STACK}
+        component={MessagesStack}
+        options={{tabBarLabel: 'Cart'}}
       />
       <BottomTabNavigator.Screen
         name={Path.PROFILE_STACK}

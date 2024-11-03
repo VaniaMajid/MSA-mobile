@@ -80,16 +80,16 @@ export const useStyles = (
     pear: {
       ...baseStyles,
       button: {
-        backgroundColor: theme.colors.pear,
+        backgroundColor: theme.colors.primaryOrange,
         paddingVertical: 12,
         paddingHorizontal: 25,
-        borderRadius: 30,
+        borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center', // Center for filled buttons
         borderWidth: 0,
       },
       text: {
-        color: theme.colors.black,
+        color: theme.colors.white,
       },
       leftIcon: baseStyles.icon,
       rightIcon: baseStyles.icon,

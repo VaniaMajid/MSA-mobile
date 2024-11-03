@@ -12,6 +12,9 @@ export const useStyles = () => {
       gap: theme.spacing.H5,
       
     },
+    headings:{
+      color: theme.colors.secondaryOrange,
+    },
     fieldContainer:{
       backgroundColor: theme.colors.white,
       padding: theme.spacing.H5,

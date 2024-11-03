@@ -13,6 +13,8 @@ import { TrackSalesScreen } from '~Screens/TrackSales';
 import { TrackTotalSalesScreen } from '~Screens/TrackTotalSales';
 import { ProductsScreen } from '~Screens/Products';
 import { OrdersScreen } from '~Screens/Orders';
+import { ChatScreen } from '~Screens/ChatSystem';
+import ProductDetailScreen from '~Screens/ProductDetails/ProductDetailScreen';
 const AuthStackNavigation = createStackNavigator<AuthParamList>();
 
 interface AuthNavProps {
@@ -115,6 +117,22 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
         component={TrackTotalSalesScreen}
         options={{
           title: 'Track Total Sales',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name={Path.CHAT_SCREEN}
+        component={ChatScreen}
+        options={{
+          title: '',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name={Path.PRODUCT_DETAILS_SCREEN}
+        component={ProductDetailScreen}
+        options={{
+          title: '',
           headerLeft: ({}) => <Header />,
         }}
       />

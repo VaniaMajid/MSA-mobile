@@ -28,16 +28,10 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
   const arrowRotation = isExpanded ? '180deg' : '0deg';
 
   const patientData = {
-    name: 'Aaron Nace',
-    birthdate: '12 June 2023',
-    gender: 'Female',
-    allergies: 'Pollen , Penicillin',
+    name: 'Nadeem Nani Wala',
+    id: 'E002',
     postalCode: 'SW1A 1AA',
     mobileNumber: '+44 32 23 12321',
-    pastMedicalHistory: 'Hypertension',
-    height: '5ft',
-    weight: '70KG',
-    bmi: '22.8',
     email: 'example@gmail.com',
     address: '10 Downing Street, London, UK',
   };
@@ -65,9 +59,9 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
               ]}
             />
             <StyledText
-              text="27 years old"
+              text= {patientData.id}
               textColor={theme.colors.white}
-              backgroundColor={theme.colors.darkBlue}
+              backgroundColor={theme.colors.primaryOrange}
               style={[
                 theme.fonts.filterText,
                 {width: '38%', alignSelf: 'center'},
@@ -95,24 +89,7 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
                 valueStyle={styles.valueStyle}
                 labelStyle={styles.valueStyle}
               />
-              <InfoRow
-                label="Birthdate"
-                value={patientData.birthdate}
-                valueStyle={styles.valueStyle}
-                labelStyle={styles.valueStyle}
-              />
-              <InfoRow
-                label="Gender"
-                value={patientData.gender}
-                valueStyle={styles.valueStyle}
-                labelStyle={styles.valueStyle}
-              />
-              <InfoRow
-                label="Allergy"
-                value={patientData.allergies || 'None'}
-                valueStyle={styles.valueStyle}
-                labelStyle={styles.valueStyle}
-              />
+             
               <InfoRow
                 label="Postal Code"
                 value={patientData.postalCode}
@@ -126,18 +103,6 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
                 labelStyle={styles.valueStyle}
               />
               <InfoRow
-                label="Past Medical History"
-                value={patientData.pastMedicalHistory}
-                valueStyle={styles.valueStyle}
-                labelStyle={styles.valueStyle}
-              />
-              <InfoRow
-                label="Height, Weight, BMI"
-                value={`${patientData.height}, ${patientData.weight} KG, ${patientData.bmi}`}
-                valueStyle={styles.valueStyle}
-                labelStyle={styles.valueStyle}
-              />
-              <InfoRow
                 label="Email"
                 value={patientData.email}
                 valueStyle={styles.valueStyle}
@@ -147,8 +112,8 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
           )}
         </View>
         <Button
-          variant="outline"
-          title="Payment History"
+          variant="primary"
+          title="Logout"
           onPress={() => navigation.goBack()}
           style={styles.paymentButton}
           textStyle={theme.fonts.filterText}

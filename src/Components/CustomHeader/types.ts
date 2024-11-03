@@ -1,6 +1,7 @@
-import { DrawerNavigationProp } from "@react-navigation/drawer";
+import React from 'react';
 
-export type CustomHeaderProps =  {
-    navigation: DrawerNavigationProp<any, any>;
-    title: string;
-  }
+export interface CustomHeaderProps {
+  navigation: any; // You may want to replace 'any' with a more specific type if possible
+  title: string;
+  children?: React.ReactNode; // Add children prop
+}

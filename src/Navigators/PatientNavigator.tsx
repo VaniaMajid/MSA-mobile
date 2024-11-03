@@ -1,40 +1,37 @@
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {Path} from './routes';
-import {FeedbackScreen} from '~Screens/Feedback';
-import {CustomHeader} from '~Components/CustomHeader';
-import {BottomTabNavigation} from './BottomNavigator';
-import {Header} from '~Components/Header';
-import {useTheme} from '~Contexts/ThemeContext';
-import {AboutScreen} from '~Screens/About';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Path } from './routes';
+import { FeedbackScreen } from '~Screens/Feedback';
+import { CustomHeader } from '~Components/CustomHeader';
+import { BottomTabNavigation } from './BottomNavigator';
+import { useTheme } from '~Contexts/ThemeContext';
+import { AboutScreen } from '~Screens/About';
 import {
   IconAbout,
-  IconFaqs,
   IconFeedback,
-  IconPricing,
-  IconPrivacyPolicy,
-  IconTerms,
 } from '~Components/Icons';
 import { CustomDrawerContent } from '~Components/index';
+import { SearchBar } from '~Components/SearchBar'; // Import the SearchBar component
 
 const PatientDrawer = createDrawerNavigator();
 
 export const PatientDrawerNavigator = () => {
   const theme = useTheme();
+  const [searchValue, setSearchValue] = React.useState('');
+
   return (
     <PatientDrawer.Navigator
       detachInactiveScreens={false}
       initialRouteName={Path.BOTTOM_TABS}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={() => ({
-        headerLeft: ({}) => <Header />,
         headerTitleAlign: 'center',
         headerTitleStyle: {
           ...theme.fonts.uiLabelSemiBold,
         },
         headerStyle: {
           shadowColor: theme.colors.darkGray,
-          shadowOffset: {width: 0, height: 2},
+          shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.25,
           shadowRadius: 3.84,
           elevation: 5,
@@ -44,20 +41,24 @@ export const PatientDrawerNavigator = () => {
           paddingLeft: theme.spacing.H3,
         },
         drawerItemStyle: {
-          paddingBottom: 5
+          paddingBottom: 5,
         },
         drawerLabelStyle: {
           ...theme.fonts.linkSemiBold,
-          marginLeft: -15,  
+          marginLeft: -15,
         },
         overlayColor: 'rgba(0, 0, 0, 0.3)',
-      })}>
+      })}
+    >
       <PatientDrawer.Screen
         name={Path.BOTTOM_TABS}
         component={BottomTabNavigation}
-        options={({navigation}) => ({
-          drawerItemStyle: {display: 'none'},
-          header: () => <CustomHeader navigation={navigation} title="" />,
+        options={({ navigation }) => ({
+          drawerItemStyle: { display: 'none' },
+          header: () => (
+            <CustomHeader navigation={navigation}>
+            </CustomHeader>
+          ),
         })}
       />
       <PatientDrawer.Screen
@@ -65,39 +66,7 @@ export const PatientDrawerNavigator = () => {
         component={AboutScreen}
         options={{
           title: 'About MSA',
-          drawerIcon: ({}) => <IconAbout color={theme.colors.primaryColor}/>,
-        }}
-      />
-      <PatientDrawer.Screen
-        name={Path.TERMS_SCREEN}
-        component={AboutScreen}
-        options={{
-          title: 'Terms & Conditions',
-          drawerIcon: ({}) => <IconTerms color={theme.colors.primaryColor}/>,
-        }}
-      />
-      <PatientDrawer.Screen
-        name={Path.PRIVACY_POLICY_SCREEN}
-        component={AboutScreen}
-        options={{
-          title: 'Privacy Policy',
-          drawerIcon: ({}) => <IconPrivacyPolicy color={theme.colors.primaryColor}/>,
-        }}
-      />
-      <PatientDrawer.Screen
-        name={Path.FAQS_SCREEN}
-        component={AboutScreen}
-        options={{
-          title: 'General FAQs',
-          drawerIcon: ({}) => <IconFaqs color={theme.colors.primaryColor}/>,
-        }}
-      />
-      <PatientDrawer.Screen
-        name={Path.PRICING_SCREEN}
-        component={AboutScreen}
-        options={{
-          title: 'Pricing',
-          drawerIcon: ({}) => <IconPricing color={theme.colors.primaryColor}/>,
+          drawerIcon: ({}) => <IconAbout color={theme.colors.primaryColor} />,
         }}
       />
       <PatientDrawer.Screen
@@ -105,9 +74,10 @@ export const PatientDrawerNavigator = () => {
         component={FeedbackScreen}
         options={{
           title: 'Feedback',
-          drawerIcon: ({}) => <IconFeedback color={theme.colors.primaryColor}/>,
+          drawerIcon: ({}) => <IconFeedback color={theme.colors.primaryColor} />,
         }}
       />
+      {/* Add more screens as needed */}
     </PatientDrawer.Navigator>
   );
 };

@@ -20,4 +20,5 @@ export * from './CustomModal';
 export * from './DatePicker';
 export * from './OrderDetails';
 export * from './GraphComponent';
-export * from './TrackSalesCard'
+export * from './TrackSalesCard';
+export * from './VideoCarousel';

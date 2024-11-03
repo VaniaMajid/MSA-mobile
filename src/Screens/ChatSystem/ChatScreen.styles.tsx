@@ -9,22 +9,9 @@ export const useStyles = () => {
       flex: 1,
       backgroundColor: theme.colors.backgroundColor, // Using theme background color
     },
-    bubbleContainer: {
-      padding: 8,
-      borderRadius: 10,
-    },
-    bubbleLeft: {
-      backgroundColor: theme.colors.primaryOrange, // Bubble color for received messages
-      color: theme.colors.white, // Text color for received messages
-      borderRadius: 10,
-    },
-    bubbleRight: {
-      backgroundColor: theme.colors.primaryColor, // Bubble color for sent messages
-      borderRadius: 10,
-    },
     inputToolbar: {
       backgroundColor: theme.colors.backgroundColor, // Input toolbar background from theme
-      paddingVertical: theme.spacing.V1,
+      // paddingVertical: theme.spacing.V1,
       paddingHorizontal: theme.spacing.H4,
     },
     input: {
@@ -33,13 +20,15 @@ export const useStyles = () => {
       padding: 8,
       color: theme.colors.black, // Theme text color
     },
-    micButton: {
-      padding: 10,
-      alignItems: 'center',
+    sendButton: {
+      borderRadius: 10,
+      backgroundColor: theme.colors.primaryOrange, // Send button background color
+      padding: theme.spacing.V1,
+      width: 50,
+      height: 35,  
     },
-    recordingText: {
-      color: 'red',
-      fontSize: 12,
+    sendButtonText:{
+      color: theme.colors.white, // Send button text color
     },
   });
 };

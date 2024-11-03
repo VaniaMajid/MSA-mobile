@@ -20,7 +20,7 @@ export const useStyles = () => {
     },
     button: {
       width: '100%',
-      backgroundColor: theme.colors.primaryColor,
+      backgroundColor: theme.colors.primaryOrange,
       justifyContent: 'center',
       alignItems: 'center',
       marginTop: theme.spacing.H5,

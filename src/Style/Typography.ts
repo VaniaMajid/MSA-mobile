@@ -18,9 +18,9 @@ export const FontSize = {
   inputFieldLabelText: hp('2.4'), // 18px
   uiLabelSemiBold: hp('2.3'), // 17px
   popupCTAText: hp('2.2'), // 17px
-  paragraphRegular: hp('2.2'), // 16px
-  paragraphBold: hp('2.2'), // 16px
-  paragraphSemiBold: hp('2.2'), // 16px
+  paragraphRegular: hp('2.0'), // 16px
+  paragraphBold: hp('2.0'), // 16px
+  paragraphSemiBold: hp('2.0'), // 16px
   headerSmallBold: hp('2.2'), // 16px
   ctaBoldTransparent: hp('2.2'), // 16px
   buttonBold: hp('2.2'), // 16px
@@ -31,14 +31,14 @@ export const FontSize = {
   chatText: hp('2.1'), // 15px
   notificationHeader: hp('2.0'), // 15px
   linkBold: hp('1.9'), // 14px
-  paragraphSmallSemiBold: hp('1.7'), // 14px
-  paragraphRegularSmall: hp('1.7'), // 14px
+  paragraphSmallSemiBold: hp('1.5'), // 14px
+  paragraphRegularSmall: hp('1.5'), // 14px
   linkSemiBold: hp('1.9'), // 14px
   inputFieldSmall: hp('1.9'), // 14px
   notificationSubtext: hp('1.9'), // 14px
   previewSubtext: hp('1.8'), // 13px
   filterText: hp('1.7'), // 12px
-  subtextSmall: hp('1.6'), // 11px
+  subtextSmall: hp('1.4'), // 11px
   medicalColumnText: hp('1.7'), // 12px
   allCapsSubtext: hp('1.4'), // 11px
   navigationSubtext: hp('1.5'), // 10px

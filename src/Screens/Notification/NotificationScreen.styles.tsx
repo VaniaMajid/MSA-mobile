@@ -7,7 +7,7 @@ export const useStyles = () => {
   return StyleSheet.create({
     container: {
       flexGrow: 1,
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.backgroundColor,
       paddingVertical: theme.spacing.H5,
       paddingHorizontal: theme.spacing.H6,
       gap: theme.spacing.HGap2,
