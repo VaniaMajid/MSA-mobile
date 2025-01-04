@@ -9,8 +9,7 @@ export const loginSchema = Yup.object().shape({
 });
 
 export const signupSchema = Yup.object().shape({
-  firstName: Yup.string().required('First name is required'),
-  lastName: Yup.string().required('Last name is required'),
+  fullName: Yup.string().required('First name is required'),
   email: Yup.string()
     .email('Invalid email')
     .required('Email is required'),
@@ -18,21 +17,17 @@ export const signupSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, 'Password must be at least 8 characters')
     .required('Password is required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password')], 'Passwords must match')
+    .required('Confirm Password is required'),
 
   phoneNumber: Yup.string()
     .matches(/^(?:\+92|0)?3[0-9]{2}-?[0-9]{7}$/, 'Invalid Pakistani phone number')
     .required('Phone number is required'),
 
-  cnic: Yup.string()
-    .matches(/^\d{5}-\d{7}-\d{1}$/, 'Invalid CNIC format (XXXXX-XXXXXXX-X)')
-    .required('CNIC is required'),
-
   address: Yup.string()
     .min(10, 'Address must be at least 10 characters')
     .required('Address is required'),
-
-  city: Yup.string()
-    .required('City is required'),
 });
 
 export const selectRoleSchema = Yup.object().shape({

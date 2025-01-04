@@ -96,7 +96,8 @@ export const useStyles = () => {
     priceRangeItem: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBottom: 5,
+      marginBottom: theme.spacing.V1,
+      paddingHorizontal: theme.spacing.H2,
     },
     actionButtonsContainer: {
       flexDirection: 'row',
@@ -142,7 +143,8 @@ export const useStyles = () => {
     },
     reviewsContainer: {
       paddingHorizontal: 20,
-      marginVertical: theme.spacing.H1,
+      marginVertical: theme.spacing.V1,
+      
     },
     reviewsTitle: {
         color: theme.colors.primaryOrange,
@@ -171,6 +173,38 @@ export const useStyles = () => {
         backgroundColor: theme.colors.white,
         borderRadius: 10,
         padding: 10,
-    }
+    },
+    addToCartAnimation: {
+      position: 'absolute',
+      top: '30%',
+      left: '50%',
+      transform: [{ translateX: -100 }, { translateY: -50 }],
+      backgroundColor: theme.colors.primaryOrange,
+      padding: theme.spacing.H3,
+      borderRadius: theme.spacing.H3,
+      zIndex: 10,
+      opacity: 0, // initial opacity for animation
+      elevation: 10,
+    },
+    cartAnimationText: {
+      color: theme.colors.white,
+    },
+    variantsContainer: {
+      paddingHorizontal: theme.spacing.H4,
+      paddingVertical: theme.spacing.V1,
+    },
+    variantsTitle: {
+      color: theme.colors.darkGray,
+    },
+    variantItem: {
+      marginVertical: theme.spacing.V1,
+    },
+    selectedItem: {
+      backgroundColor: 'white',
+      borderRadius: 8,
+      paddingVertical: theme.spacing.V1,
+      paddingHorizontal: theme.spacing.H2,
+    },
+    
   });
 };

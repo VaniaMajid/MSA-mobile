@@ -1,14 +1,14 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { GiftedChat, IMessage, InputToolbar, Send, Bubble } from 'react-native-gifted-chat';
-import { useStyles } from './ChatScreen.styles';
+import { useStyles } from './CartScreen.styles';
 import { useTheme } from '~Contexts/ThemeContext';
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthParamList } from '~Navigators/AuthParamList';
 
-type ChatScreenProps = StackScreenProps<AuthParamList>;
+type CartScreenProps = StackScreenProps<AuthParamList>;
 
-export const ChatScreen: FC<ChatScreenProps> = ({ route }) => {
+export const CartScreen: FC<CartScreenProps> = ({ route }) => {
   const styles = useStyles();
   const theme = useTheme();
 

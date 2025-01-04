@@ -21,7 +21,7 @@ export const CustomHeader: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const handleChangeText = (text: string) => {
     setSearchText(text);
-    if (text.length > 0) { // Change condition to check for non-empty input
+    if (text.length >= 0) { // Change condition to check for non-empty input
       setModalVisible(true); // Open modal when user types in the search bar
     } else {
       setModalVisible(false); // Close modal if the search text is empty

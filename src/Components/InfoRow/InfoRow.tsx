@@ -29,7 +29,7 @@ export const InfoRow: FC<InfoRowProps> = ({
       <Text
         style={[
           theme.fonts.inputFieldSmall,
-          {color: theme.colors.darkBlue},
+          {color: theme.colors.darkBlue, maxWidth: '50%'},
           valueStyle,
         ]}>
         {value}

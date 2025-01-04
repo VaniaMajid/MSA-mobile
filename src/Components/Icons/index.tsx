@@ -21,6 +21,8 @@ import IconCheckSvg from '~Assets/Icons/check.svg';
 import IconChevronleftSvg from '~Assets/Icons/chevronleft.svg';
 import IconConvertSvg from '~Assets/Icons/convert.svg';
 import IconCrossSvg from '~Assets/Icons/cross.svg';
+import IconDeleteIconBlackSvg from '~Assets/Icons/deleteIconBlack.svg';
+import IconDeleteIconWhiteSvg from '~Assets/Icons/deleteIconWhite.svg';
 import IconDermatologySvg from '~Assets/Icons/dermatology.svg';
 import IconDocumentSvg from '~Assets/Icons/document.svg';
 import IconEditSvg from '~Assets/Icons/edit.svg';
@@ -453,6 +455,48 @@ export const IconCross: FC<IconProps> = ({
   const iconSize = getSize(size);
   return (
     <IconCrossSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconDeleteIconBlack: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-deleteIconBlack',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconDeleteIconBlackSvg
+      color={color}
+      height={iconSize}
+      width={iconSize}
+      style={{
+        transform: isRTL ? [{scaleX: -1}] : [],
+      }}
+      testID={testID}
+      accessible={true}
+      accessibilityRole="image"
+    />
+  );
+};
+export const IconDeleteIconWhite: FC<IconProps> = ({
+  color = '#000000',
+  size = 'xxs',
+  isRTL = false,
+  testID = 'icon-deleteIconWhite',
+}) => {
+  const iconSize = getSize(size);
+  return (
+    <IconDeleteIconWhiteSvg
       color={color}
       height={iconSize}
       width={iconSize}

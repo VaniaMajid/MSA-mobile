@@ -1,8 +1,9 @@
 import React, {FC, useCallback, useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
+import axios from 'axios';
 import {Button} from '~Components/Button';
 import {Heading} from '~Components/Heading';
-import {IconEye, IconLock, IconGoogle, IconRightArrow} from '~Components/Icons';
+import {IconEye, IconLock, IconGoogle, IconRightArrowGray} from '~Components/Icons';
 import {InputField} from '~Components/TextInput';
 import {useStyles} from './LoginScreen.styles';
 import {Checkbox} from '~Components/Checkbox';
@@ -18,6 +19,8 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {loginSchema} from '~Utils/validation';
 import { LoginFormType } from './types';
 import { Path } from '~Navigators/routes';
+import { BASE_URL } from '~Constants/index';
+import useAccountStore from '~Configs/accountStore';
 import Colors from '~Style/Colors';
 
 type LoginScreenProps = StackScreenProps<PreAuthParamList>;
@@ -25,6 +28,7 @@ type LoginScreenProps = StackScreenProps<PreAuthParamList>;
 export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
   const styles = useStyles();
   const theme = useTheme();
+  const setBuyerData = useAccountStore((state) => state.setBuyerData);
 
   const {
     control,
@@ -46,15 +50,46 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
     navigation.navigate(Path.FORGOT_PASSWORD_EMAIL_SCREEN)
   };
 
-  const onSubmit = (data: LoginFormType) => {
-    const {email, password} = data;
-
-    if (loginError) {
-      setLoginError('Invalid email or password');
+  const onSubmit = async (data: LoginFormType) => {
+    const { email, password } = data;
+    console.log(data);
+    if (!email || !password) {
+      setLoginError('Please provide both email and password');
       return;
     }
-    // navigation.replace('AuthNavigator', { userRole: 'patient' });
+  
+    try {
+      const response = await axios.post(`${BASE_URL}/buyer/auth/login`, {
+        email,
+        password,
+      });
+  
+      const {
+        status,
+        data: { buyer, token },
+      } = response.data;
+  
+      if (status === 'success') {
+        Alert.alert('Success', 'You have successfully logged in');
+        setBuyerData({
+          id: buyer.id,
+          email: buyer.email,
+          fullName: buyer.fullName,
+          token,
+        });
+      }
+    } catch (error: any) {
+      if (error.response?.status === 400) {
+        setLoginError('Please provide both email and password');
+      } else if (error.response?.status === 401) {
+        setLoginError('Invalid email or password');
+      } else {
+        setLoginError('Login failed. Please try again.');
+      }
+      console.error('Login Error:', error);
+    }
   };
+  
 
   useFocusEffect(
     useCallback(() => {
@@ -75,7 +110,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
             name="email"
             render={({field: {onChange, value}}) => (
               <InputField
-                placeholder="Username or Email"
+                placeholder="Your Email"
                 value={value}
                 onChangeText={onChange}
                 errorMessage={errors.email?.message}
@@ -136,7 +171,7 @@ export const LoginScreen: FC<LoginScreenProps> = ({navigation}) => {
             onPress={handleSubmit(onSubmit)}
             variant="outline"
             leftIcon={<IconGoogle />}
-            rightIcon={<IconRightArrow/>}
+            rightIcon={<IconRightArrowGray/>}
           />
         </View>
 

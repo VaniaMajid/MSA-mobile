@@ -1,10 +1,8 @@
 export type SignupFormType = {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   password: string;
+  confirmPassword: string;
   phoneNumber: string; // Pakistani phone number
-  cnic: string;       // Pakistani CNIC
   address: string;    // Address
-  city: string;       // City
 };

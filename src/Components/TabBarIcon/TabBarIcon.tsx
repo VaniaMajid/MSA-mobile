@@ -36,7 +36,7 @@ export const TabBarIcon: FC<TabBarIconProps> = ({routeName, focused}) => {
       <IconWishlistInactive color={theme.colors.accentColor} size="xxs" />
     );
 
-    case 'ToolsStack':
+    case 'CategoriesStack':
       return focused ? (
         <IconCategoriesActive color={theme.colors.primaryColor} size="xs" />
       ) : (

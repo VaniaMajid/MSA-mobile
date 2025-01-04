@@ -15,6 +15,14 @@ import {IconRightArrowGray, VideoCarousel} from '~Components/index';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated';
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false, // Reanimated runs in strict mode by default
+});
 // Sample video data
 const videos = [
   {uri: require('../../../Assets/videos/video3.mp4'), title: 'Video 1'},
@@ -24,7 +32,6 @@ const videos = [
   {uri: require('../../../Assets/videos/video2.mp4'), title: 'Video 5'},
 ];
 
-// Define Product type
 type Product = {
   id: number;
   name: string;
@@ -36,6 +43,7 @@ type Product = {
   priceRanges: { range: string; price: string }[];
   reviews: { user: string; comment: string; rating: number }[];
   cn: string;
+  variants: { [key: string]: string | string[] | { price: string; quantity: string } }[];
 };
 
 const products: Product[] = [
@@ -63,6 +71,15 @@ const products: Product[] = [
       { user: "Bob", comment: "Very comfortable to wear.", rating: 4 },
     ],
     cn: "1 yr",
+    variants: [
+      { color: "Black", size: "Small", price: "549.99", quantity: "80" },
+      { color: "Black", size: "Medium", price: "554.99", quantity: "70" },
+      { color: "Black", size: "Large", price: "559.99", quantity: "60" },
+      { color: "White", size: "Small", price: "539.99", quantity: "40" },
+      { color: "White", size: "Medium", price: "544.99", quantity: "35" },
+      { color: "White", size: "Large", price: "549.99", quantity: "30" },
+      { color: "Blue", size: "Standard", price: "559.99", quantity: "30" }, 
+    ],
   },
   {
     id: 2,
@@ -88,6 +105,12 @@ const products: Product[] = [
       { user: "Dana", comment: "Battery life could be better.", rating: 3 },
     ],
     cn: "2 yr",
+    variants: [
+      { color: "Black", size: "Medium", price: "5199.99", quantity: "150" },
+      { color: "Silver", size: "Medium", price: "5299.99", quantity: "75" },
+      { color: "Gold", size: "Medium", price: "5399.99", quantity: "50" },
+      { color: "Rose Gold", size: "Medium", price: "5499.99", quantity: "20" },
+    ],
   },
   {
     id: 3,
@@ -113,6 +136,11 @@ const products: Product[] = [
       { user: "Frank", comment: "Perfect for outdoor use.", rating: 4 },
     ],
     cn: "3 yr",
+    variants: [
+      { color: "Black", size: "Compact", weight: "300g", price: "589.99", quantity: "200" },
+      { color: "Blue", size: "Compact", weight: "300g", price: "599.99", quantity: "150" },
+      { color: "Red", size: "Compact", weight: "300g", price: "589.99", quantity: "100" },
+    ],
   },
   {
     id: 4,
@@ -138,6 +166,11 @@ const products: Product[] = [
       { user: "Hank", comment: "Great support for my back.", rating: 4 },
     ],
     cn: "4 yr",
+    variants: [
+      { color: "Black", material: "Mesh", price: "5120.00", quantity: "120" },
+      { color: "Grey", material: "Leather", price: "5220.00", quantity: "80" },
+      { color: "Blue", material: "Mesh", price: "5150.00", quantity: "60" },
+    ],
   },
   {
     id: 5,
@@ -163,6 +196,10 @@ const products: Product[] = [
       { user: "Jack", comment: "Smart features are very handy.", rating: 4 },
     ],
     cn: "2 yr",
+    variants: [
+      { size: "55 inches", color: "Black", weight: "15kg", price: "12999.99", quantity: "50" },
+      { size: "65 inches", color: "Black", weight: "18kg", price: "13999.99", quantity: "30" },
+    ],
   },
   {
     id: 6,
@@ -185,117 +222,45 @@ const products: Product[] = [
       { range: "11-20", price: "87999.99" },
     ],
     reviews: [
-      { user: "Kylie", comment: "Best gaming experience ever!", rating: 5 },
-      { user: "Leo", comment: "Runs everything smoothly.", rating: 4 },
+      { user: "Mike", comment: "Excellent gaming performance.", rating: 5 },
+      { user: "Linda", comment: "The screen quality is stunning.", rating: 4 },
     ],
     cn: "1 yr",
+    variants: [
+      { color: "Black", size: "15.6 inches", weight: "2.5kg", price: "89999.99", quantity: "25" },
+      { color: "Grey", size: "15.6 inches", weight: "2.6kg", price: "90999.99", quantity: "20" },
+    ],
   },
   {
     id: 7,
-    name: "Bluetooth Headphones with Noise Cancellation and 20-Hour Battery Life",
-    details: "Enjoy immersive sound with our Bluetooth headphones featuring noise cancellation.",
-    ratings: 4.4,
+    name: "Noise-Canceling Headphones with Adjustable Headband",
+    details: "Experience immersive sound with noise-canceling headphones for long listening sessions.",
+    ratings: 4.7,
     images: [
       require('../../../Assets/images/products/headphones1.jpeg'),
       require('../../../Assets/images/products/headphones2.jpeg'),
       require('../../../Assets/images/products/headphones3.jpeg'),
       require('../../../Assets/images/products/headphones4.jpeg'),
-      require('../../../Assets/images/products/headphones5.jpeg'),
       require('../../../Assets/images/products/headphones6.jpeg'),
     ],
     unit: "pcs",
-    speciality: "Top Ranking",
+    speciality: "Best Sellers",
     priceRanges: [
-      { range: "1-5", price: "1499.99" },
-      { range: "6-10", price: "1459.99" },
-      { range: "11-20", price: "1439.99" },
+      { range: "1-10", price: "599.99" },
+      { range: "11-20", price: "589.99" },
+      { range: "21-50", price: "579.99" },
     ],
     reviews: [
-      { user: "Mia", comment: "Amazing sound quality!", rating: 5 },
-      { user: "Noah", comment: "Great battery life!", rating: 4 },
+      { user: "Mark", comment: "Great sound and noise cancellation.", rating: 5 },
+      { user: "Nina", comment: "Very comfortable for long listening sessions.", rating: 4 },
     ],
     cn: "2 yr",
-  },
-  {
-    id: 8,
-    name: "Home Security Camera System with Night Vision and Motion Detection",
-    details: "Keep your home safe with our comprehensive security camera system.",
-    ratings: 4.9,
-    images: [
-      require('../../../Assets/images/products/camera4.jpeg'),
-      require('../../../Assets/images/products/camera2.jpeg'),
-      require('../../../Assets/images/products/camera3.jpeg'),
-      require('../../../Assets/images/products/camera5.jpeg'),
-      require('../../../Assets/images/products/camera6.jpeg'),
-      require('../../../Assets/images/products/camera1.jpeg'),
+    variants: [
+      { color: "Black", size: "Standard", weight: "350g", price: "599.99", quantity: "100" },
+      { color: "White", size: "Standard", weight: "350g", price: "589.99", quantity: "50" },
     ],
-    unit: "pcs",
-    speciality: "Top Deals",
-    priceRanges: [
-      { range: "1-2", price: "19999.99" },
-      { range: "3-5", price: "19899.99" },
-      { range: "6-10", price: "19799.99" },
-    ],
-    reviews: [
-      { user: "Olivia", comment: "Great value for money!", rating: 5 },
-      { user: "Paul", comment: "Easy to set up and use.", rating: 4 },
-    ],
-    cn: "3 yr",
-  },
-  {
-    id: 9,
-    name: "Electric Toothbrush with Sonic Cleaning Technology and Multiple Modes",
-    details: "Achieve a brighter smile with our electric toothbrush featuring multiple cleaning modes.",
-    ratings: 4.5,
-    images: [
-      require('../../../Assets/images/products/brush6.jpeg'),
-      require('../../../Assets/images/products/brush5.jpeg'),
-      require('../../../Assets/images/products/brush4.jpeg'),
-      require('../../../Assets/images/products/brush3.jpeg'),
-      require('../../../Assets/images/products/brush2.jpeg'),
-      require('../../../Assets/images/products/brush1.jpeg'),
-    ],
-    unit: "pcs",
-    speciality: "New Arrivals",
-    priceRanges: [
-      { range: "1-5", price: "499.99" },
-      { range: "6-10", price: "489.99" },
-      { range: "11-20", price: "479.99" },
-    ],
-    reviews: [
-      { user: "Quinn", comment: "Teeth feel cleaner than ever!", rating: 5 },
-      { user: "Ryan", comment: "Multiple modes are very helpful.", rating: 4 },
-    ],
-    cn: "2 yr",
-  },
-  {
-    id: 10,
-    name: "High-Performance Blender with Multiple Speed Settings and Recipe Book",
-    details: "Blend smoothies and soups with our high-performance blender, comes with a recipe book.",
-    ratings: 4.3,
-    images: [
-      require('../../../Assets/images/products/blender6.jpeg'),
-      require('../../../Assets/images/products/blender2.jpeg'),
-      require('../../../Assets/images/products/blender3.jpeg'),
-      require('../../../Assets/images/products/blender4.jpeg'),
-      require('../../../Assets/images/products/blender5.jpeg'),
-      require('../../../Assets/images/products/blender1.jpeg'),
-    ],
-    unit: "pcs",
-    speciality: "Top Ranking",
-    priceRanges: [
-      { range: "1-5", price: "8499.99" },
-      { range: "6-10", price: "8399.99" },
-      { range: "11-20", price: "8299.99" },
-    ],
-    reviews: [
-      { user: "Sophia", comment: "Perfect for my morning smoothies!", rating: 5 },
-      { user: "Tom", comment: "Powerful and easy to clean.", rating: 4 },
-    ],
-    cn: "3 yr",
   },
 ];
-
 
 // Define types for navigation props
 type BuyerHomeScreenProps = StackScreenProps<AuthParamList>;

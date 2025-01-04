@@ -35,7 +35,6 @@ export const PreAuthNavigator = () => {
         }}>
         <PreAuthStack.Group screenOptions={{headerShown: false}}>
           <PreAuthStack.Screen name="Login" component={LoginScreen} />
-          <PreAuthStack.Screen name="Splash" component={SplashScreen} />
           <PreAuthStack.Screen name="Signup" component={SignupScreen} />
         </PreAuthStack.Group>
         <PreAuthStack.Screen

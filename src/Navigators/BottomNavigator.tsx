@@ -4,11 +4,9 @@ import {Path} from './routes';
 import {HomeStack} from './Stacks/HomeStack';
 import {useTheme} from '~Contexts/ThemeContext';
 import { TabBarIcon } from '~Components/TabBarIcon';
-import { ToolsStack } from './Stacks/ToolsStack';
-import { PatientProfileScreen } from '~Screens/Profile';
 import { ProfileStack } from './Stacks/ProfileStack';
-import { ChatScreen } from '~Screens/ChatSystem';
-import { MessagesStack } from './Stacks/MessagesStack';
+import { CartStack } from './Stacks/CartStack';
+import { CategoriesStack } from './Stacks/CategoriesStack';
 const BottomTabNavigator = createBottomTabNavigator();
 export const BottomTabNavigation = () => {
   const theme = useTheme();
@@ -44,13 +42,13 @@ export const BottomTabNavigation = () => {
         options={{tabBarLabel: 'Wishlist'}}
       />
       <BottomTabNavigator.Screen
-        name={Path.TOOLS_STACK}
-        component={ToolsStack}
+        name={Path.CATEGORIES_STACK}
+        component={CategoriesStack}
         options={{tabBarLabel: 'Categories'}}
       />
       <BottomTabNavigator.Screen
         name={Path.CART_STACK}
-        component={MessagesStack}
+        component={CartStack}
         options={{tabBarLabel: 'Cart'}}
       />
       <BottomTabNavigator.Screen
