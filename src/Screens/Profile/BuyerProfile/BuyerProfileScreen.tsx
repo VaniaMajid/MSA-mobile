@@ -4,37 +4,66 @@ import {
   Image,
   TouchableOpacity,
   Animated,
+  Alert,
 } from 'react-native';
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useTheme} from '~Contexts/ThemeContext';
 import {Button} from '~Components/Button';
 import {Heading} from '~Components/Heading';
 import {InfoRow} from '~Components/InfoRow';
-import {useStyles} from './PatientProfile.styles';
+import {useStyles} from './BuyerProfileScreen.styles';
 import {AuthParamList} from '~Navigators/AuthParamList';
-import {StyledText} from '~Components/StyledText';
 import {IconArrowDown, IconEdit} from '~Components/Icons';
+import useAccountStore from '~Configs/accountStore';
+import { BASE_URL } from '~Constants/index';
+import axios from 'axios';
 
-type PatientProfileScreenProps = StackScreenProps<AuthParamList>;
+type BuyerProfileScreenProps = StackScreenProps<AuthParamList>;
 
-export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
+export const BuyerProfileScreen: FC<BuyerProfileScreenProps> = ({
   navigation,
 }) => {
   const theme = useTheme();
   const styles = useStyles();
 
+  const [buyerProfile, setBuyerProfile] = useState<any | null>(null); // State for Buyer profile
+  const { buyer } = useAccountStore(); // Retrieve Buyer data from Zustand store
+
   const [isExpanded, setIsExpanded] = useState(true);
   const arrowRotation = isExpanded ? '180deg' : '0deg';
 
-  const patientData = {
-    name: 'Nadeem Nani Wala',
-    id: 'E002',
-    postalCode: 'SW1A 1AA',
-    mobileNumber: '+44 32 23 12321',
-    email: 'example@gmail.com',
-    address: '10 Downing Street, London, UK',
+  const clearBuyer = useAccountStore((state) => state.clearBuyer);
+    
+  const handleLogout = () => {
+    clearBuyer(); // Clear the account store
+    navigation.goBack(); // Navigate back
   };
+
+
+  useEffect(() => {
+    const fetchBuyerProfile = async () => {
+      if (!buyer?.token) {
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${BASE_URL}/buyer/auth/profile`, {
+          headers: {
+            Authorization: `Bearer ${buyer?.token}`, // Use token from Zustand store
+          },
+        });
+
+        setBuyerProfile(response.data.data.buyer);
+        console.log('Buyer profile:', response.data.data.buyer);
+      } catch (error) {
+        console.error('Error fetching Buyer profile:', error);
+        Alert.alert('Error', 'Failed to fetch Buyer profile. Please try again.');
+      }
+    };
+
+    fetchBuyerProfile();
+  }, [buyer?.token]);
 
   return (
     <ScrollView
@@ -51,22 +80,24 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
               source={require('../../../Assets/images/onboarding1.png')}
               style={styles.image}
             />
+            {buyerProfile? (
             <Heading
-              title={patientData.name}
+              title={buyerProfile.fullName}
               style={[
                 theme.fonts.largeSubHeaderSemiBold,
                 {textAlign: 'center', marginBottom: theme.spacing.V1},
               ]}
             />
-            <StyledText
-              text= {patientData.id}
-              textColor={theme.colors.white}
-              backgroundColor={theme.colors.primaryOrange}
+            ) : (
+              <Heading
+              title= "Loading Name..."
               style={[
-                theme.fonts.filterText,
-                {width: '38%', alignSelf: 'center'},
+                theme.fonts.largeSubHeaderSemiBold,
+                {textAlign: 'center', marginBottom: theme.spacing.V1},
               ]}
-            />
+              />
+            )
+          }
           </View>
           <View style={{flexDirection: 'row'}}>
             <Heading title="User Info" style={theme.fonts.headerSmallBold} />
@@ -83,38 +114,47 @@ export const PatientProfileScreen: FC<PatientProfileScreenProps> = ({
           </View>
           {isExpanded && (
             <View style={{gap: theme.spacing.HGap1}}>
+              {buyerProfile? (
               <InfoRow
                 label="Name"
-                value={patientData.name}
+                value={buyerProfile.fullName}
                 valueStyle={styles.valueStyle}
                 labelStyle={styles.valueStyle}
               />
-             
+              ):(
               <InfoRow
-                label="Postal Code"
-                value={patientData.postalCode}
+                label="Name"
+                value= "loading..."
                 valueStyle={styles.valueStyle}
                 labelStyle={styles.valueStyle}
               />
-              <InfoRow
-                label="Mobile Number"
-                value={patientData.mobileNumber}
-                valueStyle={styles.valueStyle}
-                labelStyle={styles.valueStyle}
-              />
-              <InfoRow
+              )}
+
+              {
+                buyerProfile? (
+                  <InfoRow
+                  label="Email"
+                  value={buyerProfile.email}
+                  valueStyle={styles.valueStyle}
+                  labelStyle={styles.valueStyle}
+                />
+                ) : 
+                (
+                  <InfoRow
                 label="Email"
-                value={patientData.email}
+                value= "loading..."
                 valueStyle={styles.valueStyle}
                 labelStyle={styles.valueStyle}
               />
+                )
+              }
             </View>
           )}
         </View>
         <Button
-          variant="primary"
+          variant="pear"
           title="Logout"
-          onPress={() => navigation.goBack()}
+          onPress={handleLogout}
           style={styles.paymentButton}
           textStyle={theme.fonts.filterText}
         />

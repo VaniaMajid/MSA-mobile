@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   View,
   Text,
@@ -11,8 +11,15 @@ import {useCartStore} from '~Configs/cartStore';
 import {useStyles} from './AddtoCartScreen.styles';
 import {useTheme} from '~Contexts/ThemeContext';
 import {IconDeleteIconWhite} from '~Components/Icons';
+import { BASE_URL } from '~Constants/index';
+import { Path } from '~Navigators/routes';
+import { StackScreenProps } from '@react-navigation/stack';
+import { AuthParamList } from '~Navigators/AuthParamList';
+type AddtoCartScreenProps = StackScreenProps<AuthParamList>;
 
-export const AddToCartScreen: React.FC = () => {
+export const AddToCartScreen: FC<AddtoCartScreenProps> = ({
+  navigation
+}) => {
   const {cart, updateQuantity, removeFromCart} = useCartStore();
   const theme = useTheme();
   const styles = useStyles();
@@ -85,11 +92,8 @@ const calculateItemTotal = (item: any) => {
   };
 
   const handleProceedToCheckout = () => {
-    // Proceed to checkout logic, e.g., navigate to the checkout screen
-    Alert.alert(
-      'Proceed to Checkout',
-      'This will navigate to the checkout screen',
-    );
+    navigation.navigate(Path.CHECKOUT_SCREEN);
+    
   };
 
   return (

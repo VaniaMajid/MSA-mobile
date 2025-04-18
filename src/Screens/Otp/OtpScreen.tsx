@@ -14,10 +14,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { otpSchema } from '~Utils/validation';
 import { Path } from '~Navigators/routes';
-
+import axios from 'axios';
+import { BASE_URL } from '~Constants/index';
 type OtpScreenProps = StackScreenProps<PreAuthParamList>;
-
-const VALID_OTP = '123456'; 
 
 export const OtpScreen: FC<OtpScreenProps> = ({ navigation, route }) => {
   const theme = useTheme();
@@ -42,23 +41,40 @@ export const OtpScreen: FC<OtpScreenProps> = ({ navigation, route }) => {
   }
 
 
-  const onSubmit = (data: { otp: string }) => {
-    if (data.otp !== VALID_OTP) {
-      setError('otp', {
-        type: 'manual',
-        message: 'Invalid OTP.',
-      });
-      return;
+  const onSubmit = async (data: { otp: string }) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/auth/verify-otp`, 
+        { email:email,
+          role: role,
+          otp: data.otp 
+        }
+      
+      );
+      if (response.data.success) {
+        if (screenType === 'forgotPassword') {
+          navigation.navigate(Path.CREATE_NEW_PASSWORD_SCREEN, { email, role, otp: data.otp });
+        } else if (screenType === 'createPassword') {
+          navigation.navigate(Path.PASSWORD_SCREEN, { role });
+        }
+        reset();
+      } else {
+        setError('otp', { type: 'manual', message: 'Invalid OTP' });
+      }
+    } catch (error) {
+      Alert.alert('Error', error.response.data.message);
     }
-    if (screenType === 'forgotPassword') {
-      navigation.navigate(Path.CREATE_NEW_PASSWORD_SCREEN);
-    } else if (screenType === 'createPassword') {
-      navigation.navigate(Path.PASSWORD_SCREEN, { role }); 
-    }
-    reset();
   };
 
   const handleResend = () => {
+    axios.post(`${BASE_URL}/auth/request-otp`, {
+      email,
+      role,
+    }).then(response => {
+      console.log('OTP request successful', response.data);
+    })
+    .catch(error => {
+      console.error('Error requesting OTP', error);
+    });
     Alert.alert('OTP resent', `A new OTP has been sent to ${email}`);
   };
   

@@ -52,7 +52,8 @@ export const useStyles = (variant?: 'default' | 'forms' | 'forms50') => {
       flex: 1,
     },
     disabledInputContainer: {
-      borderColor: theme.colors.disabled,
+      borderColor: theme.colors.lightGray,
+      backgroundColor: theme.colors.lightGray,
     },
     errorInputContainer: {
       borderColor: theme.colors.error,

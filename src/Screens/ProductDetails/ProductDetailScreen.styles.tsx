@@ -126,15 +126,14 @@ export const useStyles = () => {
       borderRadius: 10,
     },
     inquiryButton: {
-        width: '45%',
-      backgroundColor: theme.colors.white,
-      borderWidth: 1,
+      width: '45%',
+      backgroundColor: theme.colors.primaryOrange,
       paddingVertical: 15,
       paddingHorizontal: 20,
-      borderRadius: 30,
+      borderRadius: 25,
     },
     chatNowButtonText: {
-        textAlign: 'center',
+      textAlign: 'center',
       color: theme.colors.white,
     },
     inquiryButtonText: {

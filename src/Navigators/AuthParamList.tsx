@@ -12,21 +12,7 @@ export type AuthParamList = {
   AddProducts: undefined;
   Products: undefined;
   ProductDetails: {
-    product: {
-      id: number;
-      name: string;
-      details: string;
-      ratings: number;
-      images: any[];
-      speciality: string;
-      unit: string;
-      priceRanges: {range: string; price: string}[];
-      reviews: {user: string; comment: string; rating: number}[];
-      cn: string;
-      variants: {
-        [key: string]: string | string[] | {price: string; quantity: string};
-      }[];
-    };
+    productId: string;
   };
   Orders: undefined;
   Contacts: undefined;
@@ -50,4 +36,5 @@ export type AuthParamList = {
   Feedback: undefined;
   TrackSales: undefined;
   TrackTotalSales: undefined;
+  Checkout: undefined;
 };

@@ -1,8 +1,11 @@
 import { create } from 'zustand';
 
-type SelectedVariants = {
-  color: string | null; // Allow null
-  size: string | string[] | { price: string; quantity: string; };
+export type SelectedVariants = {
+  id: string;
+  trait: string; // Add this property
+  value: string;
+  price: string;
+  quantity: string;
 };
 
 interface PriceRange {
@@ -27,6 +30,7 @@ interface CartStore {
   addToCart: (item: CartItem) => void;
   updateQuantity: (uniqueId: string, quantity: number) => void;
   removeFromCart: (uniqueId: string) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartStore>((set) => ({
@@ -108,6 +112,11 @@ export const useCartStore = create<CartStore>((set) => ({
         (item) => `${item.id}-${item.selectedPriceRange?.range || 'default'}` !== uniqueId
       ),
     })),
+
+    clearCart: () =>
+      set(() => ({
+        cart: [],
+      })),
 }));
 
 // Helper function for extracting min and max quantity from a price range string

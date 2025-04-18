@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   Dimensions,
   Animated,
+  SafeAreaView,
 } from 'react-native';
-import {useStyles} from './ProductDetailScreen.styles';
-import {useTheme} from '~Contexts/ThemeContext';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { useStyles } from './ProductDetailScreen.styles';
+import { useTheme } from '~Contexts/ThemeContext';
 import ReanimatedCarousel from 'react-native-reanimated-carousel';
 import {
   IconStar,
@@ -21,11 +21,13 @@ import {
   IconCartWhite,
 } from '~Components/Icons';
 import { AddToCartModal } from './Components';
-import {AuthParamList} from '~Navigators/AuthParamList';
-import {StackScreenProps} from '@react-navigation/stack';
-import {useCartStore} from '~Configs/cartStore';
+import { AuthParamList } from '~Navigators/AuthParamList';
+import { StackScreenProps } from '@react-navigation/stack';
+import { useCartStore } from '~Configs/cartStore';
+import { BASE_URL } from '~Constants/index';
+import axios from 'axios';
+import { ApiResponse } from './types';
 
-// Define the ProductDetailScreenProps using StackScreenProps
 type ProductDetailScreenProps = StackScreenProps<
   AuthParamList,
   'ProductDetails'
@@ -35,51 +37,99 @@ const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
   route,
   navigation,
 }) => {
-  const {product} = route.params; // Extract product from route.params
+  const { productId } = route.params;
   const styles = useStyles();
   const theme = useTheme();
-  const {addToCart} = useCartStore();
+  const { addToCart } = useCartStore();
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [wishlist, setWishlist] = useState(false);
-  const {width} = Dimensions.get('window');
+  const { width } = Dimensions.get('window');
   const [animationValue] = useState(new Animated.Value(0));
-  const [isModalVisible, setModalVisible] = useState(true);
-
-  const [selectedPriceRange, setSelectedPriceRange] = useState<number | null>(
-    product.priceRanges.length > 0 ? 0 : null // Default to the first price range if available
-  );
+  const [isModalVisible, setModalVisible] = useState(true); // Start with false
   
-  const [selectedVariant, setSelectedVariant] = useState<number | null>(
-    product.variants.length > 0 ? 0 : null // Default to the first variant if available
-  );
+  const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Debug modal state changes
+  useEffect(() => {
+    console.log('isModalVisible changed:', isModalVisible);
+  }, [isModalVisible]);
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/buyer/products/${productId}`);
+        const data: ApiResponse = response.data.data;
+
+        const formattedProduct = {
+          id: data._id,
+          name: data.product_name,
+          details: data.description,
+          ratings: 0,
+          price: data.default_price,
+          unit: 'units',
+          priceRanges: data.price_ranges.map(range => ({
+            range: `${range.start_quantity}-${range.end_quantity}`,
+            price: range.price,
+          })),
+          variants: data.variants.map(variant => ({
+            ...variant.variations,
+            id: variant._id,
+            price: variant.price,
+            quantity: variant.quantity,
+          })),
+          images: data.images?.map(img => ({ uri: img.data })) || [
+            require('../../Assets/images/products/earbuds1.jpeg'),
+            require('../../Assets/images/products/earbuds2.jpeg'),
+            require('../../Assets/images/products/earbuds3.jpeg'),
+            require('../../Assets/images/products/earbuds4.jpeg'),
+            require('../../Assets/images/products/earbuds5.jpeg'),
+          ],
+          reviews: [],
+          shopName: data.shop.shopName,
+          packageDetails: data.package_details,
+          stockQuantity: data.stock_quantity,
+          category: data.category,
+          containsDangerousGoods: data.contains_dangerous_goods,
+          status: data.status,
+        };
+        setProduct(formattedProduct);
+        console.log('Product:', JSON.stringify(formattedProduct, null, 2));
+      } catch (err) {
+        setError('Failed to fetch product details');
+        console.error('Error fetching product:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductDetails();
+  }, [productId]);
+
   const toggleWishlist = () => setWishlist(!wishlist);
 
-  // Function to render each image item
-  const renderImageItem = ({item}: {item: any}) => (
+  const renderImageItem = ({ item }: { item: any }) => (
     <View style={styles.imageContainer}>
       <Image
         source={item}
-        style={[styles.carouselImage, {resizeMode: 'contain'}]}
+        style={[styles.carouselImage, { resizeMode: 'contain' }]}
       />
     </View>
   );
 
-  // Function to calculate the number of stars to display based on rating
   const renderStars = (rating: number) => {
-    const fullStars = Math.floor(rating); // Full stars
-    const halfStars = rating % 1 >= 0.5 ? 1 : 0; // Half star
-    const emptyStars = 5 - (fullStars + halfStars); // Empty stars
+    const fullStars = Math.floor(rating);
+    const halfStars = rating % 1 >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - (fullStars + halfStars);
 
     return (
       <View style={styles.starContainer}>
-        {/* Render full stars */}
         {[...Array(fullStars)].map((_, index) => (
           <IconStar key={`full-${index}`} size="xxs" />
         ))}
-        {/* Render half star if applicable */}
         {halfStars === 1 && <IconStarHalf size="xxs" />}
-        {/* Render empty stars */}
         {[...Array(emptyStars)].map((_, index) => (
           <IconStarEmpty key={`empty-${index}`} size="xxs" />
         ))}
@@ -103,44 +153,24 @@ const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
   };
 
   const handleAddToCart = () => {
-    // Select the first price range if not selected
-    const selectedPrice =
-      selectedPriceRange !== null
-        ? product.priceRanges[selectedPriceRange]
-        : product.priceRanges[0]; // Default to the first price range if not selected
-  
-    // Select the first variant if not selected
-    const selectedVariantData =
-      selectedVariant !== null
-        ? product.variants[selectedVariant]
-        : product.variants[0]; // Default to the first variant if not selected
-  
-    // Extract min quantity from the selected price range string (e.g., "1-5" => 1)
-    const getMinQuantityFromRange = (range: string) => {
-      const [minQuantity] = range.split('-').map((value) => parseInt(value.trim(), 10));
-      return minQuantity || 1; // Default to 1 if the min quantity is invalid
-    };
-  
-    const minQuantity = selectedPrice?.range ? getMinQuantityFromRange(selectedPrice.range) : 1;
-  
-    // Create a unique identifier for the product-variant combination
-    const uniqueCartItemId = `${product.id}_${selectedVariant !== null ? selectedVariant : 'default'}`;
-  
-    // Add to cart with the unique identifier
-    addToCart({
-      id: uniqueCartItemId, // Unique identifier for the variant
-      name: product.name,
-      price: selectedPrice?.price.toString() || '0',
-      image: product.images[0],
-      quantity: minQuantity, // Set the quantity to the minimum value from the price range
-      selectedPriceRange: selectedPrice,
-      selectedVariants: selectedVariantData,
+    if (!product) {
+      console.warn('Product not loaded yet');
+      return;
+    }
+    console.log('Opening modal, setting isModalVisible to true');
+    setModalVisible(prev => {
+      console.log('Previous isModalVisible:', prev);
+      return true;
     });
-  
-    showCartAnimation();
   };
-  
-  
+
+  const handleModalAddToCart = (cartItem: any) => {
+    console.log('Adding to cart:', cartItem);
+    addToCart(cartItem);
+    showCartAnimation();
+    setModalVisible(false);
+  };
+
   const animationStyle = {
     opacity: animationValue,
     transform: [
@@ -153,25 +183,43 @@ const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
     ],
   };
 
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={[theme.fonts.paragraphRegularSmall, styles.loadingText]}>
+          Loading Product Details...
+        </Text>
+      </View>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={[theme.fonts.paragraphRegularSmall, styles.loadingText]}>
+          {error || 'Product not found'}
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        {/* Animated Add to Cart Message */}
-        <Animated.View style={[styles.addToCartAnimation, animationStyle]}>
-          <Text
-            style={[
-              theme.fonts.paragraphRegularSmall,
-              styles.cartAnimationText,
-            ]}>
-            Product Added to Cart!
-          </Text>
-        </Animated.View>
+      <Animated.View style={[styles.addToCartAnimation, animationStyle]}>
+        <Text
+          style={[theme.fonts.paragraphRegularSmall, styles.cartAnimationText]}
+        >
+          Product Added to Cart!
+        </Text>
+      </Animated.View>
 
+      <ScrollView>
         {/* Image Carousel */}
         <View style={styles.carouselContainer}>
           <TouchableOpacity
             onPress={toggleWishlist}
-            style={styles.wishlistContainer}>
+            style={styles.wishlistContainer}
+          >
             {wishlist ? (
               <IconWishlistActiveFilled size="xxs" />
             ) : (
@@ -186,7 +234,6 @@ const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
             onSnapToItem={index => setActiveSlide(index)}
             scrollAnimationDuration={1000}
           />
-          {/* Pagination Dots */}
           <View style={styles.paginationContainer}>
             {product.images.map((_, index) => (
               <View
@@ -208,15 +255,18 @@ const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
             </Text>
             <TouchableOpacity
               style={styles.addToCartButton}
-              onPress={handleAddToCart}>
+              onPress={handleAddToCart}
+            >
               <IconCartWhite size="xxs" />
             </TouchableOpacity>
           </View>
           <Text
-            style={[theme.fonts.paragraphRegularSmall, styles.productDetails]}>
+            style={[theme.fonts.paragraphRegularSmall, styles.productDetails]}
+          >
             {product.details}
           </Text>
         </View>
+
         {/* Ratings */}
         <View style={styles.ratingsContainer}>
           {renderStars(product.ratings)}
@@ -224,31 +274,28 @@ const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
             {product.ratings} Ratings
           </Text>
         </View>
+
         {/* Price Ranges */}
         <View style={styles.priceRangeContainer}>
           <Text style={[theme.fonts.paragraphSemiBold, styles.priceRangeTitle]}>
             Price Ranges:
           </Text>
-          {product.priceRanges.map((range, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => setSelectedPriceRange(index)}
-              style={[
-                styles.priceRangeItem,
-                selectedPriceRange === index && styles.selectedItem,
-              ]}>
-              <Text style={theme.fonts.paragraphRegular}>
-                {range.range} {product.unit}
-              </Text>
-              <Text
-                style={[
-                  theme.fonts.paragraphSemiBold,
-                  {color: theme.colors.black},
-                ]}>
-                PKR {range.price}
-              </Text>
-            </TouchableOpacity>
-          ))}
+          {product.priceRanges.length > 0 ? (
+            product.priceRanges.map((range: any, index: number) => (
+              <View key={index} style={styles.priceRangeItem}>
+                <Text style={theme.fonts.paragraphRegular}>
+                  {range.range} {product.unit}
+                </Text>
+                <Text
+                  style={[theme.fonts.paragraphSemiBold, { color: theme.colors.black }]}
+                >
+                  PKR {range.price}
+                </Text>
+              </View>
+            ))
+          ) : (
+            <Text style={theme.fonts.paragraphRegular}>No price ranges available</Text>
+          )}
         </View>
 
         {/* Variants */}
@@ -256,118 +303,113 @@ const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
           <Text style={[theme.fonts.paragraphSemiBold, styles.variantsTitle]}>
             Variants:
           </Text>
-          {product.variants.map((variant, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => setSelectedVariant(index)}
-              style={[
-                styles.variantItem,
-                selectedVariant === index && styles.selectedItem,
-              ]}>
-              {Object.entries(variant).map(([key, value]) => (
-                <Text key={key} style={theme.fonts.paragraphRegular}>
-                  {key.charAt(0).toUpperCase() + key.slice(1)}:{' '}
-                  {Array.isArray(value)
-                    ? value.join(', ') // Join array values with commas
-                    : typeof value === 'object' && value !== null
-                      ? `Price: ${value.price}, Quantity: ${value.quantity}` // Handle object case
-                      : value}{' '}
-                  {/* Fallback for string */}
+          {product.variants.length > 0 ? (
+            product.variants.map((variant: any, index: number) => (
+              <View key={index} style={styles.variantItem}>
+                {Object.entries(variant)
+                  .filter(([key]) => key !== 'price' && key !== 'quantity' && key !== 'id')
+                  .map(([key, value]) => (
+                    <Text key={key} style={theme.fonts.paragraphRegular}>
+                      {key.charAt(0).toUpperCase() + key.slice(1)}: {String(value)}
+                    </Text>
+                  ))}
+                <Text style={theme.fonts.paragraphRegular}>
+                  Price: PKR {variant.price}
                 </Text>
-              ))}
-            </TouchableOpacity>
-          ))}
+                <Text style={theme.fonts.paragraphRegular}>
+                  Available: {variant.quantity}
+                </Text>
+              </View>
+            ))
+          ) : (
+            <Text style={theme.fonts.paragraphRegular}>No variants available</Text>
+          )}
         </View>
 
         {/* Action Buttons */}
         <View style={styles.actionButtonsContainer}>
-          <TouchableOpacity style={styles.chatNowButton}
-          onPress={() => setModalVisible(true)}
+          <TouchableOpacity
+            style={styles.chatNowButton}
+            onPress={handleAddToCart}
           >
             <Text
-              style={[
-                theme.fonts.paragraphRegularSmall,
-                styles.chatNowButtonText,
-              ]}>
+              style={[theme.fonts.paragraphRegularSmall, styles.chatNowButtonText]}
+            >
               Add to Cart
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.inquiryButton}>
             <Text
-              style={[
-                theme.fonts.paragraphRegularSmall,
-                styles.inquiryButtonText,
-              ]}>
+              style={[theme.fonts.paragraphRegularSmall, styles.inquiryButtonText]}
+            >
               Send Inquiry
             </Text>
           </TouchableOpacity>
         </View>
+
         {/* Reviews */}
         <View style={styles.reviewsContainer}>
           <Text style={[theme.fonts.paragraphSemiBold, styles.reviewsTitle]}>
             Reviews
           </Text>
-          {product.reviews.map((review, index) => (
-            <View key={index} style={styles.reviewItem}>
-              <View style={styles.reviewHeader}>
-                <Text
-                  style={[
-                    theme.fonts.paragraphSmallSemiBold,
-                    styles.reviewUser,
-                  ]}>
-                  {review.user}
-                </Text>
-                {renderStars(review.rating)}
+          {product.reviews.length > 0 ? (
+            product.reviews.map((review: any, index: number) => (
+              <View key={index} style={styles.reviewItem}>
+                <View style={styles.reviewHeader}>
+                  <Text
+                    style={[theme.fonts.paragraphSmallSemiBold, styles.reviewUser]}
+                  >
+                    {review.user}
+                  </Text>
+                  {renderStars(review.rating)}
+                </View>
+                <View style={styles.reviewDetails}>
+                  <Text
+                    style={[theme.fonts.paragraphRegularSmall, styles.reviewComment]}
+                  >
+                    {review.comment}
+                  </Text>
+                  <Text
+                    style={[theme.fonts.paragraphSmallSemiBold, styles.reviewRating]}
+                  >
+                    Rating: {review.rating}/5
+                  </Text>
+                </View>
               </View>
-              <View style={styles.reviewDetails}>
-                <Text
-                  style={[
-                    theme.fonts.paragraphRegularSmall,
-                    styles.reviewComment,
-                  ]}>
-                  {review.comment}
-                </Text>
-                <Text
-                  style={[
-                    theme.fonts.paragraphSmallSemiBold,
-                    styles.reviewRating,
-                  ]}>
-                  Rating: {review.rating}/5
-                </Text>
-              </View>
-            </View>
-          ))}
+            ))
+          ) : (
+            <Text style={theme.fonts.paragraphRegular}>No reviews available</Text>
+          )}
         </View>
 
-        {/* Action Buttons */}
+        {/* Seller Buttons */}
         <View style={styles.actionButtonsContainer}>
           <TouchableOpacity style={styles.chatNowButton}>
             <Text
-              style={[
-                theme.fonts.paragraphRegularSmall,
-                styles.chatNowButtonText,
-              ]}>
+              style={[theme.fonts.paragraphRegularSmall, styles.chatNowButtonText]}
+            >
               Seller Profile
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.inquiryButton}>
             <Text
-              style={[
-                theme.fonts.paragraphRegularSmall,
-                styles.inquiryButtonText,
-              ]}>
+              style={[theme.fonts.paragraphRegularSmall, styles.inquiryButtonText]}
+            >
               More Products
             </Text>
           </TouchableOpacity>
         </View>
-         <AddToCartModal
-          
-          isVisible={isModalVisible}
-          onClose={() => setModalVisible(false)}
-          product={product}
-          onAddToCart={handleAddToCart}
-        />
       </ScrollView>
+      <AddToCartModal
+        isVisible={isModalVisible}
+        onClose={() => {
+          console.log('Closing modal');
+          setModalVisible(false);
+        }}
+        product={product}
+        onAddToCart={handleModalAddToCart}
+      />
+    )
       
     </SafeAreaView>
   );

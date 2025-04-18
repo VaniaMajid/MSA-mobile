@@ -1,1 +1,1 @@
-export * from './PatientProfile'
+export * from './BuyerProfile'

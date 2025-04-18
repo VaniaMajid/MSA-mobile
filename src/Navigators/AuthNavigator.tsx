@@ -15,6 +15,7 @@ import { ProductsScreen } from '~Screens/Products';
 import { OrdersScreen } from '~Screens/Orders';
 import { CartScreen } from '~Screens/CartSystem';
 import ProductDetailScreen from '~Screens/ProductDetails/ProductDetailScreen';
+import { CheckoutScreen } from '~Screens/Checkout';
 const AuthStackNavigation = createStackNavigator<AuthParamList>();
 
 interface AuthNavProps {
@@ -133,6 +134,14 @@ export const AuthNavigator: FC<AuthNavProps> = ({userRole}) => {
         component={ProductDetailScreen}
         options={{
           title: '',
+          headerLeft: ({}) => <Header />,
+        }}
+      />
+      <AuthStackNavigation.Screen
+        name = {Path.CHECKOUT_SCREEN}
+        component={CheckoutScreen}
+        options={{
+          title: 'Checkout',
           headerLeft: ({}) => <Header />,
         }}
       />

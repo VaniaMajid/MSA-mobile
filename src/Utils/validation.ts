@@ -358,3 +358,78 @@ export const AddProductsSchema = Yup.object().shape({
     .typeError('Height must be a number.'),
   isFragile: Yup.boolean().optional(), // Optional checkbox for fragile goods
 });
+
+
+export const addShippingAddressSchema = Yup.object().shape({
+  fullName: Yup.string()
+    .required('Full name is required.')
+    .min(3, 'Full name must be at least 3 characters long.'),
+  phone: Yup.string()
+    .required('Phone number is required.')
+    .matches(/^(?:\+92|0)?3[0-9]{2}-?[0-9]{7}$/, 'Invalid Pakistani phone number.'),
+  address: Yup.string()
+    .required('Address is required.')
+    .min(5, 'Address must be at least 5 characters long.'),
+  city: Yup.string()
+    .required('City is required.')
+    .min(2, 'City must be at least 2 characters long.'),
+  postalCode: Yup.string()
+    .required('Postal code is required.')
+    .matches(/^\d{5}$/, 'Postal code must be a valid 5-digit number.'),
+  isDefault: Yup.boolean().required('Default status is required.'),
+});
+
+
+export const createOrderSchema = Yup.object().shape({
+  buyerId: Yup.string()
+    .required('Buyer ID is required.')
+    .matches(/^[a-fA-F0-9]{24}$/, 'Invalid Buyer ID format.'),
+
+  shippingAddressId: Yup.string()
+    .required('Shipping Address ID is required.')
+    .matches(/^[a-fA-F0-9]{24}$/, 'Invalid Shipping Address ID format.'),
+
+  items: Yup.array()
+    .of(
+      Yup.object().shape({
+        productId: Yup.string()
+          .required('Product ID is required.')
+          .matches(/^[a-fA-F0-9]{24}$/, 'Invalid Product ID format.'),
+        variations: Yup.array()
+          .of(
+            Yup.object().shape({
+              trait: Yup.string()
+                .required('Trait is required.')
+                .matches(/^[a-zA-Z0-9\s]+$/, 'Trait must be alphanumeric.'),
+              value: Yup.string()
+                .required('Value is required.')
+                .matches(/^[a-zA-Z0-9\s]+$/, 'Value must be alphanumeric.'),
+              price: Yup.number()
+                .required('Price is required.')
+                .positive('Price must be a positive number.')
+                .typeError('Price must be a number.'),
+              quantity: Yup.number()
+                .required('Quantity is required.')
+                .positive('Quantity must be a positive number.')
+                .integer('Quantity must be an integer.')
+                .typeError('Quantity must be a number.'),
+            })
+          )
+          .required('Variations are required.')
+          .min(1, 'At least one variation is required.'),
+      })
+    )
+    .required('Items are required.')
+    .min(1, 'At least one item is required.'),
+
+  orderNote: Yup.string().optional(),
+
+  advancePayment: Yup.number()
+    .required('Advance payment is required.')
+    .min(0, 'Advance payment cannot be negative.')
+    .typeError('Advance payment must be a number.'),
+
+  paymentMethod: Yup.string()
+    .required('Payment method is required.')
+    .oneOf(['bank_transfer', 'cash_on_delivery', 'credit_card'], 'Invalid payment method.'),
+});

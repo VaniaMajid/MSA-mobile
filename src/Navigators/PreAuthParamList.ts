@@ -4,7 +4,7 @@ export type PreAuthParamList = {
   Splash: undefined;
   ForgotPasswordEmail: undefined;
   PasswordResetSuccessful: undefined;
-  CreateNewPassword: undefined;
+  CreateNewPassword: { email: string, role: string, otp: string };
   SelectRole: undefined;
   SignupEmail: { role: string }; 
   Otp: { role?: string; email: string, screenType: string}; 

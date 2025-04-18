@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 import React, {FC} from 'react';
 import {ImageBackgroundWrapper} from 'src/HOC';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -18,10 +18,13 @@ import {passwordSchema} from '~Utils/validation';
 import {useStyles} from './CreateNewPasswordScreen.styles';
 import { Path } from '~Navigators/routes';
 import Colors from '~Style/Colors';
+import axios from 'axios';
+import { BASE_URL } from '~Constants/index';
+
 type CreateNewPasswordScreenProps = StackScreenProps<PreAuthParamList>;
 
 export const CreateNewPasswordScreen: FC<CreateNewPasswordScreenProps> = ({
-  navigation,
+  navigation, route
 }) => {
   const styles = useStyles();
   const theme = useTheme();
@@ -39,11 +42,24 @@ export const CreateNewPasswordScreen: FC<CreateNewPasswordScreenProps> = ({
     },
   });
 
-  const onSubmit = (data: CreateNewPasswordFormType) => {
-    navigation.navigate(Path.PASSWORD_RESET_SUCCESSFUL_SCREEN);
+  const { role, email, otp} = route.params as { role: string; email: string, otp: string };
+
+  const onSubmit = async (data: CreateNewPasswordFormType) => {
+      try {
+        const response = await axios.post(`${BASE_URL}/auth/reset-password`, {
+          email: email,
+          otp: otp,
+          newPassword: data.password,
+          role: role
+        });
+        console.log(response.data);
+        navigation.navigate(Path.PASSWORD_RESET_SUCCESSFUL_SCREEN);
+        reset();
+      } catch (error) {
+        Alert.alert('Error', error.response.data.message);
+      }  
     reset();
   };
-  
 
   return (
     <ImageBackgroundWrapper>

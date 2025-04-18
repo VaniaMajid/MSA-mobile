@@ -42,5 +42,5 @@ export enum Path {
   FEEDBACK_SCREEN = 'Feedback',
   TRACK_SALES_SCREEN = 'TrackSales',
   TRACK_TOTAL_SALES_SCREEN = 'TrackTotalSales',
- 
+  CHECKOUT_SCREEN = 'Checkout',
 }

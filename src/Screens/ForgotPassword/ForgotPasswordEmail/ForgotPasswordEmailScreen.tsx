@@ -13,6 +13,8 @@ import {ForgotPasswordEmailFormType} from './types';
 import { Path } from '~Navigators/routes';
 import Colors from '~Style/Colors';
 type ForgotPasswordEmailScreenProps = StackScreenProps<PreAuthParamList>;
+import axios from 'axios';
+import { BASE_URL } from '~Constants/index';
 
 export const ForgotPasswordEmailScreen: FC<ForgotPasswordEmailScreenProps> = ({
   navigation,
@@ -33,10 +35,22 @@ export const ForgotPasswordEmailScreen: FC<ForgotPasswordEmailScreenProps> = ({
   });
 
   const onSubmit = (data: ForgotPasswordEmailFormType) => {
-    navigation.navigate(Path.OTP_SCREEN, {
+    axios.post(`${BASE_URL}/auth/request-otp`, {
       email: data.email,
-      screenType: 'forgotPassword',
+      role: 'buyer',
+    })
+    .then(response => {
+      console.log('OTP request successful', response.data);
+      navigation.navigate(Path.OTP_SCREEN, {
+        email: data.email,
+        role: 'buyer',
+        screenType: 'forgotPassword',
+      });
+    })
+    .catch(error => {
+      console.error('Error requesting OTP', error.message);
     });
+
     reset();
   };
 

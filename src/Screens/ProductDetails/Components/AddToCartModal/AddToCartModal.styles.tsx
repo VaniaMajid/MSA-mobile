@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { useTheme } from '~Contexts/ThemeContext';
 
-const { width } = Dimensions.get('window'); // Get the screen width
 
 export const useStyles = () => {
   const theme = useTheme();
@@ -10,13 +9,19 @@ export const useStyles = () => {
     
 
     modalContainer: {
+      flex: 1,
       position: 'absolute',
-      left: 0,
       top: 0,
-      width: width * 0.9,
+      left: 0,
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
       backgroundColor: theme.colors.backgroundColor,
-      borderRadius: 10,
       padding: 20,
+    },
+    scrollContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: theme.colors.backgroundColor,
     },
     closeButton: {
       position: 'absolute',
@@ -29,6 +34,7 @@ export const useStyles = () => {
       marginBottom: 20,
     },
     sectionContainer: {
+      width: '100%',
       marginVertical: 15,
     },
     sectionTitle: {
@@ -89,7 +95,9 @@ export const useStyles = () => {
       borderColor: '#007BFF',
       backgroundColor: '#E7F3FF',
     },
-
+    activePriceRangeText: {
+      color: theme.colors.secondaryColor,
+    },
     variantItem: {
       
       padding: 10,
@@ -123,6 +131,7 @@ export const useStyles = () => {
       color: theme.colors.black,
     },
     addToCartButton: {
+      width: '100%',
       marginTop: 20,
       padding: 15,
       backgroundColor: theme.colors.primaryOrange,
@@ -132,6 +141,24 @@ export const useStyles = () => {
     
     addToCartButtonText: {
       color: theme.colors.white,
+    },
+
+    variantContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#eee',
+    },
+    variantDetails: {
+      flex: 1,
+    },
+    variantText: {
+      marginBottom: 4,
+    },
+    disabledButton: {
+      opacity: 0.5,
     },
     
   });
